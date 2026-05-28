@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ project.name }} - Portfolio. Day {{ project.day }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="logo-block">
+      <div class="name">Portfolio<span class="dot">.</span></div>
+      <div class="sub">30 days of finance + AI</div>
+    </div>
+    <span class="pill {% if env_key_ok %}live{% endif %}">
+      {% if env_key_ok %}DeepSeek V4 live{% else %}Deterministic mode{% endif %}
+    </span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <section class="detail-cover">
+    <a href="/" class="back">&lt; ALL PROJECTS</a>
+    <div class="day-num">DAY {{ '%02d' % project.day }} OF 30</div>
+    <h1>{{ project.name }}</h1>
+    <div class="tagline">{{ project.tagline }}</div>
+    <div class="meta">
+      <span><span class="key">STACK</span>{{ project.stack|join(' / ') }}</span>
+      <span><span class="key">FOCUS</span>{{ project.accounting_focus }}</span>
+      <span><span class="key">PORT</span>:{{ project.port }}</span>
+      {% if project.test_count %}<span><span class="key">TESTS</span>{{ project.test_count }}</span>{% endif %}
+    </div>
+  </section>
+
+  <section class="detail-grid">
+    <div>
+      <section class="detail-section">
+        <h3>About the project</h3>
+        <p>{{ project.description }}</p>
+        {% if project.readme_top %}<p>{{ project.readme_top }}</p>{% endif %}
+      </section>
+
+      <section class="detail-section">
+        <h3>AI integration</h3>
+        <p>{{ project.ai_integration }}</p>
+      </section>
+
+      {% if project.talking_points %}
+      <section class="detail-section">
+        <h3>Talking points (interview prep)</h3>
+        <ul class="talking-points">
+          {% for p in project.talking_points %}
+            <li>{{ p }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if project.shots %}
+      <section class="detail-section">
+        <h3>Screenshots</h3>
+        <div class="shot-grid">
+          {% for shot in project.shots %}
+            <img src="/shots/{{ project.folder }}/{{ shot }}" alt="{{ shot }}">
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+    </div>
+
+    <aside>
+      <div class="aside-card">
+        <div class="row">
+          <h4>Tags</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            {% for t in project.tags %}
+              <span class="tag" style="font-family:var(--mono);font-size:11px;
+                  background:var(--paper);border:1px solid var(--rule);
+                  padding:3px 9px;border-radius:10px;">{{ t }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row">
+          <h4>Stack</h4>
+          <div class="stack-list">{{ project.stack|join(' / ') }}</div>
+        </div>
+        <div class="row">
+          <h4>Build status</h4>
+          <div class="num" style="color:{% if project.built %}var(--c-green){% else %}var(--ink-faint){% endif %};font-size:22px;">
+            {% if project.built %}Shipped{% else %}Work in progress{% endif %}
+          </div>
+        </div>
+        {% if project.test_count %}
+        <div class="row">
+          <h4>Tests</h4>
+          <div class="num">{{ project.test_count }}</div>
+          <div class="label">unit + integration</div>
+        </div>
+        {% endif %}
+        {% if project.screenshot_count %}
+        <div class="row">
+          <h4>Screenshots</h4>
+          <div class="num">{{ project.screenshot_count }}</div>
+        </div>
+        {% endif %}
+        <div class="row">
+          <h4>Folder</h4>
+          <div class="label">{{ project.folder }}/</div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <div class="foot">
+    <span>PORTFOLIO. /  DAY {{ project.day }}  /  127.0.0.1:1030</span>
+    <span>30 DAYS OF FINANCE + AI  /  CASE-STUDY PROJECT</span>
+  </div>
+</div>
+
+</body>
+</html>

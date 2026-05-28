@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>30 Days of Finance + AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="logo-block">
+      <div class="name">Portfolio<span class="dot">.</span></div>
+      <div class="sub">30 days of finance + AI</div>
+    </div>
+    <span class="pill {% if env_key_ok %}live{% endif %}">
+      {% if env_key_ok %}DeepSeek V4 live{% else %}Deterministic mode{% endif %}
+    </span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <section class="intro">
+    <div>
+      <h1>30 daily builds. <em>Finance.</em><br>One AI integration each.</h1>
+      <p>From a financial-ratio dashboard to a three-stage dividend discount model. Every project is a working Flask app, every project ships with tests, and every project uses AI (Claude on Days 1 to 3, DeepSeek V4 from Day 4 onwards) as a meaningful part of the workflow.</p>
+    </div>
+    <div class="stats">
+      <div class="cell">
+        <div class="lab">Projects shipped</div>
+        <div class="v">{{ portfolio.built_projects }}<span style="color:var(--ink-mute);font-size:18px;"> / {{ portfolio.total_projects }}</span></div>
+      </div>
+      <div class="cell">
+        <div class="lab">Tests written</div>
+        <div class="v">{{ portfolio.total_tests }}</div>
+      </div>
+      <div class="cell">
+        <div class="lab">Screenshots</div>
+        <div class="v">{{ portfolio.total_screenshots }}</div>
+      </div>
+      <div class="cell">
+        <div class="lab">Tags covered</div>
+        <div class="v">{{ portfolio.tag_counts|length }}</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <span class="lab">Filter by tag</span>
+    <button class="filter-chip active" data-filter="all">All</button>
+    {% for tag, count in portfolio.tag_counts.items() %}
+      <button class="filter-chip" data-filter="{{ tag }}">{{ tag }} ({{ count }})</button>
+    {% endfor %}
+  </div>
+
+  <section class="grid" id="grid">
+    {% set colors = ['var(--ink)', 'var(--c-red)', 'var(--c-blue)',
+                       'var(--c-green)', 'var(--c-amber)', 'var(--c-purple)',
+                       'var(--c-teal)', 'var(--c-rose)'] %}
+    {% for s in portfolio.summaries %}
+      <a href="/project/{{ s.folder }}" class="card" data-tags="{{ s.tags|join(',') }}">
+        <div class="swatch" style="background:{{ colors[loop.index0 % colors|length] }}"></div>
+        <div class="body">
+          <div class="day-num">DAY {{ '%02d' % s.day }}</div>
+          <h2>{{ s.name }}</h2>
+          <p class="tagline">{{ s.tagline }}</p>
+          <div class="description">{{ s.description }}</div>
+          <div class="tags">
+            {% for t in s.tags %}
+              <span class="tag">{{ t }}</span>
+            {% endfor %}
+          </div>
+          <div class="stack">
+            <b>Stack.</b> {{ s.stack|join(' / ') }}
+          </div>
+          <div class="footer-row">
+            <span class="ports">:{{ s.port }}</span>
+            <span class="built {% if not s.built %}no{% endif %}">{% if s.built %}SHIPPED{% else %}WIP{% endif %}</span>
+            {% if s.test_count %}<span class="tests">{{ s.test_count }} tests</span>{% endif %}
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </section>
+
+  <div class="foot">
+    <span>PORTFOLIO. /  30 DAYS OF FINANCE + AI  /  127.0.0.1:1030</span>
+    <span>30 DAYS OF FINANCE + AI  /  ACA / ACCA CANDIDATE</span>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
