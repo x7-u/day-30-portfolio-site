@@ -16,7 +16,6 @@ class Project:
     port: int = 0
     accounting_focus: str = ""
     ai_integration: str = ""
-    talking_points: list[str] = field(default_factory=list)  # AI-generated
     shots: list[str] = field(default_factory=list)            # screenshot rel paths
 
     def to_dict(self) -> dict:
@@ -28,7 +27,6 @@ class Project:
             "port": self.port,
             "accounting_focus": self.accounting_focus,
             "ai_integration": self.ai_integration,
-            "talking_points": list(self.talking_points),
             "shots": list(self.shots),
         }
 

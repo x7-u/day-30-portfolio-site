@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AP Ageing - Portfolio. Day 10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="logo-block">
+      <div class="name">Portfolio<span class="dot">.</span></div>
+      <div class="sub">30 days of finance + AI by Safwan</div>
+    </div>
+    <span class="pill">30 builds / 30 days</span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <section class="detail-cover">
+    <a href="index.html" class="back">&lt; ALL PROJECTS</a>
+    <div class="day-num">DAY 10 OF 30</div>
+    <h1>AP Ageing</h1>
+    <div class="tagline">Accounts payable ageing with AI flagger</div>
+    <div class="meta">
+      <span><span class="key">STACK</span>Python / Flask / openpyxl / DeepSeek</span>
+      <span><span class="key">FOCUS</span>Accounts payable management</span>
+      <span><span class="key">PORT</span>:1010</span>
+      <span><span class="key">TESTS</span>49</span>
+    </div>
+  </section>
+
+  <section class="detail-grid">
+    <div>
+      <section class="detail-section">
+        <h3>About the project</h3>
+        <p>Bucket-by-bucket ageing (0-30, 30-60, 60-90, 90+) across suppliers, with AI flagging unusual delays.</p>
+        <p>Local-only Flask web app and CLI for accounts payable ageing analysis. Loads invoice data into an in-memory SQLite database, runs the aged trial balance in SQL, computes deterministic risk signals per supplier, and asks DeepSeek V4 to rank the highest-risk suppliers and recommend an action for each.</p>
+      </section>
+
+      <section class="detail-section">
+        <h3>AI integration</h3>
+        <p>DeepSeek flags unusual ageing patterns</p>
+      </section>
+
+      
+      <section class="detail-section">
+        <h3>Fun facts</h3>
+        <ul class="talking-points">
+          
+            <li>It buckets every supplier invoice by how overdue it is (0-30, 30-60, 60-90, and 90 plus days) and points at the delays that look unusual.</li>
+          
+            <li>The kind of report a treasury team lives by, produced in seconds.</li>
+          
+        </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Screenshots</h3>
+        <div class="shot-grid">
+          
+            <img src="assets/shots/day-10-ap-ageing-report/01_empty.png" alt="01_empty.png">
+          
+            <img src="assets/shots/day-10-ap-ageing-report/02_compose.png" alt="02_compose.png">
+          
+            <img src="assets/shots/day-10-ap-ageing-report/03_upload.png" alt="03_upload.png">
+          
+            <img src="assets/shots/day-10-ap-ageing-report/04_hero.png" alt="04_hero.png">
+          
+        </div>
+      </section>
+      
+    </div>
+
+    <aside>
+      <div class="aside-card">
+        <div class="row">
+          <h4>Tags</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            
+              <span class="tag" style="font-family:var(--mono);font-size:11px;
+                  background:var(--paper);border:1px solid var(--rule);
+                  padding:3px 9px;border-radius:10px;">ap</span>
+            
+              <span class="tag" style="font-family:var(--mono);font-size:11px;
+                  background:var(--paper);border:1px solid var(--rule);
+                  padding:3px 9px;border-radius:10px;">ageing</span>
+            
+              <span class="tag" style="font-family:var(--mono);font-size:11px;
+                  background:var(--paper);border:1px solid var(--rule);
+                  padding:3px 9px;border-radius:10px;">treasury</span>
+            
+          </div>
+        </div>
+        <div class="row">
+          <h4>Stack</h4>
+          <div class="stack-list">Python / Flask / openpyxl / DeepSeek</div>
+        </div>
+        <div class="row">
+          <h4>Build status</h4>
+          <div class="num" style="color:var(--c-green);font-size:22px;">
+            Shipped
+          </div>
+        </div>
+        
+        <div class="row">
+          <h4>Tests</h4>
+          <div class="num">49</div>
+          <div class="label">unit + integration</div>
+        </div>
+        
+        
+        <div class="row">
+          <h4>Screenshots</h4>
+          <div class="num">10</div>
+        </div>
+        
+        <div class="row">
+          <h4>Folder</h4>
+          <div class="label">day-10-ap-ageing-report/</div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <div class="foot">
+    <span>PORTFOLIO. /  DAY 10</span>
+    <span>SAFWAN  /  30 DAYS OF FINANCE + AI</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -53,11 +53,13 @@ def _readme_top(folder: Path) -> str:
     for line in lines:
         if line.strip().startswith("#"):
             if current:
-                paras.append(" ".join(current).strip()); current = []
+                paras.append(" ".join(current).strip())
+                current = []
             continue
         if not line.strip():
             if current:
-                paras.append(" ".join(current).strip()); current = []
+                paras.append(" ".join(current).strip())
+                current = []
             continue
         current.append(line.strip())
     if current:

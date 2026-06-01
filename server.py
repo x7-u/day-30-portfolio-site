@@ -9,15 +9,14 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from flask import Flask, abort, jsonify, render_template, request, send_file
+from flask import Flask, abort, jsonify, render_template, send_file
+from fun_facts import fun_facts_for
 from pipeline import analyse
 from werkzeug.utils import safe_join
-
-from shared.config import DEEPSEEK_API_KEY
 
 HERE = Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
@@ -40,10 +39,6 @@ log = logging.getLogger("day30.server")
 _cache = {}
 
 
-def _env_key_ok() -> bool:
-    return bool(DEEPSEEK_API_KEY) and not DEEPSEEK_API_KEY.startswith("sk-placeholder")
-
-
 def _safe_folder(name: str) -> bool:
     return bool(re.fullmatch(r"day-\d{2}-[a-z0-9-]+", name))
 
@@ -52,61 +47,44 @@ def _safe_file(name: str) -> bool:
     return bool(re.fullmatch(r"[a-zA-Z0-9_.\-]+\.png", name))
 
 
-def _get_portfolio(skip_ai: bool = True):
-    cache_key = "with_ai" if not skip_ai else "no_ai"
-    if cache_key not in _cache:
-        _cache[cache_key] = analyse(PROJECT_ROOT, skip_ai=skip_ai)
-    return _cache[cache_key]
+def _get_portfolio():
+    if "portfolio" not in _cache:
+        _cache["portfolio"] = analyse(PROJECT_ROOT)
+    return _cache["portfolio"]
 
 
 @app.route("/")
 def index():
-    skip_ai = request.args.get("ai", "off") != "on"
-    portfolio = _get_portfolio(skip_ai=skip_ai)
-    return render_template(
-        "index.html",
-        env_key_ok=_env_key_ok(),
-        portfolio=portfolio.to_dict(),
-        ai_enabled=not skip_ai,
-    )
+    portfolio = _get_portfolio()
+    return render_template("index.html", portfolio=portfolio.to_dict())
 
 
 @app.route("/project/<folder>")
 def project_detail(folder: str):
     if not _safe_folder(folder):
         abort(400)
-    portfolio = _get_portfolio(skip_ai=True)
-    project = None
+    portfolio = _get_portfolio()
+    summary = None
     for s in portfolio.result.summaries:
         if s.project.folder == folder:
-            project = s
+            summary = s
             break
-    if project is None:
+    if summary is None:
         abort(404)
-    proj_d = project.to_dict()
-    # Pull talking points from AI cache (if available)
-    if portfolio.ai_cache and folder in portfolio.ai_cache.points:
-        proj_d["talking_points"] = portfolio.ai_cache.points[folder]
-    return render_template(
-        "project.html",
-        env_key_ok=_env_key_ok(),
-        project=proj_d,
-    )
+    proj_d = summary.to_dict()
+    proj_d["fun_facts"] = fun_facts_for(summary)
+    return render_template("project.html", project=proj_d)
 
 
 @app.route("/api/portfolio")
 def api_portfolio():
-    skip_ai = request.args.get("ai", "off") != "on"
-    portfolio = _get_portfolio(skip_ai=skip_ai)
-    return jsonify(portfolio.to_dict())
+    return jsonify(_get_portfolio().to_dict())
 
 
 @app.route("/api/refresh", methods=["POST"])
 def api_refresh():
     _cache.clear()
-    skip_ai = request.json.get("skip_ai", True) if request.is_json else True
-    portfolio = _get_portfolio(skip_ai=skip_ai)
-    return jsonify({"refreshed": True, "total": portfolio.result.total_projects})
+    return jsonify({"refreshed": True, "total": _get_portfolio().result.total_projects})
 
 
 @app.route("/shots/<folder>/<filename>")

@@ -13,11 +13,9 @@
   <div class="masthead-inner">
     <div class="logo-block">
       <div class="name">Portfolio<span class="dot">.</span></div>
-      <div class="sub">30 days of finance + AI</div>
+      <div class="sub">30 days of finance + AI by Safwan</div>
     </div>
-    <span class="pill {% if env_key_ok %}live{% endif %}">
-      {% if env_key_ok %}DeepSeek V4 live{% else %}Deterministic mode{% endif %}
-    </span>
+    <span class="pill">30 builds / 30 days</span>
   </div>
 </header>
 
@@ -49,11 +47,11 @@
         <p>{{ project.ai_integration }}</p>
       </section>
 
-      {% if project.talking_points %}
+      {% if project.fun_facts %}
       <section class="detail-section">
-        <h3>Talking points (interview prep)</h3>
+        <h3>Fun facts</h3>
         <ul class="talking-points">
-          {% for p in project.talking_points %}
+          {% for p in project.fun_facts %}
             <li>{{ p }}</li>
           {% endfor %}
         </ul>
@@ -116,8 +114,8 @@
   </section>
 
   <div class="foot">
-    <span>PORTFOLIO. /  DAY {{ project.day }}  /  127.0.0.1:1030</span>
-    <span>30 DAYS OF FINANCE + AI  /  CASE-STUDY PROJECT</span>
+    <span>PORTFOLIO. /  DAY {{ project.day }}</span>
+    <span>SAFWAN  /  30 DAYS OF FINANCE + AI</span>
   </div>
 </div>
 

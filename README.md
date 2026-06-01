@@ -1,139 +1,73 @@
-# Day 30. Portfolio. Showcase Site.
+# Portfolio. 30 days of finance + AI
 
-![AI provider: DeepSeek V4](https://img.shields.io/badge/AI-DeepSeek_V4-2A6CC0?style=flat-square)
-![Stack: Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white)
-![Local-only](https://img.shields.io/badge/Hosted-Local_only_(127.0.0.1:1030)-555555?style=flat-square)
-![Status](https://img.shields.io/badge/Status-MVP_complete-16A34A?style=flat-square)
+A static portfolio site for a 30-day run of daily finance and AI builds. It
+shows a filterable gallery of all 29 prior projects, and a page per project
+with a couple of plain-English fun facts and a few screenshots.
 
-The public face of the 30-day finance + AI sprint. A single Flask app that indexes all 30 day-projects, renders a portfolio landing page with one card per day (title, tagline, stack, AI provider, port, cost, GitHub link), and surfaces aggregate stats: total tools shipped, total tests across the suite, combined AI cost log, line count by language, and the AI-provider mix (Claude for days 1-3, DeepSeek V4 for days 4-30). DeepSeek V4 writes the per-card elevator pitch and the site-level retrospective (what worked, what I'd do differently, lessons learned). Without an API key, the deterministic fallback writes the same shape from the project metadata. Built to a self-contained static-style feel; runs locally and is the final showcase artefact of the sprint.
+It is a plain, fast website: no server and no AI when someone visits. It is
+hosted on GitHub Pages.
 
-This is **Day 30 of a 30-day finance and AI portfolio sprint** where each
-project is shipped end-to-end in a single day, runs locally on its own
-loopback port, and integrates the AI in a way that is not cosmetic. The
-series alternates between Claude (Days 1 to 3) and DeepSeek V4 (Days 4
-onwards) with a deliberate provider switch documented in the README.
+Live site: https://x7-u.github.io/day-30-portfolio-site/
 
----
+## What it shows
 
-## AI provider
+- A gallery: one card per project with the day number, name, tagline, tags,
+  stack, build status and test count. Filter the gallery by tag.
+- A page per project: a couple of fun facts about what the build does, the
+  accounting focus, the technology used, the build status, the test count,
+  and up to four screenshots.
 
-**This project uses the DeepSeek V4 API (OpenAI-compatible).**
+## How it is built
 
-- **Model**: DeepSeek V4 (deepseek-chat) via the OpenAI-compatible SDK.
-- **Cost target**: around $0.001 per full-site render (one batched call).
-- **Why DeepSeek here**: Days 4 onwards of the 30-day series switched off Claude to DeepSeek V4 for cost. DeepSeek's chat endpoint is OpenAI-compatible (we use the openai SDK pointed at DeepSeek's base URL), JSON mode is reliable, and prefix caching on identical system prompts brings repeat calls down further. Roughly 5x to 15x cheaper than Claude Haiku 4.5 on JSON-shaped finance workloads.
-
-The shared client is `shared/deepseek_client.py` and exposes `ask_deepseek_json_with_stats(prompt, system, max_tokens, model)`. It returns the parsed JSON plus a `CallResult` with token counts, cache-hit tokens, latency and cost in USD.
-
----
-
-## What it does
-
-The public face of the 30-day finance + AI sprint. A single Flask app that indexes all 30 day-projects, renders a portfolio landing page with one card per day (title, tagline, stack, AI provider, port, cost, GitHub link), and surfaces aggregate stats: total tools shipped, total tests across the suite, combined AI cost log, line count by language, and the AI-provider mix (Claude for days 1-3, DeepSeek V4 for days 4-30). DeepSeek V4 writes the per-card elevator pitch and the site-level retrospective (what worked, what I'd do differently, lessons learned). Without an API key, the deterministic fallback writes the same shape from the project metadata. Built to a self-contained static-style feel; runs locally and is the final showcase artefact of the sprint.
-
-The MVP is intentionally compact:
-
-1. The user uploads a file (or picks a bundled sample).
-2. The pipeline parses, validates and normalises the input.
-3. The deterministic finance maths runs locally (no AI involved).
-4. A single AI call writes the narrative around those numbers.
-5. The web UI renders the result; Excel + PDF + CSV exports drop into `outputs/`.
-
-Every analytical figure is computed by Python, not the LLM. The AI is
-asked only to interpret and explain.
-
-## Quickstart (Windows)
-
-One-time setup, from the repo root:
-
-```bat
-python -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements.txt
-copy .env.example .env
-notepad .env       :: paste your API key
-```
-
-Then run:
-
-```bat
-start.bat
-```
-
-A browser window opens at `http://127.0.0.1:1030/`.
-
-## Quickstart (macOS / Linux)
-
-```bash
-python -m venv .venv
-./.venv/bin/python -m pip install -r requirements.txt
-cp .env.example .env
-$EDITOR .env       # paste your API key
-chmod +x start.sh
-./start.sh
-```
-
-## Environment variables
-
-- `DEEPSEEK_API_KEY` -- Optional. Get one at https://platform.deepseek.com/. Without it, the deterministic fallback renders the same site shape from project metadata.
-- `DEEPSEEK_MODEL_FAST` -- Optional override; deepseek-chat resolves to V4 latest.
-
-The `.env` file is git-ignored. **Never commit it.** A `.env.example` lives
-next to it with placeholder values that you can copy.
-
-## Stack
-
-- Python 3.11+
-- openai (DeepSeek client), flask
-- System fonts only, no CDN dependencies, loopback only.
-
-## File layout
+The site is generated from the project catalogue by a small build script.
+The output is fully static (plain HTML, CSS, one tiny script for the tag
+filter, the favicon, and the screenshots).
 
 ```
-day-30-portfolio-site/
-  server.py            Flask web server (port 1030)
-  main.py              CLI entry point
-  pipeline.py          orchestrator
-  shared/              vendored shared modules (config, AI client, etc.)
-  static/              frontend CSS + JS + favicon
-  templates/           Jinja2 HTML
-  sample_data/         deterministic samples that round-trip the parser
-  tests/               pytest suite
-  outputs/             generated artefacts (gitignored)
-  uploads/             user uploads (gitignored)
-  logs/                rotating server log (gitignored)
-  start.bat / start.sh launchers
-  requirements.txt
-  README.md (this file)
-  .env.example         placeholders for the env vars above
-  .gitignore
-  LICENSE              MIT
+.venv\Scripts\python.exe day-30-portfolio-site\build_site.py
 ```
 
-## Running tests
+That writes a self-contained `docs/` folder. GitHub Pages serves `docs/`
+straight from the main branch, so what you push is what goes live.
 
-```bat
-.venv\Scripts\python.exe -m pytest
+## Files
+
+```
+build_site.py        static site generator (writes docs/)
+fun_facts.py         curated per-project fun facts
+portfolio_schema.py  the project catalogue (day, name, tagline, stack, tags)
+portfolio_engine.py  scans each folder for build status, tests, screenshots
+pipeline.py          ties the scan together
+server.py            optional local preview (Flask, port 1030)
+templates/           index.html and project.html, shared by builder and preview
+static/              style.css, app.js (the tag filter), favicon.svg
+docs/                the generated static site that GitHub Pages serves
+tests/               catalogue, engine, fun-facts and no-dashes checks
 ```
 
-The tests do not call the AI provider; the LLM is stubbed where the
-pipeline crosses the network.
+## Hosting on GitHub Pages
 
-## Security and privacy notes
+1. Build the site (run `build_site.py`). It writes `docs/`.
+2. Commit and push.
+3. In the repo Settings, under Pages, set the source to the `main` branch and
+   the `/docs` folder. The site is then live at the URL above.
 
-- All processing is local. The server binds to `127.0.0.1` only; no
-  inbound traffic is accepted from the network.
-- The only outbound call is to the AI provider's API endpoint
-  (`api.anthropic.com` for Claude or `api.deepseek.com` for DeepSeek).
-- Uploaded files stay in `uploads/` and are git-ignored.
-- The exception scrubber strips API keys and absolute paths from any
-  error surfaced to the UI before the user sees it.
-- CSRF double-submit cookie + single-flight semaphore on the analyse
-  route prevent CSRF and accidental double-submission.
+## Local preview (optional)
 
-## Project context
+The same content can be previewed locally with a small Flask app, handy while
+editing. The hosted site is the static `docs/` folder, not this server.
 
-Day 30 of a 30-day finance + AI sprint, 2026.
+```
+day-30-portfolio-site\start.bat
+```
 
-## License
+Opens at `http://127.0.0.1:1030/`.
 
-MIT. See `LICENSE`.
+## Tests
+
+```
+pytest day-30-portfolio-site -v
+```
+
+Covers the catalogue, the folder scan, the fun facts (every project has at
+least two), and the no-dashes rule across the whole tree.

@@ -46,7 +46,7 @@ _CONFLICTING = {
     "valuation_schema", "valuation_maths", "valuation_ai",
     "chat_schema", "chat_engine", "chat_ai",
     # Day 30
-    "portfolio_engine", "portfolio_ai",
+    "portfolio_engine", "fun_facts", "build_site",
 }
 
 

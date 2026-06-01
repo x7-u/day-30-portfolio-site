@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Safwan - 30 Days of Finance + AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="logo-block">
+      <div class="name">Portfolio<span class="dot">.</span></div>
+      <div class="sub">30 days of finance + AI by Safwan</div>
+    </div>
+    <span class="pill">30 builds / 30 days</span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <section class="intro">
+    <div>
+      <h1>30 daily builds. <em>Finance.</em><br>One AI integration each.</h1>
+      <p>From a financial-ratio dashboard to a three-stage dividend discount model. Every project is a working Flask app, every project ships with tests, and every project uses AI (Claude on Days 1 to 3, DeepSeek V4 from Day 4 onwards) as a meaningful part of the workflow.</p>
+    </div>
+    <div class="stats">
+      <div class="cell">
+        <div class="lab">Projects shipped</div>
+        <div class="v">29<span style="color:var(--ink-mute);font-size:18px;"> / 29</span></div>
+      </div>
+      <div class="cell">
+        <div class="lab">Tests written</div>
+        <div class="v">1286</div>
+      </div>
+      <div class="cell">
+        <div class="lab">Screenshots</div>
+        <div class="v">200</div>
+      </div>
+      <div class="cell">
+        <div class="lab">Tags covered</div>
+        <div class="v">70</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filter-bar">
+    <span class="lab">Filter by tag</span>
+    <button class="filter-chip active" data-filter="all">All</button>
+    
+      <button class="filter-chip" data-filter="ratios">ratios (1)</button>
+    
+      <button class="filter-chip" data-filter="ai-commentary">ai-commentary (1)</button>
+    
+      <button class="filter-chip" data-filter="excel">excel (1)</button>
+    
+      <button class="filter-chip" data-filter="ocr">ocr (1)</button>
+    
+      <button class="filter-chip" data-filter="ap">ap (2)</button>
+    
+      <button class="filter-chip" data-filter="automation">automation (2)</button>
+    
+      <button class="filter-chip" data-filter="budget">budget (1)</button>
+    
+      <button class="filter-chip" data-filter="variance">variance (1)</button>
+    
+      <button class="filter-chip" data-filter="rag">rag (1)</button>
+    
+      <button class="filter-chip" data-filter="cashflow">cashflow (1)</button>
+    
+      <button class="filter-chip" data-filter="treasury">treasury (4)</button>
+    
+      <button class="filter-chip" data-filter="scenario">scenario (1)</button>
+    
+      <button class="filter-chip" data-filter="sentiment">sentiment (1)</button>
+    
+      <button class="filter-chip" data-filter="news">news (1)</button>
+    
+      <button class="filter-chip" data-filter="nlp">nlp (3)</button>
+    
+      <button class="filter-chip" data-filter="cvp">cvp (1)</button>
+    
+      <button class="filter-chip" data-filter="breakeven">breakeven (1)</button>
+    
+      <button class="filter-chip" data-filter="mc">mc (3)</button>
+    
+      <button class="filter-chip" data-filter="earnings">earnings (1)</button>
+    
+      <button class="filter-chip" data-filter="ir">ir (2)</button>
+    
+      <button class="filter-chip" data-filter="bank">bank (1)</button>
+    
+      <button class="filter-chip" data-filter="categorisation">categorisation (1)</button>
+    
+      <button class="filter-chip" data-filter="personal">personal (1)</button>
+    
+      <button class="filter-chip" data-filter="valuation">valuation (5)</button>
+    
+      <button class="filter-chip" data-filter="dcf">dcf (1)</button>
+    
+      <button class="filter-chip" data-filter="ageing">ageing (1)</button>
+    
+      <button class="filter-chip" data-filter="sec">sec (1)</button>
+    
+      <button class="filter-chip" data-filter="filings">filings (1)</button>
+    
+      <button class="filter-chip" data-filter="edgar">edgar (1)</button>
+    
+      <button class="filter-chip" data-filter="risk">risk (2)</button>
+    
+      <button class="filter-chip" data-filter="portfolio">portfolio (1)</button>
+    
+      <button class="filter-chip" data-filter="financials">financials (1)</button>
+    
+      <button class="filter-chip" data-filter="tb">tb (1)</button>
+    
+      <button class="filter-chip" data-filter="trial-balance">trial-balance (1)</button>
+    
+      <button class="filter-chip" data-filter="glossary">glossary (1)</button>
+    
+      <button class="filter-chip" data-filter="training">training (2)</button>
+    
+      <button class="filter-chip" data-filter="inventory">inventory (1)</button>
+    
+      <button class="filter-chip" data-filter="eoq">eoq (1)</button>
+    
+      <button class="filter-chip" data-filter="supply-chain">supply-chain (1)</button>
+    
+      <button class="filter-chip" data-filter="ifrs">ifrs (2)</button>
+    
+      <button class="filter-chip" data-filter="lease">lease (1)</button>
+    
+      <button class="filter-chip" data-filter="compliance">compliance (1)</button>
+    
+      <button class="filter-chip" data-filter="tax">tax (1)</button>
+    
+      <button class="filter-chip" data-filter="rd">rd (1)</button>
+    
+      <button class="filter-chip" data-filter="provision">provision (1)</button>
+    
+      <button class="filter-chip" data-filter="credit">credit (1)</button>
+    
+      <button class="filter-chip" data-filter="ar">ar (1)</button>
+    
+      <button class="filter-chip" data-filter="fx">fx (1)</button>
+    
+      <button class="filter-chip" data-filter="hedging">hedging (1)</button>
+    
+      <button class="filter-chip" data-filter="reporting">reporting (1)</button>
+    
+      <button class="filter-chip" data-filter="docx">docx (1)</button>
+    
+      <button class="filter-chip" data-filter="working-capital">working-capital (1)</button>
+    
+      <button class="filter-chip" data-filter="dso">dso (1)</button>
+    
+      <button class="filter-chip" data-filter="wacc">wacc (1)</button>
+    
+      <button class="filter-chip" data-filter="capm">capm (1)</button>
+    
+      <button class="filter-chip" data-filter="forensic">forensic (1)</button>
+    
+      <button class="filter-chip" data-filter="audit">audit (1)</button>
+    
+      <button class="filter-chip" data-filter="fraud">fraud (1)</button>
+    
+      <button class="filter-chip" data-filter="ddm">ddm (1)</button>
+    
+      <button class="filter-chip" data-filter="dividends">dividends (1)</button>
+    
+      <button class="filter-chip" data-filter="bookkeeping">bookkeeping (1)</button>
+    
+      <button class="filter-chip" data-filter="coa">coa (1)</button>
+    
+      <button class="filter-chip" data-filter="system-design">system-design (1)</button>
+    
+      <button class="filter-chip" data-filter="equity-research">equity-research (1)</button>
+    
+      <button class="filter-chip" data-filter="payroll">payroll (1)</button>
+    
+      <button class="filter-chip" data-filter="people-cost">people-cost (1)</button>
+    
+      <button class="filter-chip" data-filter="reconciliation">reconciliation (1)</button>
+    
+      <button class="filter-chip" data-filter="football-field">football-field (1)</button>
+    
+      <button class="filter-chip" data-filter="aggregator">aggregator (1)</button>
+    
+      <button class="filter-chip" data-filter="chatbot">chatbot (1)</button>
+    
+  </div>
+
+  <section class="grid" id="grid">
+    
+    
+      <a href="day-01-ratio-dashboard.html" class="card" data-tags="ratios,ai-commentary,excel">
+        <div class="swatch" style="background:var(--ink)"></div>
+        <div class="body">
+          <div class="day-num">DAY 01</div>
+          <h2>Ratio Dashboard</h2>
+          <p class="tagline">Financial ratio analysis with AI commentary</p>
+          <div class="description">Drop in financial statements; the engine computes liquidity, profitability and gearing ratios with RAG flags, and Claude writes the controller commentary.</div>
+          <div class="tags">
+            
+              <span class="tag">ratios</span>
+            
+              <span class="tag">ai-commentary</span>
+            
+              <span class="tag">excel</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / Anthropic
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1001</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">36 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-02-invoice-extractor.html" class="card" data-tags="ocr,ap,automation">
+        <div class="swatch" style="background:var(--c-red)"></div>
+        <div class="body">
+          <div class="day-num">DAY 02</div>
+          <h2>Invoice Workbench</h2>
+          <p class="tagline">PDF invoice extraction to ledger CSV</p>
+          <div class="description">Drag PDF or image invoices in; the AI extracts line items, totals and counterparty into a normalised ledger. Confidence scores and an audit trail per line.</div>
+          <div class="tags">
+            
+              <span class="tag">ocr</span>
+            
+              <span class="tag">ap</span>
+            
+              <span class="tag">automation</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / pdf parsing / Anthropic
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1002</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">33 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-03-budget-tracker.html" class="card" data-tags="budget,variance,rag">
+        <div class="swatch" style="background:var(--c-blue)"></div>
+        <div class="body">
+          <div class="day-num">DAY 03</div>
+          <h2>Budget vs Actual</h2>
+          <p class="tagline">Variance tracking with management commentary</p>
+          <div class="description">Budget and actual side-by-side with per-row tolerance, direction-aware adverse vs favourable, and AI-drafted management commentary.</div>
+          <div class="tags">
+            
+              <span class="tag">budget</span>
+            
+              <span class="tag">variance</span>
+            
+              <span class="tag">rag</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / Anthropic
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1003</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">15 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-04-cashflow-model.html" class="card" data-tags="cashflow,treasury,scenario">
+        <div class="swatch" style="background:var(--c-green)"></div>
+        <div class="body">
+          <div class="day-num">DAY 04</div>
+          <h2>Cashflow Model</h2>
+          <p class="tagline">13-week cash flow forecast with scenario engine</p>
+          <div class="description">Drop in receipts, payments, payroll and tax; the engine builds a rolling 13-week balance projection. DeepSeek V4 parses &#39;what if&#39; prompts into deterministic shocks.</div>
+          <div class="tags">
+            
+              <span class="tag">cashflow</span>
+            
+              <span class="tag">treasury</span>
+            
+              <span class="tag">scenario</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1004</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">42 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-05-sentiment-analyser.html" class="card" data-tags="sentiment,news,nlp">
+        <div class="swatch" style="background:var(--c-amber)"></div>
+        <div class="body">
+          <div class="day-num">DAY 05</div>
+          <h2>Sentiment Pulse</h2>
+          <p class="tagline">Financial news sentiment with sector aggregation</p>
+          <div class="description">Ingests news headlines; classifies sentiment per company and rolls up to sector. Bias-aware aggregation, RAG flags on extreme movements.</div>
+          <div class="tags">
+            
+              <span class="tag">sentiment</span>
+            
+              <span class="tag">news</span>
+            
+              <span class="tag">nlp</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1005</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">65 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-06-breakeven-tool.html" class="card" data-tags="cvp,breakeven,mc">
+        <div class="swatch" style="background:var(--c-purple)"></div>
+        <div class="body">
+          <div class="day-num">DAY 06</div>
+          <h2>Breakeven Tool</h2>
+          <p class="tagline">Cost-volume-profit analysis with Monte Carlo</p>
+          <div class="description">Compute break-even volume and revenue from fixed costs, variable costs and price. Monte Carlo overlay shows the probability distribution of profit.</div>
+          <div class="tags">
+            
+              <span class="tag">cvp</span>
+            
+              <span class="tag">breakeven</span>
+            
+              <span class="tag">mc</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / numpy / matplotlib
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1006</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">71 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-07-earnings-summariser.html" class="card" data-tags="earnings,nlp,ir">
+        <div class="swatch" style="background:var(--c-teal)"></div>
+        <div class="body">
+          <div class="day-num">DAY 07</div>
+          <h2>Earnings Brief</h2>
+          <p class="tagline">Earnings transcript analysis and claim extraction</p>
+          <div class="description">Drop in an earnings call transcript; AI extracts the forward-looking statements, hedge phrases, and claims with confidence scoring.</div>
+          <div class="tags">
+            
+              <span class="tag">earnings</span>
+            
+              <span class="tag">nlp</span>
+            
+              <span class="tag">ir</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1007</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">46 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-08-finance-categoriser.html" class="card" data-tags="bank,categorisation,personal">
+        <div class="swatch" style="background:var(--c-rose)"></div>
+        <div class="body">
+          <div class="day-num">DAY 08</div>
+          <h2>Finance Categoriser</h2>
+          <p class="tagline">Bank statement categorisation</p>
+          <div class="description">Drop in a bank statement; the engine categorises every transaction by merchant dictionary plus AI for edge cases.</div>
+          <div class="tags">
+            
+              <span class="tag">bank</span>
+            
+              <span class="tag">categorisation</span>
+            
+              <span class="tag">personal</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1008</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">81 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-09-dcf-model.html" class="card" data-tags="valuation,dcf,mc">
+        <div class="swatch" style="background:var(--ink)"></div>
+        <div class="body">
+          <div class="day-num">DAY 09</div>
+          <h2>DCF Model</h2>
+          <p class="tagline">5-year DCF with sensitivity and Monte Carlo</p>
+          <div class="description">Five-year free cash flow forecast with Gordon terminal, 5x5 sensitivity over WACC and growth, and a Monte Carlo overlay for the intrinsic value distribution.</div>
+          <div class="tags">
+            
+              <span class="tag">valuation</span>
+            
+              <span class="tag">dcf</span>
+            
+              <span class="tag">mc</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1009</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">60 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-10-ap-ageing-report.html" class="card" data-tags="ap,ageing,treasury">
+        <div class="swatch" style="background:var(--c-red)"></div>
+        <div class="body">
+          <div class="day-num">DAY 10</div>
+          <h2>AP Ageing</h2>
+          <p class="tagline">Accounts payable ageing with AI flagger</p>
+          <div class="description">Bucket-by-bucket ageing (0-30, 30-60, 60-90, 90+) across suppliers, with AI flagging unusual delays.</div>
+          <div class="tags">
+            
+              <span class="tag">ap</span>
+            
+              <span class="tag">ageing</span>
+            
+              <span class="tag">treasury</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1010</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">49 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-11-sec-filing-parser.html" class="card" data-tags="sec,filings,edgar">
+        <div class="swatch" style="background:var(--c-blue)"></div>
+        <div class="body">
+          <div class="day-num">DAY 11</div>
+          <h2>Filing Parser</h2>
+          <p class="tagline">SEC 10-K parsing with risk extraction</p>
+          <div class="description">Parse SEC 10-K filings from EDGAR; extract the risk section, executive summary, and key financials.</div>
+          <div class="tags">
+            
+              <span class="tag">sec</span>
+            
+              <span class="tag">filings</span>
+            
+              <span class="tag">edgar</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / BeautifulSoup / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1011</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">51 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-12-monte-carlo-sim.html" class="card" data-tags="risk,mc,portfolio">
+        <div class="swatch" style="background:var(--c-green)"></div>
+        <div class="body">
+          <div class="day-num">DAY 12</div>
+          <h2>Monte Carlo</h2>
+          <p class="tagline">Risk simulation for portfolio analysis</p>
+          <div class="description">Run 10,000 simulations on a multi-asset portfolio with configurable returns, volatility, correlations.</div>
+          <div class="tags">
+            
+              <span class="tag">risk</span>
+            
+              <span class="tag">mc</span>
+            
+              <span class="tag">portfolio</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / numpy / matplotlib
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1012</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">56 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-13-mgmt-accounts.html" class="card" data-tags="financials,tb,trial-balance">
+        <div class="swatch" style="background:var(--c-amber)"></div>
+        <div class="body">
+          <div class="day-num">DAY 13</div>
+          <h2>Mgmt Accounts</h2>
+          <p class="tagline">P&amp;L, balance sheet and cash flow from trial balance</p>
+          <div class="description">Take a trial balance, produce the three primary statements with YoY comparison and AI commentary.</div>
+          <div class="tags">
+            
+              <span class="tag">financials</span>
+            
+              <span class="tag">tb</span>
+            
+              <span class="tag">trial-balance</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1013</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">67 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-14-jargon-explainer.html" class="card" data-tags="glossary,training,nlp">
+        <div class="swatch" style="background:var(--c-purple)"></div>
+        <div class="body">
+          <div class="day-num">DAY 14</div>
+          <h2>Jargon Explainer</h2>
+          <p class="tagline">Glossary for finance jargon in any document</p>
+          <div class="description">Drop in a finance document; AI finds the jargon, explains it in plain English, builds a glossary.</div>
+          <div class="tags">
+            
+              <span class="tag">glossary</span>
+            
+              <span class="tag">training</span>
+            
+              <span class="tag">nlp</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1014</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">41 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-15-inventory-optimiser.html" class="card" data-tags="inventory,eoq,supply-chain">
+        <div class="swatch" style="background:var(--c-teal)"></div>
+        <div class="body">
+          <div class="day-num">DAY 15</div>
+          <h2>Inventory Optimiser</h2>
+          <p class="tagline">EOQ + reorder point + AI recommendations</p>
+          <div class="description">Economic order quantity, reorder point, and safety stock for inventory items with AI recommendations.</div>
+          <div class="tags">
+            
+              <span class="tag">inventory</span>
+            
+              <span class="tag">eoq</span>
+            
+              <span class="tag">supply-chain</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1015</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">38 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-16-ifrs16-calculator.html" class="card" data-tags="ifrs,lease,compliance">
+        <div class="swatch" style="background:var(--c-rose)"></div>
+        <div class="body">
+          <div class="day-num">DAY 16</div>
+          <h2>IFRS 16 Calculator</h2>
+          <p class="tagline">Right-of-use asset and lease liability schedule</p>
+          <div class="description">Full IFRS 16 calculation: ROU asset, lease liability, interest accrual, year-by-year schedule.</div>
+          <div class="tags">
+            
+              <span class="tag">ifrs</span>
+            
+              <span class="tag">lease</span>
+            
+              <span class="tag">compliance</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1016</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">38 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-17-tax-provision.html" class="card" data-tags="tax,rd,provision">
+        <div class="swatch" style="background:var(--ink)"></div>
+        <div class="body">
+          <div class="day-num">DAY 17</div>
+          <h2>Tax Provision</h2>
+          <p class="tagline">Corporation tax computation with R&amp;D identifier</p>
+          <div class="description">UK corporation tax computation with deferred tax, R&amp;D identification, and effective rate calculation.</div>
+          <div class="tags">
+            
+              <span class="tag">tax</span>
+            
+              <span class="tag">rd</span>
+            
+              <span class="tag">provision</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1017</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">77 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-18-credit-scorecard.html" class="card" data-tags="credit,ar,risk">
+        <div class="swatch" style="background:var(--c-red)"></div>
+        <div class="body">
+          <div class="day-num">DAY 18</div>
+          <h2>Credit Scorecard</h2>
+          <p class="tagline">Trade credit scorecard with memo writer</p>
+          <div class="description">Score a counterparty on the standard 5-factor model (liquidity, leverage, profitability, scale, payment behaviour) and draft the credit memo.</div>
+          <div class="tags">
+            
+              <span class="tag">credit</span>
+            
+              <span class="tag">ar</span>
+            
+              <span class="tag">risk</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1018</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">36 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-19-fx-exposure.html" class="card" data-tags="fx,hedging,treasury">
+        <div class="swatch" style="background:var(--c-blue)"></div>
+        <div class="body">
+          <div class="day-num">DAY 19</div>
+          <h2>FX Exposure</h2>
+          <p class="tagline">FX exposure analysis with hedging recommendations</p>
+          <div class="description">Aggregate FX exposure by currency and tenor; AI recommends hedging instruments and ratios.</div>
+          <div class="tags">
+            
+              <span class="tag">fx</span>
+            
+              <span class="tag">hedging</span>
+            
+              <span class="tag">treasury</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1019</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">32 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-20-report-builder.html" class="card" data-tags="reporting,docx,automation">
+        <div class="swatch" style="background:var(--c-green)"></div>
+        <div class="body">
+          <div class="day-num">DAY 20</div>
+          <h2>Report Builder</h2>
+          <p class="tagline">Automated management reports from P&amp;L plus KPIs</p>
+          <div class="description">Generate a fully formatted Word document plus Excel workbook of the management report from your P&amp;L lines and KPI dashboard.</div>
+          <div class="tags">
+            
+              <span class="tag">reporting</span>
+            
+              <span class="tag">docx</span>
+            
+              <span class="tag">automation</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / python-docx / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1020</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">21 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-21-working-capital.html" class="card" data-tags="working-capital,dso,treasury">
+        <div class="swatch" style="background:var(--c-amber)"></div>
+        <div class="body">
+          <div class="day-num">DAY 21</div>
+          <h2>Cycle.</h2>
+          <p class="tagline">Working capital DSO/DPO/DIO/CCC dashboard</p>
+          <div class="description">Multi-period working capital diagnostics with sector benchmarks. AI explains the trapped-cash impact.</div>
+          <div class="tags">
+            
+              <span class="tag">working-capital</span>
+            
+              <span class="tag">dso</span>
+            
+              <span class="tag">treasury</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1021</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">41 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-22-wacc-calculator.html" class="card" data-tags="wacc,valuation,capm">
+        <div class="swatch" style="background:var(--c-purple)"></div>
+        <div class="body">
+          <div class="day-num">DAY 22</div>
+          <h2>WACC.</h2>
+          <p class="tagline">Cost of capital with sector beta checks</p>
+          <div class="description">Build WACC step by step: CAPM cost of equity, after-tax cost of debt, capital structure. AI sanity-checks every input against sector typicals.</div>
+          <div class="tags">
+            
+              <span class="tag">wacc</span>
+            
+              <span class="tag">valuation</span>
+            
+              <span class="tag">capm</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1022</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">35 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-23-fraud-detection.html" class="card" data-tags="forensic,audit,fraud">
+        <div class="swatch" style="background:var(--c-teal)"></div>
+        <div class="body">
+          <div class="day-num">DAY 23</div>
+          <h2>Audit.</h2>
+          <p class="tagline">Five-rule fraud detection console</p>
+          <div class="description">Forensic transaction monitor: round-numbers, duplicates, off-hours, rapid-sequential, first-time. AI writes the investigation note per flag.</div>
+          <div class="tags">
+            
+              <span class="tag">forensic</span>
+            
+              <span class="tag">audit</span>
+            
+              <span class="tag">fraud</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1023</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">38 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-24-ddm-valuation.html" class="card" data-tags="valuation,ddm,dividends">
+        <div class="swatch" style="background:var(--c-rose)"></div>
+        <div class="body">
+          <div class="day-num">DAY 24</div>
+          <h2>DDM.</h2>
+          <p class="tagline">Three-stage dividend discount model</p>
+          <div class="description">High growth + transition + Gordon terminal. AI interrogates each assumption against the dividend history.</div>
+          <div class="tags">
+            
+              <span class="tag">valuation</span>
+            
+              <span class="tag">ddm</span>
+            
+              <span class="tag">dividends</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1024</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">47 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-25-coa-generator.html" class="card" data-tags="bookkeeping,coa,system-design">
+        <div class="swatch" style="background:var(--ink)"></div>
+        <div class="body">
+          <div class="day-num">DAY 25</div>
+          <h2>Ledger.</h2>
+          <p class="tagline">AI-generated chart of accounts</p>
+          <div class="description">Describe a business in plain English; AI designs the chart of accounts for entity type, industry, size and standard. Validated against the 1000-9999 convention.</div>
+          <div class="tags">
+            
+              <span class="tag">bookkeeping</span>
+            
+              <span class="tag">coa</span>
+            
+              <span class="tag">system-design</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1025</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">32 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-26-equity-research.html" class="card" data-tags="equity-research,valuation,ir">
+        <div class="swatch" style="background:var(--c-red)"></div>
+        <div class="body">
+          <div class="day-num">DAY 26</div>
+          <h2>Equity.</h2>
+          <p class="tagline">One-page sell-side research note</p>
+          <div class="description">Drop in five years of financials; AI writes the rating, target price, investment thesis, bull and bear cases, risks and catalysts.</div>
+          <div class="tags">
+            
+              <span class="tag">equity-research</span>
+            
+              <span class="tag">valuation</span>
+            
+              <span class="tag">ir</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1026</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">38 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-27-payroll-variance.html" class="card" data-tags="payroll,people-cost,reconciliation">
+        <div class="swatch" style="background:var(--c-blue)"></div>
+        <div class="body">
+          <div class="day-num">DAY 27</div>
+          <h2>Roll.</h2>
+          <p class="tagline">Payroll variance analyser</p>
+          <div class="description">Classify every period-on-period variance into starters, leavers, salary changes, overtime, bonus, NIC effects, pension changes. AI narrates the period story.</div>
+          <div class="tags">
+            
+              <span class="tag">payroll</span>
+            
+              <span class="tag">people-cost</span>
+            
+              <span class="tag">reconciliation</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1027</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">33 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-28-valuation-aggregator.html" class="card" data-tags="valuation,football-field,aggregator">
+        <div class="swatch" style="background:var(--c-green)"></div>
+        <div class="body">
+          <div class="day-num">DAY 28</div>
+          <h2>Field.</h2>
+          <p class="tagline">Football-field valuation aggregator</p>
+          <div class="description">Four valuation methods side by side (DCF, EV/EBITDA, P/E, NAV) with AI weighting by sector and stage.</div>
+          <div class="tags">
+            
+              <span class="tag">valuation</span>
+            
+              <span class="tag">football-field</span>
+            
+              <span class="tag">aggregator</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1028</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">34 tests</span>
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-29-accounting-chatbot.html" class="card" data-tags="chatbot,ifrs,training">
+        <div class="swatch" style="background:var(--c-amber)"></div>
+        <div class="body">
+          <div class="day-num">DAY 29</div>
+          <h2>Ledger.AI</h2>
+          <p class="tagline">ACA-qualified accounting chatbot</p>
+          <div class="description">UK accounting Q&amp;A: IFRS / FRS 102 / IAS treatment, journal entries with Dr / Cr lines, audit and tax. Cites standards by name and number.</div>
+          <div class="tags">
+            
+              <span class="tag">chatbot</span>
+            
+              <span class="tag">ifrs</span>
+            
+              <span class="tag">training</span>
+            
+          </div>
+          <div class="stack">
+            <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
+          </div>
+          <div class="footer-row">
+            <span class="ports">:1029</span>
+            <span class="built ">SHIPPED</span>
+            <span class="tests">33 tests</span>
+          </div>
+        </div>
+      </a>
+    
+  </section>
+
+  <div class="foot">
+    <span>PORTFOLIO. /  30 DAYS OF FINANCE + AI</span>
+    <span>SAFWAN  /  ACA / ACCA CANDIDATE</span>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
