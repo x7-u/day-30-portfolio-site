@@ -42,10 +42,65 @@
         <p>A local Flask app and CLI that compares two payroll runs and classifies every variance into named categories: starters, leavers, salary changes, overtime, bonus, NIC threshold effects, pension changes. DeepSeek V4 narrates the period story.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Monthly payroll variance reconciliation, finance to HR handover</dd>
+          
+            <dt>Inputs</dt><dd>Two payroll run exports (employees, gross, NI, pension, tax, net, dept, role)</dd>
+          
+            <dt>Outputs</dt><dd>Classified variances + department rollup + Excel + 3 CSVs</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.0003 per month)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Schema.</b> payroll_schema.py validates two runs of up to 1,000 employees each, with unique employee IDs per run.</li>
+          
+            <li><b>Variance engine.</b> payroll_engine.compute classifies every variance: new_starter (in current, not in prior), leaver (in prior, not in current), salary_change (matched employee with base-pay delta...</li>
+          
+            <li><b>AI narrative.</b> payroll_ai.narrative builds a pipe-delimited digest of the totals, the variance breakdown by kind, the top ten variances by absolute impact, and the department rollup.</li>
+          
+            <li><b>HR-corporate UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts, Variances colour-coded by kind, Departments rollup, Narrative typeset, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek narrates the variance bridge</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>UK PAYE / NIC convention. International payroll mappings (US 401k, French URSSAF, German Lohnsteuer) are post-30.</li>
+          
+            <li>No HR system integration. Upload only.</li>
+          
+            <li>Fixed variance thresholds. 0.5% on base pay, 2pp on NIC ratio.</li>
+          
+            <li>AI proposes; payroll manager disposes. Every narrative needs payroll-manager review before circulation.</li>
+          
+            <li>No headcount FTE conversion. Part-time vs full-time normalisation is post-30.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +112,25 @@
             <li>It is called &#39;Roll.&#39; and every penny of the movement is accounted for.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - HR / payroll corporate aesthetic. Clean blue-grey on white, sans-serif body, like a Workday or ADP product screen.</li>
+          
+            <li><b>First data run: tech scale-up</b> - Growth sample.</li>
+          
+            <li><b>Second data run: mid-cap restructure</b> - Restructure sample. Westgate Logistics with three leavers in operations (manager and two drivers).</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts on a white background: employer cost bridge (waterfall), department breakdown (grouped bars), variances by...</li>
+          
+            <li><b>AI narrative (the integration)</b> - DeepSeek V4 reads the variance digest and writes the four-block narrative: headline, summary, four driver blocks...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +154,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-27-payroll-variance" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

@@ -53,3 +53,8 @@ def test_round_trip_to_dict():
     d = p.to_dict()
     assert d["day"] == p.day
     assert d["folder"] == p.folder
+
+
+def test_all_have_repo():
+    for p in CATALOG:
+        assert p.repo.startswith("https://github.com/"), f"day {p.day} missing repo"

@@ -42,10 +42,40 @@
         <p>Local-only Flask app and CLI for break-even analysis with sensitivity bands and an AI verdict on whether the cost structure works.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat default), one verdict call + optional follow-up</dd>
+          
+            <dt>Cost</dt><dd>around $0.0001 per analysis.</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>The Tool.</b> Pure-Python deterministic core. cvp_schema.py parses the workbook into typed dataclasses (CVPMetadata, CVPInputs, Product, StepCost, VolumePoint).</li>
+          
+            <li><b>AI Verdict + Follow-up.</b> One DeepSeek V4 call per analysis. The system prompt instructs a CFO voice, two to three sentences, do-not-restate the inputs.</li>
+          
+            <li><b>Excel &amp; Exports.</b> openpyxl writes a 3-sheet workbook (Summary, Inputs, Sensitivity) with embedded break-even chart and tornado PNGs (rendered by matplotlib, Agg backend).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek interprets break-even output</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +88,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +112,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Breakeven-Tool-Day-6-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

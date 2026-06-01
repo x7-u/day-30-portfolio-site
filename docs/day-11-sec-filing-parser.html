@@ -42,10 +42,48 @@
         <p>Local-only Flask web app and CLI that pulls a 10-K (or 10-Q) filing from SEC EDGAR for any US-listed company, parses five years of XBRL financials into structured statements + ratios, extracts the Risk Factors section from the 10-K HTML, and asks DeepSeek V4 to rank the five most material and most specific risks. Each AI flag carries a verbatim citation back to the filing source text.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>EDGAR</dt><dd>free public API, real User-Agent, 8 req/sec rate limit, local cache, 429 backoff</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per filing (deterministic fallback if offline)</dd>
+          
+            <dt>Cost</dt><dd>around $0.001 per filing on the AAPL sample, well under the 1c ceiling</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>EDGAR client.</b> edgar.py wraps SEC&#39;s free public API. Requires a real User-Agent header (we ship a generic one and let the user override via DAY11_EDGAR_UA).</li>
+          
+            <li><b>XBRL parser.</b> xbrl_parser.py walks the companyfacts JSON and collapses the multi-decade dataset to the most recent five fiscal years of the four canonical statements.</li>
+          
+            <li><b>10-K HTML parser.</b> filing_parser.py uses BeautifulSoup with regex anchors to locate Item 1A.</li>
+          
+            <li><b>AI risk extractor.</b> risk_extractor.py sends only the lead sentences to DeepSeek V4 (around 3-5k tokens) rather than the full 50k-word section.</li>
+          
+            <li><b>Newsprint UI.</b> Distinct from Day 7 (Bloomberg terminal black), Day 8 (glass orbs gradient), Day 9 (parchment + navy serif italic + gold), Day 10 (sage cream + bold colour blocks + heavy...</li>
+          
+            <li><b>Excel and CSV exports.</b> openpyxl writes a 7-sheet workbook (Summary + Income + Balance + Cash Flow + Ratios + Risk Factors + Risk Verbatim).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek extracts risk and forward-looking</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +96,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +120,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/SEC-Filing-Parser-Day-11-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

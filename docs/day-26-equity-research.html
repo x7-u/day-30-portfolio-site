@@ -42,10 +42,65 @@
         <p>A small Flask app and CLI that takes a stock ticker plus a financial history and produces a one-page sell-side equity research note. The engine computes the multiples and the growth and margin signals; DeepSeek V4 writes the rating, target, thesis, bull and bear cases, and the risks and catalysts list.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Sell-side equity research initiation notes</dd>
+          
+            <dt>Inputs</dt><dd>5 years of financials per stock + sector + market data + consensus target</dd>
+          
+            <dt>Outputs</dt><dd>Research note + financial-history XLSX + 3 CSVs + 3 charts</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.0005 per note)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Schema.</b> research_schema.py validates ticker (uppercased), sector from the 12 standard GICS-style sectors, currency in GBP / USD / EUR, market price and target price as non-negative...</li>
+          
+            <li><b>Multiples engine.</b> research_maths.compute walks the history year by year computing growth rates and margins.</li>
+          
+            <li><b>AI research note.</b> research_ai.draft builds a pipe-delimited digest of the history, the derived signals, the multiples, and the consensus comparison.</li>
+          
+            <li><b>Sell-side research-note UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with charts embedded, Research note typeset, Financials grid year-by-year, Multiples, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek drafts the research note</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single-stock; no peer comparison. A real research note triangulates against 3 to 5 peers.</li>
+          
+            <li>Trailing multiples only. Forward P/E and EV/EBITDA need consensus estimates.</li>
+          
+            <li>No DCF on this day. Day 9 is the DCF model.</li>
+          
+            <li>Output needs human review. AI-drafted notes are a starting point, not a publication-ready research note.</li>
+          
+            <li>For educational use only. Not investment advice.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +112,25 @@
             <li>The sort of note that takes an analyst a day, drafted in a moment.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Sell-side research note aesthetic.</li>
+          
+            <li><b>First data run: defensive blue chip</b> - Blue_chip sample. Sterling Foods plc.</li>
+          
+            <li><b>Second data run: deep-value materials</b> - Value sample. Norbeck Materials plc.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts on a black-and-white paper: revenue and EBITDA history (grouped bars), margin profile (line chart),...</li>
+          
+            <li><b>AI research note (the integration)</b> - DeepSeek V4 reads the digest and writes the note: rating, target, investment thesis, key drivers, valuation summary,...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +154,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-26-equity-research" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

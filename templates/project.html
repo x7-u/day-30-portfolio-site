@@ -42,10 +42,43 @@
         {% if project.readme_top %}<p>{{ project.readme_top }}</p>{% endif %}
       </section>
 
+      {% if project.brief and project.brief.facts %}
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          {% for f in project.brief.facts %}
+            <dt>{{ f.label }}</dt><dd>{{ f.value }}</dd>
+          {% endfor %}
+        </dl>
+      </section>
+      {% endif %}
+
+      {% if project.brief and project.brief.how_it_works %}
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          {% for it in project.brief.how_it_works %}
+            <li><b>{{ it.title }}.</b> {{ it.summary }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>{{ project.ai_integration }}</p>
       </section>
+
+      {% if project.brief and project.brief.limitations %}
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          {% for lim in project.brief.limitations %}
+            <li>{{ lim }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
 
       {% if project.fun_facts %}
       <section class="detail-section">
@@ -55,6 +88,17 @@
             <li>{{ p }}</li>
           {% endfor %}
         </ul>
+      </section>
+      {% endif %}
+
+      {% if project.brief and project.brief.walkthrough %}
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          {% for fr in project.brief.walkthrough %}
+            <li><b>{{ fr.title }}</b>{% if fr.caption %} - {{ fr.caption }}{% endif %}</li>
+          {% endfor %}
+        </ol>
       </section>
       {% endif %}
 
@@ -72,6 +116,12 @@
 
     <aside>
       <div class="aside-card">
+        {% if project.repo %}
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="{{ project.repo }}" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        {% endif %}
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

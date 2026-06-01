@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 from flask import Flask, abort, jsonify, render_template, send_file
 from fun_facts import fun_facts_for
 from pipeline import analyse
+from project_brief import brief_for
 from werkzeug.utils import safe_join
 
 HERE = Path(__file__).resolve().parent
@@ -73,6 +74,7 @@ def project_detail(folder: str):
         abort(404)
     proj_d = summary.to_dict()
     proj_d["fun_facts"] = fun_facts_for(summary)
+    proj_d["brief"] = brief_for(PROJECT_ROOT / folder)
     return render_template("project.html", project=proj_d)
 
 

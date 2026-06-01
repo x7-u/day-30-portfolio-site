@@ -42,10 +42,67 @@
         <p>Local Flask app + CLI for treasury-style FX exposure reporting. Drop in a multi-currency AR/AP ledger plus spot rates; the engine converts everything to GBP, nets per currency, flags material positions, stress-tests a 5% and 10% adverse move, and DeepSeek V4 recommends a hedge instrument per position (forward / natural hedge / currency account / stay open).</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Standard</dt><dd>IAS 21 (FX translation), IFRS 7 (financial risk disclosures)</dd>
+          
+            <dt>Inputs</dt><dd>Multi-currency AR/AP ledger + spot rates + material threshold</dd>
+          
+            <dt>Outputs</dt><dd>Per-currency net position + material flags + 5/10% stress + AI hedge recommendations</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4, single call (~$0.001 per analysis)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>FX schema.</b> fx_schema.py wraps the inputs in a typed FxInput dataclass with FxEntry sub-records.</li>
+          
+            <li><b>FX maths.</b> fx_maths.compute converts every ledger line to GBP at the supplied rate, groups by currency, separates AR from AP, and computes net per currency.</li>
+          
+            <li><b>AI hedge recommender.</b> hedging_ai.recommend builds a digest (total AR/AP/net, per-currency positions with direction, materiality, and sensitivity) and asks DeepSeek V4 for JSON: overall_summary,...</li>
+          
+            <li><b>Midnight FX desk UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes a 5-sheet workbook (Summary with embedded charts + Positions + Entries (GBP converted) + Hedges + Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek recommends hedging strategy</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Rates are user-supplied. No live FX feed.</li>
+          
+            <li>Spot only. Forward rates would need a yield-curve input.</li>
+          
+            <li>Worst-case stress only. 5% and 10% adverse moves are symmetric absolute-value stresses; correlated multi-currency moves (e.g., USD up + EUR down at once) are not modelled.</li>
+          
+            <li>No hedge accounting under IFRS 9. Designation, effectiveness testing, and the cash-flow vs fair-value hedge distinction are out of scope.</li>
+          
+            <li>GBP base only. Multi-base support (USD or EUR as base for international subsidiaries) is post-30.</li>
+          
+            <li>AI proposes, does not execute. Recommendations are starting points for a treasurer; actual hedge execution requires a counterparty bank and treasury policy sign-off.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,25 @@
             <li>Treasury-desk thinking, made approachable.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Midnight FX trading-desk aesthetic. Near-black navy background, mono tickers, electric cyan + amber accents.</li>
+          
+            <li><b>First data run: UK exporter</b> - Pemberton Components Ltd. Large USD and EUR receivables; mostly long base.</li>
+          
+            <li><b>Second data run: UK importer</b> - Northwind Retail Ltd. CNY and USD payables dominate; mostly short base.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts on the dark navy page: net exposure diverging bar, 5%/10% stress sensitivity, due-date profile.</li>
+          
+            <li><b>AI hedge recommendations (the integration)</b> - DeepSeek V4 reads the FX result and recommends one of four instruments per material currency: forward / natural hedge /...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +156,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-19-fx-exposure" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

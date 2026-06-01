@@ -42,10 +42,67 @@
         <p>Local-only Flask web app and CLI that takes SKU-level sales + stock data, computes the textbook turnover metrics (inventory turnover ratio, days sales of inventory, ABC Pareto class, velocity class), flags slow-moving / dead / excess stock, computes EOQ + reorder point + safety stock per SKU, and asks DeepSeek V4 for per-SKU action recommendations framed in working-capital terms.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Inputs</dt><dd>3 CSVs (SKU master + 6-month sales history + current stock)</dd>
+          
+            <dt>Outputs</dt><dd>Per-SKU turnover + DSI + ABC + velocity, EOQ + safety stock + reorder point, AI per-SKU action plan in working-capital terms</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per analysis</dd>
+          
+            <dt>Cost</dt><dd>around $0.001 per analysis</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Inventory schema.</b> inventory_schema.py parses three CSVs: SKU master (sku_id, name, category, unit_cost, lead_time_days, supplier), 6-month sales history (date, sku_id, units_sold, revenue), and...</li>
+          
+            <li><b>Inventory metrics.</b> inventory_metrics.py computes per SKU: total units sold, revenue, COGS, avg daily units, on-hand, inventory value, turnover ratio (units_sold / on_hand), DSI (365 / turnover),...</li>
+          
+            <li><b>EOQ + reorder point.</b> eoq_calculator.py computes per SKU: annual demand (extrapolated from the period), EOQ via the Wilson formula (sqrt(2 * D * S / H), with S = order_cost and H = unit_cost *...</li>
+          
+            <li><b>AI recommender.</b> ai_recommender.py builds a digest of the worst performers + EOQ gaps + headline stats (~600 input tokens) and asks DeepSeek V4 in JSON mode for: summary, per-SKU diagnosis +...</li>
+          
+            <li><b>Warehouse-tag UI.</b> Distinct from Day 7 (Bloomberg), Day 8 (glass orbs), Day 9 (parchment atelier), Day 10 (magazine bold blocks), Day 11 (FT pink broadsheet), Day 12 (matte engineering drawing), Day...</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek recommends stocking levels</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single period only. One 6-month window; comparing two periods is post-30.</li>
+          
+            <li>ABC on revenue, not gross margin. Margin-weighted ABC is a small change.</li>
+          
+            <li>Constant lead time per SKU. Lead-time variability not modelled; tightens safety stock when added.</li>
+          
+            <li>EOQ assumes constant demand + instantaneous replenishment.</li>
+          
+            <li>Single location. Multi-warehouse netting + redistribution is post-30.</li>
+          
+            <li>No demand forecasting. Brief lists ARIMA / Prophet as post-30; we agree.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,27 @@
             <li>Economic order quantity, the classic textbook formula, brought to life with real recommendations.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Cold start</b> - Kraft paper ground, hi-vis stencilled masthead, three CSV upload slots, sample chips.</li>
+          
+            <li><b>Compose region with sample loaded</b> - Sample chip selected, three CSV slots showing &#39;no file chosen&#39; (samples skip the upload step).</li>
+          
+            <li><b>Headline ribbon</b> - Four monolithic blocks: Inventory value / Weighted DSI / Dead stock value / Excess stock value.</li>
+          
+            <li><b>Worst performers (warehouse tag cards)</b> - Top 10 ranked by tied-up cash + lateness. Each card is a printed inventory tag with hole-punch and hi-vis flag bar.</li>
+          
+            <li><b>All SKUs table</b> - Full sortable table with ABC class, velocity, flag, units sold, on-hand, cover days, DSI, inventory value, excess value.</li>
+          
+            <li><b>EOQ + reorder point table</b> - Per SKU: lead time, annual demand, avg daily, EOQ, safety stock, reorder point, on-hand, days to reorder, suggested...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +158,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Inventory-Optimiser-Day-15-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

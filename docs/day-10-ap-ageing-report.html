@@ -42,10 +42,46 @@
         <p>Local-only Flask web app and CLI for accounts payable ageing analysis. Loads invoice data into an in-memory SQLite database, runs the aged trial balance in SQL, computes deterministic risk signals per supplier, and asks DeepSeek V4 to rank the highest-risk suppliers and recommend an action for each.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per analysis (rule-based fallback if offline)</dd>
+          
+            <dt>Cost</dt><dd>around $0.001 per analysis, $0 with --skip-ai</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>CSV parser.</b> ap_schema.parse_csv accepts column aliases (Sage, Xero, NetSuite, in-house exports) and walks utf-8-sig / utf-8 / cp1252 / latin-1 encodings.</li>
+          
+            <li><b>SQLite layer.</b> Brief calls for &#39;Python + SQL&#39; so we use sqlite3 from stdlib.</li>
+          
+            <li><b>Severity classifier.</b> Each supplier lands in low / medium / high / critical.</li>
+          
+            <li><b>AI flagger.</b> Single DeepSeek V4 call per analysis.</li>
+          
+            <li><b>Magazine editorial aesthetic.</b> Distinct from Day 7 (Bloomberg terminal black), Day 8 (glass orbs gradient) and Day 9 (parchment + navy serif).</li>
+          
+            <li><b>Excel and CSV exports.</b> openpyxl writes a 6-sheet workbook (Summary + Supplier Ageing + Invoices + Risk Flags + Cash Required + SQL).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek flags unusual ageing patterns</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +94,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +118,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/AP-Ageing-Day-10-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

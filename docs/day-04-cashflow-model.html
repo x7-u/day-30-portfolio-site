@@ -42,10 +42,46 @@
         <p>Local-only Flask web app and CLI for a 13-week rolling cash flow forecast with an AI-driven scenario engine. Drop in an XLSX, get a deterministic forecast plus a controller-voiced commentary on any &#34;what if&#34; you can describe in plain English.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat default)</dd>
+          
+            <dt>Cost</dt><dd>around $0.0004 per analysis.</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek parses scenarios + writes commentary</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>GBP only in the MVP. Non-GBP metadata is rejected with a clear remediation message.</li>
+          
+            <li>Period labels are opaque strings. April-26, 2026-04 and Q1 26 all work; they sort by first-seen order.</li>
+          
+            <li>AI commentary is a draft. The fallback when the API errors is a stub card with the error reason; the rest of the analysis still runs.</li>
+          
+            <li>Power BI integration not yet wired (Day 3 had it).</li>
+          
+            <li>Run history caps at 100 with FIFO eviction.</li>
+          
+            <li>Scenario taxonomy covers six shock types. M&amp;A, hiring waves and capex spread are not yet supported.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -61,10 +97,18 @@
       
 
       
+
+      
     </div>
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Cashflow-Model-Day-4-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

@@ -42,10 +42,67 @@
         <p>Local Flask app + CLI that turns this period&#39;s P&amp;L numbers and KPI dashboard into a fully formatted Word document. DeepSeek V4 writes the period overview, variance commentary, key risks, and forward outlook; the engine assembles the cover, tables, embedded charts, and exports both .docx and .xlsx.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Management-accounts commentary, board-pack period results</dd>
+          
+            <dt>Inputs</dt><dd>P&amp;L lines (current + prior) + KPI dashboard with direction flags</dd>
+          
+            <dt>Outputs</dt><dd>Fully formatted Word doc + Excel workbook + three CSVs + three charts</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.001 per pack)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Report schema.</b> report_schema.py wraps the inputs in a typed ReportInput dataclass with PlLine and Kpi sub-records.</li>
+          
+            <li><b>Report builder.</b> report_builder.compute pulls the headline metrics by finding the standard P&amp;L line names (revenue / gross profit / EBIT / PAT) in the user&#39;s input.</li>
+          
+            <li><b>Narrative AI.</b> narrative_ai.draft builds a pipe-delimited digest (every P&amp;L line with current/prior/delta; every KPI with current/prior/format/direction/adverse flag) and asks DeepSeek V4 for...</li>
+          
+            <li><b>Annual-report UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Word + Excel + CSV exports.</b> python-docx writes a fully formatted Word document: cover page, period overview, headline numbers table, P&amp;L chart, variance commentary, KPI table + chart, margin walk chart, key...</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes the narrative sections</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Two-period view only. Current + prior.</li>
+          
+            <li>User supplies the data. No live ERP / accounting-system integration.</li>
+          
+            <li>Single-template output. One template; no brand colours / custom logos.</li>
+          
+            <li>GBP base only. Multi-currency consolidation is post-30.</li>
+          
+            <li>AI proposes, does not opine. Every figure and narrative paragraph needs review by a finance director before publication.</li>
+          
+            <li>No automatic distribution. Brief lists scheduled email distribution as post-30.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,25 @@
             <li>The fiddly formatting that eats an afternoon, done in moments.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Annual-report magazine aesthetic. Warm-white paper, deep navy masthead, gold accent rule, Georgia serif body.</li>
+          
+            <li><b>First data run: growth tech company</b> - Lumen Cloud Ltd. Revenue up 18% Q-on-Q, margins steady, KPI dashboard mostly favourable.</li>
+          
+            <li><b>Second data run: declining manufacturer</b> - Britannia Engineering plc. Revenue down 12%, margin compression, most KPIs adverse.</li>
+          
+            <li><b>Figures tab (what the Excel + Word exports embed)</b> - Three charts on warm-white pages: P&amp;L current-vs-prior grouped bar, KPI delta-pct bar (adverse red, favourable green),...</li>
+          
+            <li><b>AI narrative (the integration)</b> - DeepSeek V4 reads the digest of P&amp;L lines and KPIs and writes the four sections: period overview, variance commentary,...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +156,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-20-report-builder" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

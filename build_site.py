@@ -10,8 +10,8 @@ What it does:
   2. Renders the home page and one page per project with Jinja2.
   3. Rewrites the app's absolute URLs to relative ones so the site works from
      any base path (for example https://<user>.github.io/<repo>/).
-  4. Copies the stylesheet, the tiny filter script, the favicon, and each
-     project's screenshots into ``docs/assets/``.
+  4. Copies the stylesheet, the favicon, and each project's screenshots into
+     ``docs/assets/``.
   5. Drops a ``.nojekyll`` marker so GitHub Pages serves the files as-is.
 
 Run it with the project's Python:
@@ -32,12 +32,13 @@ if str(HERE) not in sys.path:
 from fun_facts import fun_facts_for
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from portfolio_engine import build_portfolio
+from project_brief import brief_for
 
 OUT = HERE / "docs"
 ASSETS = OUT / "assets"
 STATIC = HERE / "static"
 TEMPLATES = HERE / "templates"
-ASSET_FILES = ("style.css", "app.js", "favicon.svg")
+ASSET_FILES = ("style.css", "favicon.svg")
 MAX_SHOTS = 4   # screenshots shown per project, to keep the site light and fast
 
 # Hard rule for this project: no em-dashes or en-dashes anywhere in output.
@@ -98,6 +99,7 @@ def build() -> dict:
         proj = s.to_dict()
         proj["shots"] = (proj.get("shots") or [])[:MAX_SHOTS]
         proj["fun_facts"] = fun_facts_for(s)
+        proj["brief"] = brief_for(PROJECT_ROOT / s.project.folder)
         html = project_tmpl.render(project=proj)
         (OUT / f"{s.project.folder}.html").write_text(to_relative(html), encoding="utf-8")
         pages += 1

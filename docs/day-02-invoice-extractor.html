@@ -42,10 +42,67 @@
         <p>Local-only Flask web app + CLI that uses Claude&#39;s multimodal vision API to extract structured data (vendor, dates, line items, totals) from invoice images and PDFs. Output is CSV (one row per line item) plus a multi-sheet Excel workbook. **Runs on your machine only - no third-party hosting.**</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Accounts-payable automation, invoice data capture from PDFs and images</dd>
+          
+            <dt>Inputs</dt><dd>Invoice PDFs or images (jpg / png / webp); multi-page PDFs capped at 5 pages</dd>
+          
+            <dt>Outputs</dt><dd>CSV (one row per line item), a multi-sheet Excel workbook, and a per-invoice confidence band and duplicate flag</dd>
+          
+            <dt>Model</dt><dd>Claude Haiku 4.5 vision default, Sonnet 4.6 / Opus 4.7 selectable</dd>
+          
+            <dt>Cost</dt><dd>around $0.003 to $0.005 per invoice on Haiku 4.5, $0 with --no-ai</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Page rasteriser.</b> pdf_loader.py turns each PDF or image page into image bytes with pypdfium2 and Pillow (EXIF-rotate, clamp to a 1568px edge).</li>
+          
+            <li><b>Vision extraction.</b> pipeline.py sends each page to Claude&#39;s vision API and gets strict JSON back: vendor, invoice number, dates, line items, subtotal, tax, currency and a confidence band.</li>
+          
+            <li><b>Arithmetic validation.</b> invoice_schema.py checks line items sum to subtotal and subtotal plus tax equals total; mismatches add warnings and downgrade confidence rather than silently correcting.</li>
+          
+            <li><b>Duplicate ledger.</b> ledger.py fingerprints every extraction (vendor, number, date, currency, total) and flags re-uploads as EXACT, SUSPICIOUS or FUZZY.</li>
+          
+            <li><b>CSV + Excel output.</b> one accountant-friendly row per line item, plus an Invoices / Line items / Summary workbook with an embedded chart and confidence pills.</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>Claude extracts and normalises invoice fields</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>AI proposes, you decide. Validation surfaces discrepancies but never silently corrects the model&#39;s numbers.</li>
+          
+            <li>Multi-page PDFs are capped at 5 pages per file; over-cap files trigger a warning.</li>
+          
+            <li>Generic CSV export. Direct Xero / QuickBooks / Sage import formats are post-30.</li>
+          
+            <li>No on-device OCR fallback. Offline runs produce stub output; a Tesseract fallback is post-30.</li>
+          
+            <li>Local-only. Loopback Flask dev server with no auth; production hosting is a later step.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -61,10 +118,18 @@
       
 
       
+
+      
     </div>
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Invoice-Extractor-Day-2-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

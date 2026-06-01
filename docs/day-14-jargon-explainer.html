@@ -42,10 +42,52 @@
         <p>Local-only Flask web app and CLI that takes any paragraph of dense financial text and produces a plain-English glossary, tuned to the document type. Bond prospectuses, fund factsheets, annual reports, earnings call transcripts, research notes  --  paste anything and the matched jargon gets highlighted in marker-coloured strokes by category, with a click-through term card explaining each one.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Glossary size</dt><dd>around 70 curated finance terms with aliases, across 13 categories</dd>
+          
+            <dt>Inputs</dt><dd>Pasted financial text (free text or pick a bundled sample)</dd>
+          
+            <dt>Outputs</dt><dd>Plain-English glossary + worked examples + sentence rewrites + new-jargon discovery</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per analysis (deterministic fallback if offline)</dd>
+          
+            <dt>Cost</dt><dd>around $0.0005 per analysis</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Glossary.</b> glossary.py carries around 70 curated finance terms across 13 categories.</li>
+          
+            <li><b>Jargon finder.</b> jargon_finder.py builds one big OR-regex from all surface forms (canonical + aliases) with negative lookbehind / lookahead for non-letter / non-digit characters as word boundaries.</li>
+          
+            <li><b>Doc-type classifier.</b> doc_type.py is heuristic-only. Each document type has a list of (regex, weight) rules.</li>
+          
+            <li><b>AI explainer.</b> ai_explainer.py builds a prompt with the source text, predicted doc type + confidence, and the matched glossary entries (with their disambiguation hints), and asks DeepSeek V4 in...</li>
+          
+            <li><b>Highlighter UI.</b> Distinct from Day 7 (Bloomberg terminal), Day 8 (glass orbs), Day 9 (parchment atelier), Day 10 (magazine bold blocks), Day 11 (FT pink broadsheet), Day 12 (matte black drafting),...</li>
+          
+            <li><b>Excel and CSV exports.</b> openpyxl writes a 5-sheet workbook (Summary + Glossary + Hits + Rewrites + New Jargon).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek identifies and explains jargon</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +100,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +124,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Jargon-Explainer-Day-14-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

@@ -42,10 +42,67 @@
         <p>Local-only Flask web app and CLI that turns accounting profit into a defensible UK corporation tax provision: book-to-tax reconciliation, marginal-relief banding, deferred tax on PPE timing differences, and an AI scan over the business&#39;s activities that flags potential R&amp;D tax-credit opportunities with verbatim citations.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Standard</dt><dd>UK CT 2026 (small 19% / main 25% / MRR 3-200), IAS 12 deferred tax</dd>
+          
+            <dt>Inputs</dt><dd>PBT + add-backs + CAs + losses + FII + PPE NBV / TWDV + opening deferred tax</dd>
+          
+            <dt>Outputs</dt><dd>Current tax + deferred tax + ETR + CT600 box reconciliation + R&amp;D scan</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4, single call (~$0.0005 per scan)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Tax schema.</b> tax_schema.py wraps the inputs in a typed TaxInput dataclass.</li>
+          
+            <li><b>Corporation tax maths.</b> tax_maths.compute runs the CT600 walk. PBT plus add-backs (depreciation, amortisation, disallowable) gives adjusted profit.</li>
+          
+            <li><b>AI R&amp;D scan.</b> rd_identifier.scan asks DeepSeek V4 to identify R&amp;D-qualifying projects in the user&#39;s plain-English activities description, keyed to HMRC BEIS criteria (advance in science /...</li>
+          
+            <li><b>GOV.UK / HMRC UI.</b> Distinct from every prior day&#39;s palette family (Bloomberg, orbs, parchment, magazine, FT pink, engineering, Bauhaus, textbook, warehouse hi-vis, dark cocoa).</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes a 6-sheet workbook (Summary with embedded chart PNGs + Reconciliation + Rate band + Deferred tax + R&amp;D scan + Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek flags R&amp;D eligible spend</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single-period view. No multi-period rollforward.</li>
+          
+            <li>PPE only for deferred tax. Provisions, share schemes, intangibles, pensions and tax losses are out of scope.</li>
+          
+            <li>No group relief. Associated companies count divides the thresholds, but inter-company loss surrender is not modelled.</li>
+          
+            <li>No quarterly instalment payments. Headline current-tax charge only; cash-flow implications of QIPs / large-company status are post-30.</li>
+          
+            <li>Capital allowances at user level. User supplies a single capital_allowances figure; AIA / FYA / pools / full-expensing allocation is computed externally.</li>
+          
+            <li>AI proposes, does not opine on qualification.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,27 @@
             <li>It works out the effective tax rate for you too.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Cold start</b> - GOV.UK / HMRC tax-return aesthetic: white page, near-black GOV.UK body text, official HMRC green for primary actions,...</li>
+          
+            <li><b>Compose region with sample loaded</b> - CT600 box references in the field gutter. Heavy 2px borders.</li>
+          
+            <li><b>Headline ribbon</b> - Four monolithic cells: TTP / current tax / deferred tax P&amp;L charge / total tax.</li>
+          
+            <li><b>Schedule I: book-to-tax reconciliation</b> - Every CT600 line stamped with its box number.</li>
+          
+            <li><b>Schedule II: rate band</b> - Lower / upper limits divided by (associated + 1), augmented profits, marginal relief computation step by step.</li>
+          
+            <li><b>Schedule III: deferred tax</b> - Timing-difference approach. Closing balance = (PPE NBV less PPE TWDV) at the measurement rate.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +158,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Tax-Provision-Day-17-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

@@ -42,10 +42,42 @@
         <p>Local-only Flask app and CLI for buy-side earnings call analysis. Drag in a transcript (.txt or .pdf), or paste it. The tool detects speaker turns, infers roles (CEO / CFO / EXEC / ANALYST / OPERATOR), runs a deterministic hedge / certainty / deflection rule detector and a quantitative claim regex, makes one DeepSeek V4 call to extract guidance + themes + Q&amp;A + risks + a bull/bear verdict, and renders it all in a Bloomberg-terminal aesthetic.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat default), one extraction call + optional follow-up</dd>
+          
+            <dt>Cost</dt><dd>around $0.002 per analysis.</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>The Tool.</b> Pure-Python deterministic core. transcript_schema.py parses the transcript (TXT or PDF via PyMuPDF) into typed dataclasses with speaker-turn detection and role inference.</li>
+          
+            <li><b>AI Extraction + Follow-up.</b> One DeepSeek V4 call per analysis. The system prompt instructs a buy-side analyst voice.</li>
+          
+            <li><b>Tone Curve, Q&amp;A Filter, URL state.</b> All client-side. The tone curve renders to inline SVG, redrawn from the JSON whenever a role chip is toggled.</li>
+          
+            <li><b>Excel &amp; Exports.</b> openpyxl writes a 6-sheet workbook (Summary + Guidance + Themes + QA + Quotes + Inputs) with embedded tone curve and speaker breakdown PNGs.</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek extracts hedge phrases and claims</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +90,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +114,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Earnings-Summariser-Day-7-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

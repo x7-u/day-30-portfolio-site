@@ -42,10 +42,67 @@
         <p>Local Flask app + CLI that builds the weighted-average cost of capital step by step using CAPM for the cost of equity, after-tax cost of debt, and market-value capital weights. DeepSeek V4 sanity-checks every input against sector typicals and flags anything unusual.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Discount-rate build for valuations, IRR hurdles, capital-allocation tests</dd>
+          
+            <dt>Inputs</dt><dd>CAPM components, after-tax cost of debt, capital structure in market values, sector enum</dd>
+          
+            <dt>Outputs</dt><dd>WACC + workings + 5x5 sensitivity + 3 charts + Excel workbook + 3 CSVs</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.0002 per run)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>WACC schema.</b> wacc_schema.py wraps the inputs in a WaccInput dataclass.</li>
+          
+            <li><b>WACC maths.</b> wacc_maths.compute walks the CAPM (Ke = Rf + Beta * ERP), the after-tax cost of debt (Kd_after = Kd * (1 - t)), the weights (We = E / (E + D), Wd = D / (E + D)), and the WACC = We...</li>
+          
+            <li><b>AI commentary.</b> wacc_ai.commentary builds a digest of every input, the computed Ke, Kd_after, WACC, leverage ratio, and beta range.</li>
+          
+            <li><b>Valuation working-paper UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts, Workings step-by-step, Sensitivity grid, Commentary, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek sanity-checks inputs</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single-currency. All inputs assumed in one currency.</li>
+          
+            <li>Static capital structure. The MVP treats the supplied structure as constant.</li>
+          
+            <li>No tax shield modelling beyond the flat tax rate.</li>
+          
+            <li>No country risk overlay. Emerging-market adjustments to Rf and ERP are post-30.</li>
+          
+            <li>AI proposes, does not opine. Every WACC needs review by a director or partner before it enters a binding model.</li>
+          
+            <li>Single-period view. Time-varying WACC for projects with phased risk is post-30.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,25 @@
             <li>The single number that sits under every valuation, demystified.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Valuation working-paper aesthetic. Cream paper, deep-green section bands, gold ruler, Georgia serif body.</li>
+          
+            <li><b>First data run: technology company</b> - Tech sample. Beta 1.30, ERP 5.5 percent, Ke around 12 percent, light debt.</li>
+          
+            <li><b>Second data run: leveraged buyout target</b> - Leveraged sample. Debt-heavy capital structure (60 percent debt).</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts: the WACC build as a horizontal bar walk, the CAPM cost-of-equity stacked bar, and the beta x leverage...</li>
+          
+            <li><b>AI commentary (the integration)</b> - DeepSeek V4 reads the pre-computed WACC, the CAPM components, the leverage ratio, and the sector enum.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +156,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-22-wacc-calculator" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

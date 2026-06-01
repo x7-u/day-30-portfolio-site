@@ -42,10 +42,50 @@
         <p>Local-only Flask web app and CLI that turns a single trial-balance .xlsx into a full monthly management-accounts pack: P&amp;L by department, balance sheet (with balance check), indirect cash-flow statement, KPI dashboard with RAG bands, and a CFO-voice narrative drafted by DeepSeek V4. The maths is deterministic and reproducible; the AI never touches a number, only annotates the digest.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Inputs</dt><dd>One trial-balance .xlsx for the monthly pack; an optional second one for year-over-year</dd>
+          
+            <dt>Outputs</dt><dd>P&amp;L by department + Balance + Indirect Cash Flow + KPI dashboard + AI commentary + YoY comparison</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per pack + one call per YoY narrative (deterministic fallback if offline)</dd>
+          
+            <dt>Cost</dt><dd>around $0.0002 per CFO narrative; same again per YoY commentary</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Trial-balance schema.</b> tb_schema.py validates a two-sheet workbook (metadata + accounts).</li>
+          
+            <li><b>P&amp;L compute.</b> pl_compute.py aggregates revenue / direct_cost / opex / depreciation / interest / tax into the standard headline lines (GP, EBITDA, EBIT, PBT, NI), computes margins safely, and...</li>
+          
+            <li><b>Balance sheet compute.</b> bs_compute.py aggregates assets / liabilities / equity, runs the balance check (assets = L + E within max(1.0, 0.1% of assets) tolerance), and computes working capital, current...</li>
+          
+            <li><b>Indirect cash flow.</b> cf_compute.py reconciles the indirect statement: NI + depreciation + interest + tax addbacks - working capital deltas - cash interest - cash tax = OCF.</li>
+          
+            <li><b>KPI dashboard.</b> kpi_compute.py produces 13 KPIs each with a comparator (prior month / budget / fixed target), delta, and RAG band.</li>
+          
+            <li><b>AI commentator.</b> ai_commentator.py builds a 250-token digest from the metrics (headline P&amp;L, top departments, BS check, CF summary, top-5 variance lines) and asks DeepSeek V4 in JSON mode for...</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes the period commentary</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +98,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +122,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Mgmt-Accounts-Day-13-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

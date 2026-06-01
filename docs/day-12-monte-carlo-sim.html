@@ -42,10 +42,50 @@
         <p>Local-only Flask web app and CLI that runs a 10,000-path Monte Carlo simulation over a 9-asset portfolio, computes a full risk readout (VaR / CVaR / Sharpe / Sortino / max drawdown), attributes downside contribution per asset, and asks DeepSeek V4 to write a 3-paragraph commentary on what the distribution actually says. The maths is deterministic and reproducible; the AI never touches a number. The UI renders as a literal engineering blueprint: deep cyan ground, white drafting linework, drawing title block with FOR REVIEW stamp, detail callouts A through H, FIG 01 / FIG 02 / FIG 03 figure numb</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Engine</dt><dd>Cholesky-decomposed multivariate normal in log-space; Ito drift correction</dd>
+          
+            <dt>Universe</dt><dd>9 asset classes (US / international / EM equity, long Treasury, IG / HY corporates, REITs, gold, cash)</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per simulation (deterministic fallback if offline)</dd>
+          
+            <dt>Cost</dt><dd>around $0.0002 per readout, well under the 1c ceiling</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Asset universe.</b> asset_universe.py defines 9 asset classes with annual mu / sigma calibrated to long-run historical estimates (e.g.</li>
+          
+            <li><b>Allocation schema.</b> portfolio_schema.py wraps weights in a typed Allocation dataclass with a parse_allocation validator: weights must be in [0, 1], must sum to 1.0 within 1e-3, unknown codes are...</li>
+          
+            <li><b>Monte Carlo engine.</b> simulator.py builds the monthly covariance Sigma_m = D R D, Cholesky-decomposes it once with a 1e-12 ridge for stability, and draws N x T x K standard normals from numpy&#39;s PCG64.</li>
+          
+            <li><b>Risk metrics.</b> risk_metrics.py reads the (N, T+1) path matrix and computes expected / median / 5/25/50/75/95 percentiles of terminal value, VaR and CVaR at 95% and 99%, Sharpe and Sortino vs the...</li>
+          
+            <li><b>AI commentator.</b> ai_commentator.py builds a small digest from the metrics + allocation (around 250 input tokens) and asks DeepSeek V4 in JSON mode for headline + narrative + three observations +...</li>
+          
+            <li><b>Engineering-blueprint UI.</b> Distinct from Day 7 (Bloomberg terminal black), Day 8 (glass orbs gradient), Day 9 (parchment + navy serif italic + gold), Day 10 (sage cream + bold colour blocks + heavy...</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes the risk commentary</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +98,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +122,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Monte-Carlo-Sim-Day-12-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

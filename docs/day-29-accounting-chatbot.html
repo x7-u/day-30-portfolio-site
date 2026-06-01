@@ -42,10 +42,65 @@
         <p>A local Flask chat app that answers UK accounting questions in the voice of an ACA-qualified chartered accountant. Cites IFRS / FRS 102 / IAS standards by name and number, gives journal entries with Dr / Cr lines and amounts, and flags where professional judgement is needed.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Technical accounting Q&amp;A in the voice of an ACA-qualified UK accountant</dd>
+          
+            <dt>Inputs</dt><dd>Free-text question + accounting standard + conversation history</dd>
+          
+            <dt>Outputs</dt><dd>Structured answer + journal entries + standards cited + judgement flags + exports</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call per turn (~$0.0004)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Schema.</b> chat_schema.py validates question length (1 to 2000 chars), standard from the 5 option enum, tone from the 4 option enum, and conversation history (up to 30 turns, each role in...</li>
+          
+            <li><b>Question classifier.</b> chat_engine.analyse pre-classifies every question by keyword voting into 9 topic buckets: journal_entry, treatment, standard, exam, reconciliation, ratio, audit, tax, other.</li>
+          
+            <li><b>AI response.</b> chat_ai.respond layers the base system prompt with a standard-specific overlay (IFRS / FRS 102 / FRS 105 / US GAAP), sends the question plus the last 10 turns of history, and asks...</li>
+          
+            <li><b>Chat / messaging UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the session Excel (Q&amp;A sheet with the latest question and answer, Journal entries sheet, History sheet with the running conversation).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek answers in voice of ACA accountant</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>No retrieval-augmented generation in MVP. Day 29 sends the conversation history but no IFRS / FRS 102 source PDFs.</li>
+          
+            <li>AI proposes, ACA disposes. Every answer should be reviewed against the specific standard before being relied on.</li>
+          
+            <li>UK PAYE / GAAP focus. International standards are supported (US GAAP, IFRS) but UK conventions dominate the templates.</li>
+          
+            <li>Free-text only. File upload (TBs, statements) is post-30; for now the chat is text-only.</li>
+          
+            <li>Educational use only. Not professional advice.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +112,25 @@
             <li>Debits on the left, credits on the right, sources quoted.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Chat / messaging aesthetic. White canvas, mint-green accent, conversation bubbles.</li>
+          
+            <li><b>First question: revenue recognition</b> - Sample question: &#39;How do I account for a 12-month SaaS subscription paid upfront?&#39; AI responds with the IFRS 15...</li>
+          
+            <li><b>Second question: lease accounting</b> - Sample question: &#39;Explain IFRS 16 lease accounting at lease inception.&#39; AI returns the ROU asset and lease liability...</li>
+          
+            <li><b>Journal-entry question</b> - Custom question: &#39;Post the journal entry for a 12000 SaaS receipt over 12 months under IFRS 15.&#39; AI returns the exact...</li>
+          
+            <li><b>Full thread view (the integration)</b> - Top of the conversation, scrolled back to the first question.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +154,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-29-accounting-chatbot" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

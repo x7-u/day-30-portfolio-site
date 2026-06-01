@@ -16,6 +16,7 @@ class Project:
     port: int = 0
     accounting_focus: str = ""
     ai_integration: str = ""
+    repo: str = ""       # public GitHub repo URL
     shots: list[str] = field(default_factory=list)            # screenshot rel paths
 
     def to_dict(self) -> dict:
@@ -27,6 +28,7 @@ class Project:
             "port": self.port,
             "accounting_focus": self.accounting_focus,
             "ai_integration": self.ai_integration,
+            "repo": self.repo,
             "shots": list(self.shots),
         }
 
@@ -403,3 +405,43 @@ CATALOG: list[Project] = [
         ai_integration="DeepSeek answers in voice of ACA accountant",
     ),
 ]
+
+
+# ------------------------------------------------------------
+# Public source repositories, one per project. Keyed by folder
+# so the full list is easy to audit against the GitHub account.
+# ------------------------------------------------------------
+_REPOS: dict[str, str] = {
+    "day-01-ratio-dashboard": "https://github.com/x7-u/Ratio-Dashboard-Day-1-of-30",
+    "day-02-invoice-extractor": "https://github.com/x7-u/Invoice-Extractor-Day-2-of-30",
+    "day-03-budget-tracker": "https://github.com/x7-u/Budget-Tracker-Day-3-of-30",
+    "day-04-cashflow-model": "https://github.com/x7-u/Cashflow-Model-Day-4-of-30",
+    "day-05-sentiment-analyser": "https://github.com/x7-u/Sentiment-Analyser-Day-5-of-30",
+    "day-06-breakeven-tool": "https://github.com/x7-u/Breakeven-Tool-Day-6-of-30",
+    "day-07-earnings-summariser": "https://github.com/x7-u/Earnings-Summariser-Day-7-of-30",
+    "day-08-finance-categoriser": "https://github.com/x7-u/Finance-Categoriser-Day-8-of-30",
+    "day-09-dcf-model": "https://github.com/x7-u/DCF-Model-Day-9-of-30",
+    "day-10-ap-ageing-report": "https://github.com/x7-u/AP-Ageing-Day-10-of-30",
+    "day-11-sec-filing-parser": "https://github.com/x7-u/SEC-Filing-Parser-Day-11-of-30",
+    "day-12-monte-carlo-sim": "https://github.com/x7-u/Monte-Carlo-Sim-Day-12-of-30",
+    "day-13-mgmt-accounts": "https://github.com/x7-u/Mgmt-Accounts-Day-13-of-30",
+    "day-14-jargon-explainer": "https://github.com/x7-u/Jargon-Explainer-Day-14-of-30",
+    "day-15-inventory-optimiser": "https://github.com/x7-u/Inventory-Optimiser-Day-15-of-30",
+    "day-16-ifrs16-calculator": "https://github.com/x7-u/IFRS16-Calculator-Day-16-of-30",
+    "day-17-tax-provision": "https://github.com/x7-u/Tax-Provision-Day-17-of-30",
+    "day-18-credit-scorecard": "https://github.com/x7-u/day-18-credit-scorecard",
+    "day-19-fx-exposure": "https://github.com/x7-u/day-19-fx-exposure",
+    "day-20-report-builder": "https://github.com/x7-u/day-20-report-builder",
+    "day-21-working-capital": "https://github.com/x7-u/day-21-working-capital",
+    "day-22-wacc-calculator": "https://github.com/x7-u/day-22-wacc-calculator",
+    "day-23-fraud-detection": "https://github.com/x7-u/day-23-fraud-detection",
+    "day-24-ddm-valuation": "https://github.com/x7-u/day-24-ddm-valuation",
+    "day-25-coa-generator": "https://github.com/x7-u/day-25-coa-generator",
+    "day-26-equity-research": "https://github.com/x7-u/day-26-equity-research",
+    "day-27-payroll-variance": "https://github.com/x7-u/day-27-payroll-variance",
+    "day-28-valuation-aggregator": "https://github.com/x7-u/day-28-valuation-aggregator",
+    "day-29-accounting-chatbot": "https://github.com/x7-u/day-29-accounting-chatbot",
+}
+
+for _p in CATALOG:
+    _p.repo = _REPOS.get(_p.folder, "")

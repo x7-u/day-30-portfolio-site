@@ -11,17 +11,19 @@ Live site: https://x7-u.github.io/day-30-portfolio-site/
 
 ## What it shows
 
-- A gallery: one card per project with the day number, name, tagline, tags,
-  stack, build status and test count. Filter the gallery by tag.
-- A page per project: a couple of fun facts about what the build does, the
-  accounting focus, the technology used, the build status, the test count,
-  and up to four screenshots.
+- A gallery: one card per project with the day number, name, tagline,
+  stack, build status and test count.
+- A page per project: a condensed brief pulled from the project's overview
+  doc (use case, inputs and outputs, how it works, a screenshot walk-through
+  and honest limitations), a couple of fun facts, the accounting focus, the
+  stack, the build status, the test count, a link to the GitHub repo, and up
+  to four screenshots.
 
 ## How it is built
 
 The site is generated from the project catalogue by a small build script.
-The output is fully static (plain HTML, CSS, one tiny script for the tag
-filter, the favicon, and the screenshots).
+The output is fully static (plain HTML, CSS, the favicon, and the
+screenshots).
 
 ```
 .venv\Scripts\python.exe day-30-portfolio-site\build_site.py
@@ -35,12 +37,13 @@ straight from the main branch, so what you push is what goes live.
 ```
 build_site.py        static site generator (writes docs/)
 fun_facts.py         curated per-project fun facts
+project_brief.py     condensed brief pulled from each PROJECT_OVERVIEW.docx
 portfolio_schema.py  the project catalogue (day, name, tagline, stack, tags)
 portfolio_engine.py  scans each folder for build status, tests, screenshots
 pipeline.py          ties the scan together
 server.py            optional local preview (Flask, port 1030)
 templates/           index.html and project.html, shared by builder and preview
-static/              style.css, app.js (the tag filter), favicon.svg
+static/              style.css, favicon.svg
 docs/                the generated static site that GitHub Pages serves
 tests/               catalogue, engine, fun-facts and no-dashes checks
 ```
@@ -70,4 +73,5 @@ pytest day-30-portfolio-site -v
 ```
 
 Covers the catalogue, the folder scan, the fun facts (every project has at
-least two), and the no-dashes rule across the whole tree.
+least two), the project brief extraction, and the no-dashes rule across the
+whole tree.

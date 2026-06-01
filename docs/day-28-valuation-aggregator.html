@@ -42,10 +42,65 @@
         <p>A local Flask app and CLI that runs four valuation methods side by side (DCF, EV/EBITDA, P/E, NAV), draws the football-field chart, and lets DeepSeek V4 weight the methods based on sector and stage and write the valuation conclusion.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Investment-bank pitch valuation, M&amp;A football-field</dd>
+          
+            <dt>Inputs</dt><dd>Financials + peer multiples + DCF inputs + sector</dd>
+          
+            <dt>Outputs</dt><dd>4-method football field + AI weighted central + 3 CSVs + Excel + 3 charts</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.0004 per pitch)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Four methods, four perspectives.</b> DCF: 5-year EBITDA forecast at the forecast growth rate, discounted at WACC, plus a Gordon terminal at the terminal growth rate.</li>
+          
+            <li><b>Bands and football field.</b> Each method emits a low / central / high estimate using +/- 15 to 30 percent bands.</li>
+          
+            <li><b>AI weighting matrix.</b> valuation_ai.commentary uses a sector x method matrix.</li>
+          
+            <li><b>Pitch-deck UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts and gold-coloured weighted central, Methods detail, Commentary typeset, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek weights methods + writes conclusion</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Comps multiples are user-supplied. Live market data integration is post-30.</li>
+          
+            <li>Single-currency. Cross-border valuation in mixed currencies is post-30.</li>
+          
+            <li>DCF is EBITDA-proxy. True free-cash-flow build (capex, change in working capital, tax) is in Day 9.</li>
+          
+            <li>AI weights are advisory. The analyst signs off on the weighting before the valuation goes into a pitch deck.</li>
+          
+            <li>Not investment advice. For educational use.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +112,25 @@
             <li>One picture, four opinions, a sensible conclusion.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Investment bank pitch deck aesthetic. Slate dark sections, gold and orange accents, deep navy slate.</li>
+          
+            <li><b>First data run: capital-light SaaS</b> - Tech_saas sample. Velocity Cloud plc.</li>
+          
+            <li><b>Second data run: REIT</b> - Asset_heavy sample. Riverside Property plc.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts: the football field with diamonds and a market-price reference line, the method centrals as side-by-side...</li>
+          
+            <li><b>AI commentary (the integration)</b> - DeepSeek V4 reads the digest and writes the headline, method weights, per-method notes, valuation conclusion, and risks...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +154,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-28-valuation-aggregator" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

@@ -42,10 +42,67 @@
         <p>Local Flask app + CLI that runs five anomaly-detection rules over a transaction ledger (round-number payments, duplicate amounts, off-hours timestamps, rapid sequential payments, first-time large counterparties) and asks DeepSeek V4 to write the investigation note that goes with each flag.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Forensic accounting, internal audit, transaction anomaly review</dd>
+          
+            <dt>Inputs</dt><dd>Transaction ledger (TX id, datetime, amount, counterparty, description, posted_by) + rule thresholds</dd>
+          
+            <dt>Outputs</dt><dd>Per-TX severity + rule hits + 3 charts + Excel workbook + 3 CSVs</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call covering all flagged TXs (~$0.0003 per run)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Fraud schema.</b> fraud_schema.py wraps the inputs in a FraudInput dataclass with Transaction sub-records.</li>
+          
+            <li><b>Five-rule engine.</b> fraud_engine.run_rules applies the five rules independently and then aggregates.</li>
+          
+            <li><b>AI investigation.</b> fraud_ai.notes builds a digest of every flagged transaction and the rule hits per TX.</li>
+          
+            <li><b>Forensic-console UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts, Flagged transactions table with severity fill, Rule hits sheet, Investigation notes, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes investigation notes</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Rules-based, not ML. The five rules are explainable.</li>
+          
+            <li>Up to 5,000 transactions per run. Single-period reviews.</li>
+          
+            <li>No counterparty enrichment. The rules look at the local ledger only.</li>
+          
+            <li>Human auditor review required. Every flag needs a human investigator.</li>
+          
+            <li>No automated remediation. The engine surfaces; it does not freeze.</li>
+          
+            <li>Single currency per run. Cross-currency anomaly detection is post-30.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,25 @@
             <li>Each flag arrives with a ready-drafted investigation note.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Forensic-console aesthetic. Dark ink canvas, cyan accents, red / amber / green severity colouring.</li>
+          
+            <li><b>First data run: ring of round-number payments</b> - Ringed sample. Coordinated round-number payments around a threshold.</li>
+          
+            <li><b>Second data run: rapid sequential payments</b> - Sequential sample. Several payments to the same counterparty within a tight time window.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts on a dark background: severity breakdown (donut), rule hit counts (bar), and the top flagged transactions...</li>
+          
+            <li><b>AI investigation tab (the integration)</b> - DeepSeek V4 reads the structured digest of every flagged transaction and writes the investigation note per TX.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +156,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-23-fraud-detection" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

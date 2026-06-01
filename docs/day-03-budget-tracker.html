@@ -42,10 +42,65 @@
         <p>Local-only Flask web app and CLI for budget vs actual variance analysis with an AI-drafted management commentary in the voice of a financial controller. Drop in a workbook, walk away with the same pack a finance team would assemble manually for the month-end review. **Runs on your machine only, loopback bound, no third-party hosting.**</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>Claude Haiku 4.5 (default), Sonnet 4.6 / Opus 4.7 selectable</dd>
+          
+            <dt>Cost</dt><dd>around $0.004 per analysis on Haiku 4.5</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>The Tracker.</b> Drop zone front and centre, three bundled samples on the right.</li>
+          
+            <li><b>AI Commentary.</b> Pre-summarised pipe-delimited digest of headline numbers, top-5 adverse drivers, top-5 favourable drivers and the three rollups.</li>
+          
+            <li><b>Excel Output.</b> Six sheets single-period, seven multi-period.</li>
+          
+            <li><b>Power BI Script.</b> One-click Power Query M generator. Paste it into Power BI Desktop&#39;s blank query editor and you get the same long-format table the app uses, ready to model.</li>
+          
+            <li><b>Comparison and History.</b> Last 100 runs persisted to JSONL, FIFO eviction.</li>
+          
+            <li><b>PowerPoint and JSON.</b> Three-slide deck on demand: title, KPI tiles plus headline narrative, drivers and actions.</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>Claude drafts the period commentary</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>GBP only in the MVP. Non-GBP metadata is rejected with a clear remediation message.</li>
+          
+            <li>Period labels are opaque strings. April-26, 2026-04 and Q1 26 all work; they sort by first-seen order.</li>
+          
+            <li>AI commentary is a draft. The fallback when the API errors is a stub card with the error reason; the rest of the analysis still runs.</li>
+          
+            <li>Power BI export is a Power Query script, not a .pbix file.</li>
+          
+            <li>Run history caps at 100 with FIFO eviction. The JSONL store is fine for a single user; a finance team would want a shared store, which is post-30.</li>
+          
+            <li>Single-flight on /api/analyse. A slow run blocks a second click.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -61,10 +116,35 @@
       
 
       
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Empty home</b> - Cold start. Drop zone front and centre, sample picker on the right.</li>
+          
+            <li><b>Sample Co Ltd: commentary plus pivots</b> - Single-period sample. Commentary card at top, three pivot rollups underneath, heat-map below.</li>
+          
+            <li><b>Heat-map and Detail grid with filter pills</b> - Cost centre by category heat-map sits above the Detail grid.</li>
+          
+            <li><b>Quarterly: commentary plus parent rollups</b> - TechStartup Quarterly. Headline KPIs across the top, commentary, then parent rollups grouped by parent column.</li>
+          
+            <li><b>Quarterly pivots, sparklines, heat-map</b> - Multi-period pivots gain a sparkline column. Heat-map gains a period dimension.</li>
+          
+        </ol>
+      </section>
+      
+
+      
     </div>
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Budget-Tracker-Day-3-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

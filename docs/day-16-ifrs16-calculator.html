@@ -42,10 +42,67 @@
         <p>Local-only Flask web app and CLI that takes a lease contract (term + payment schedule + incremental borrowing rate) and produces the full IFRS 16 lessee output: right-of-use asset, lease liability amortisation, period-by-period interest + depreciation, P&amp;L impact, balance-sheet impact, cash-flow split, and the maturity analysis required by IFRS 16.58. DeepSeek V4 explains each output line in plain English; deterministic fallback uses canned IFRS-16-accurate phrasing keyed off the actual numerics.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Standard</dt><dd>IFRS 16 (lessee accounting), effective 2019</dd>
+          
+            <dt>Inputs</dt><dd>Lease term + payment schedule + IBR (plus IDCs, prepayments, incentives, useful life)</dd>
+          
+            <dt>Outputs</dt><dd>Lease liability + ROU asset + per-period amortisation + P&amp;L + BS + cash flow + maturity analysis</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4, single call (~$0.0005 per lease)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Lease schema.</b> lease_schema.py wraps the inputs in a typed LeaseInput dataclass.</li>
+          
+            <li><b>IFRS 16 maths.</b> ifrs16_maths.py computes the present value of the lease payments at the IBR (annuity formula, ordinary or due based on payment timing).</li>
+          
+            <li><b>AI explainer.</b> ai_explainer.py builds a digest (headline figures + 5 sample periods + year totals + maturity bands) and asks DeepSeek V4 for JSON: headline (one sentence, GBP cited), line...</li>
+          
+            <li><b>Dark cocoa library UI.</b> Distinct from every prior day&#39;s warm-cream / pink / parchment / graph-paper / hi-vis / printer-white family.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes a 7-sheet workbook (Summary + Schedule + P&amp;L impact + Balance sheet + Cash flow + Disclosure note + Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek explains the journal flow</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single lease only. Multi-lease portfolio aggregation is post-30.</li>
+          
+            <li>No modifications. Term extensions, scope changes, payment changes that require IFRS 16.42 remeasurement are out of scope.</li>
+          
+            <li>No deferred tax. Timing differences between IFRS 16 and the tax treatment create deferred tax positions; not modelled.</li>
+          
+            <li>No indexation. CPI- / RPI-linked rent reviews + variable lease payments tied to an index require remeasurement; not in MVP.</li>
+          
+            <li>No published-prose disclosure note. We compute the numerical IFRS 16.51/53/58 disclosures + a checklist; the published narrative paragraph is post-30.</li>
+          
+            <li>Lessor accounting absent. IFRS 16 keeps an IAS 17-style operating / finance distinction for lessors.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,27 @@
             <li>The standard that put leases on the balance sheet, handled end to end.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Cold start</b> - Dark cocoa library aesthetic: deep cocoa ground (#221912), warm cream text, muted brown hairlines, brass-gold rules for...</li>
+          
+            <li><b>Compose region with sample loaded</b> - Particulars of the lease pre-filled from the office sample.</li>
+          
+            <li><b>Headline ribbon + working-paper stamps</b> - Four monolithic cells: lease liability at t=0 / ROU at t=0 / total P&amp;L over term / year-1 P&amp;L.</li>
+          
+            <li><b>Schedule I: lease liability amortisation</b> - Period-by-period amortisation: opening liability, payment, interest, principal, closing liability, depreciation, P&amp;L...</li>
+          
+            <li><b>Schedule II: P&amp;L impact</b> - Year-by-year interest + depreciation + total P&amp;L impact.</li>
+          
+            <li><b>Schedule III: balance sheet</b> - ROU asset net + total lease liability + current vs non-current split.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +158,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/IFRS16-Calculator-Day-16-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

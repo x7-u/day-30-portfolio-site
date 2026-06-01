@@ -42,10 +42,65 @@
         <p>A small Flask app and CLI that takes a plain-English business description and generates a complete, structured chart of accounts appropriate for the entity type, industry, size and accounting standard. DeepSeek V4 designs the COA; a rules-based validator confirms uniqueness, code ranges and normal balances.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Chart of accounts design for new ledgers, accounting system setup</dd>
+          
+            <dt>Inputs</dt><dd>Plain-English business description + entity type + industry + size + accounting standard</dd>
+          
+            <dt>Outputs</dt><dd>Validated COA + 3 charts + Excel workbook + 3 CSVs</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.0008 per generation)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Schema.</b> coa_schema.py validates entity type from a 7-option enum, industry from 14 sectors, size band from {micro, small, medium, large}, accounting standard from {FRS 102, FRS 105, IFRS,...</li>
+          
+            <li><b>Validation engine.</b> coa_maths.validate enforces the UK 1000-9999 convention: 1000s assets, 2000s liabilities, 3000s equity, 4000s revenue, 5000-9999 expenses.</li>
+          
+            <li><b>AI design.</b> coa_ai.draft sends the business context to DeepSeek V4 with a structured JSON schema requesting 25-55 accounts (sized by size_band) across all five sections, with...</li>
+          
+            <li><b>Bookkeeping-ledger UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts, Accounts sheet with section-coloured rows, Validation, Rationale, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek designs the chart of accounts</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>UK 1000-9999 convention only. US firms often use 10000-99999 (five digit).</li>
+          
+            <li>Output needs human review. Generated COAs need review by a qualified accountant before being loaded into a production accounting system.</li>
+          
+            <li>No accounting-system integration. Export to Xero, QuickBooks, Sage import format is post-30.</li>
+          
+            <li>Generic UK GAAP / IFRS overlay. Specialist industries (insurance, banking, oil and gas, agriculture) need their own overlay templates.</li>
+          
+            <li>Hard-coded to the 8 most common industries. Other industries get the generic overlay only.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +112,25 @@
             <li>It keeps to the standard 1000 to 9999 numbering convention without being told.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Traditional bookkeeping-ledger aesthetic.</li>
+          
+            <li><b>First data run: high-street retailer</b> - Retail sample. Mid-cap furnishings retailer with inventory and stores.</li>
+          
+            <li><b>Second data run: precision engineering plc</b> - Manufacturing sample. IFRS plc with raw materials, work-in-progress, finished goods.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts on cream paper: accounts by section (horizontal bar), statement split (donut chart), normal balance...</li>
+          
+            <li><b>AI rationale (the integration)</b> - DeepSeek V4 reads the business context and designs the COA.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +154,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-25-coa-generator" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

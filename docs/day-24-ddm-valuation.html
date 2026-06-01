@@ -42,10 +42,67 @@
         <p>A small Flask app and CLI that runs a three-stage dividend discount model on a company, builds a Ke x g_terminal sensitivity grid, and lets DeepSeek V4 write the working-paper commentary that interrogates each assumption.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Equity-research intrinsic-value working paper, dividend stock valuation</dd>
+          
+            <dt>Inputs</dt><dd>D0, growth (g1, N1, N2, g_term), Ke, optional dividend history + EPS</dd>
+          
+            <dt>Outputs</dt><dd>Intrinsic per share + projection + 5x5 Ke x g_term sensitivity + Excel + 3 CSVs</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.00025 per run)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>DDM schema.</b> ddm_schema.py wraps the inputs in a DdmInput dataclass plus DividendHistory sub-records.</li>
+          
+            <li><b>DDM maths.</b> ddm_maths.compute builds the projection year by year.</li>
+          
+            <li><b>AI commentary.</b> ddm_ai.commentary builds a digest of the projection, the stage-by-stage growth, intrinsic, terminal value, and historical CAGR.</li>
+          
+            <li><b>Buffett-letter UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts, Projection year by year with terminal row, Sensitivity grid, Commentary, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes the working-paper commentary</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single-stock per run. Bulk portfolio valuation is out of scope.</li>
+          
+            <li>Linear-taper transition only. Real businesses do not transition linearly.</li>
+          
+            <li>Constant cost of equity. Ke moves with the equity risk premium and beta over time.</li>
+          
+            <li>DDM only, no FCFE. Free cash flow to equity is a related but separate model.</li>
+          
+            <li>AI proposes, does not opine. Every valuation needs review by an analyst before being acted on.</li>
+          
+            <li>Only GBP / USD / EUR accepted. Other currencies rejected at the schema.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,25 @@
             <li>It pressure-tests each assumption against the company&#39;s own dividend history.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Buffett&#39;s-letter aesthetic. Warm white paper, deep teal, gold accents, Georgia / Garamond serif.</li>
+          
+            <li><b>First data run: mature blue-chip dividend payer</b> - Blue-chip sample. Eight years of dividend growth around 4 to 5 percent, modest Ke.</li>
+          
+            <li><b>Second data run: stretched aggressive assumptions</b> - Stretched sample. 22 percent g1, 5.5 percent terminal growth.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts: dividend projection (years 1 to N1+N2 plus terminal); PV breakdown (explicit vs terminal); sensitivity...</li>
+          
+            <li><b>AI commentary (the integration)</b> - DeepSeek V4 reads the projection digest and writes the working-paper commentary: assumption review block by block,...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +156,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-24-ddm-valuation" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

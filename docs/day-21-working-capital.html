@@ -42,10 +42,67 @@
         <p>Local Flask app + CLI that computes DSO, DPO, DIO and the cash conversion cycle from multi-period balance-sheet and P&amp;L data, benchmarks the latest period against sector peers, and asks DeepSeek V4 to quantify trapped cash and recommend operational actions in plain English.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Use case</dt><dd>Working-capital diagnostics, cash-tied-up review, treasury reporting</dd>
+          
+            <dt>Inputs</dt><dd>Per-period revenue + COGS + 3 balance-sheet averages, optional sector benchmark</dd>
+          
+            <dt>Outputs</dt><dd>DSO / DPO / DIO / CCC time series + 3 charts + Excel workbook + 3 CSVs</dd>
+          
+            <dt>Model</dt><dd>Single DeepSeek call (~$0.0002 per run)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Working-capital schema.</b> wc_schema.py wraps the inputs in a WcInput dataclass with PeriodData sub-records (period_end, label, revenue, cogs, avg AR, avg AP, avg inventory).</li>
+          
+            <li><b>Working-capital maths.</b> wc_maths.py computes DSO, DPO and DIO per period using a days-in-period heuristic (Q = 91.25, monthly = 30.4375, annual = 365.25).</li>
+          
+            <li><b>AI commentary.</b> wc_ai.commentary builds a pipe-delimited digest of the time series, the latest values, the trapped-cash decomposition, and the sector benchmark deltas.</li>
+          
+            <li><b>SaaS-dashboard UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes the multi-sheet workbook (Summary with embedded charts, Periods, Gaps, Commentary, Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes trapped-cash commentary</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Single-entity view. No group consolidation.</li>
+          
+            <li>GBP base only. Multi-currency working capital across entities is post-30.</li>
+          
+            <li>Period averages only. Real working-capital management uses ageing buckets (30/60/90/120).</li>
+          
+            <li>No counterparty granularity. Concentration of receivables by customer or payables by supplier is post-30.</li>
+          
+            <li>AI proposes, does not opine. Every recommendation needs review by a treasurer before being acted on.</li>
+          
+            <li>No live ERP feed. User supplies the periods.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +114,25 @@
             <li>It is called &#39;Cycle.&#39; because that is exactly what it measures: the cash cycle.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - SaaS-dashboard aesthetic. Off-white canvas, deep teal accents, orange highlights for adverse movements.</li>
+          
+            <li><b>First data run: clean SaaS profile</b> - SaaS sample. Four quarters.</li>
+          
+            <li><b>Second data run: stressed retailer</b> - Stressed sample. Inventory bloat, DSO drifting up, CCC expanding period over period.</li>
+          
+            <li><b>Figures tab (what the Excel + CSV exports include)</b> - Three charts on a clean canvas: time-series line of the four metrics across periods; latest-vs-benchmark bar;...</li>
+          
+            <li><b>AI commentary (the integration)</b> - DeepSeek V4 reads the pre-computed metrics digest and writes the four-block commentary: trapped-cash narrative,...</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +156,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-21-working-capital" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

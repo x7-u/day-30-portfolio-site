@@ -39,38 +39,21 @@
         <div class="lab">Screenshots</div>
         <div class="v">{{ portfolio.total_screenshots }}</div>
       </div>
-      <div class="cell">
-        <div class="lab">Tags covered</div>
-        <div class="v">{{ portfolio.tag_counts|length }}</div>
-      </div>
     </div>
   </section>
-
-  <div class="filter-bar">
-    <span class="lab">Filter by tag</span>
-    <button class="filter-chip active" data-filter="all">All</button>
-    {% for tag, count in portfolio.tag_counts.items() %}
-      <button class="filter-chip" data-filter="{{ tag }}">{{ tag }} ({{ count }})</button>
-    {% endfor %}
-  </div>
 
   <section class="grid" id="grid">
     {% set colors = ['var(--ink)', 'var(--c-red)', 'var(--c-blue)',
                        'var(--c-green)', 'var(--c-amber)', 'var(--c-purple)',
                        'var(--c-teal)', 'var(--c-rose)'] %}
     {% for s in portfolio.summaries %}
-      <a href="/project/{{ s.folder }}" class="card" data-tags="{{ s.tags|join(',') }}">
+      <a href="/project/{{ s.folder }}" class="card">
         <div class="swatch" style="background:{{ colors[loop.index0 % colors|length] }}"></div>
         <div class="body">
           <div class="day-num">DAY {{ '%02d' % s.day }}</div>
           <h2>{{ s.name }}</h2>
           <p class="tagline">{{ s.tagline }}</p>
           <div class="description">{{ s.description }}</div>
-          <div class="tags">
-            {% for t in s.tags %}
-              <span class="tag">{{ t }}</span>
-            {% endfor %}
-          </div>
           <div class="stack">
             <b>Stack.</b> {{ s.stack|join(' / ') }}
           </div>
@@ -90,6 +73,5 @@
   </div>
 </div>
 
-<script src="/static/app.js"></script>
 </body>
 </html>

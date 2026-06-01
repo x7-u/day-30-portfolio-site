@@ -42,10 +42,44 @@
         <p>Local-only Flask web app and CLI for taking a UK bank statement CSV and turning it into a categorised spend dashboard with a per-category pie chart, monthly trend, recurring subscription detector, and a savings rate.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat default), one batched call per statement</dd>
+          
+            <dt>Cost</dt><dd>around $0.001 per analysis.</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Multi-bank parser.</b> statement_schema.py auto-detects the bank format from the CSV headers.</li>
+          
+            <li><b>PDF parser.</b> pdf_parser.py uses PyMuPDF&#39;s word-level extraction with Y-coordinate clustering, plus the page index in the cluster key so identical Y values on different pages do not collide.</li>
+          
+            <li><b>Two-pass categoriser.</b> categoriser.py runs the rule pass first against merchant_dict.py (200+ UK patterns).</li>
+          
+            <li><b>Visual layer.</b> All client-side. Inline-SVG donut chart with stroke-dasharray slice reveal.</li>
+          
+            <li><b>Excel and exports.</b> openpyxl writes a 5-sheet workbook (Summary + Categories + Transactions + Recurring + Monthly + Inputs) with the donut and monthly-trend PNGs embedded into Summary via BytesIO so...</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek categorises ambiguous transactions</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +92,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +116,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/Finance-Categoriser-Day-8-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

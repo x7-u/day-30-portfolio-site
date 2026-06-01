@@ -42,10 +42,69 @@
         <p>Local Flask app + CLI that grades a corporate credit file as LOW / MEDIUM / HIGH risk using a weighted multi-factor scorecard, then drafts the one-page credit memo a credit analyst would write before a lending decision.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Framework</dt><dd>Weighted multi-factor scorecard, 14 features across 5 categories</dd>
+          
+            <dt>Tiers</dt><dd>LOW &lt; 30 / MEDIUM 30-60 / HIGH &gt; 60</dd>
+          
+            <dt>Inputs</dt><dd>Profitability + liquidity + leverage + efficiency + payment-history ratios</dd>
+          
+            <dt>Outputs</dt><dd>Total score + tier + sub-scores + per-feature contributions + AI credit memo</dd>
+          
+            <dt>Model</dt><dd>DeepSeek V4, single call (~$0.0005 per memo)</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Score schema.</b> score_schema.py wraps the inputs in a typed CreditInput dataclass.</li>
+          
+            <li><b>Scoring engine.</b> score_maths.py defines 14 features across 5 categories: profitability (gross / operating / net margin, ROA, ROE), liquidity (current + quick), leverage (debt-to-equity, interest...</li>
+          
+            <li><b>AI credit memo.</b> credit_memo.py builds a pre-summarised digest (headline score, tier, five category sub-scores, and the per-feature contribution table sorted by impact) and asks DeepSeek V4 for...</li>
+          
+            <li><b>Institutional credit-research UI.</b> Distinct from every prior day&#39;s palette.</li>
+          
+            <li><b>Excel + CSV exports.</b> openpyxl writes a 4-sheet workbook (Memo styled as a one-page credit note + Summary with embedded charts + Contributions + Inputs).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek drafts the credit memo</p>
       </section>
+
+      
+      <section class="detail-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Point-in-time only. Single-period view; no through-the-cycle scoring or PD curve.</li>
+          
+            <li>No external data. All inputs come from the user; no integration with Companies House, credit bureaus, or KYC feeds.</li>
+          
+            <li>Benchmark bands are textbook, not sector-calibrated.</li>
+          
+            <li>No Altman Z comparison. Brief mentions Altman Z-Score side-by-side as post-30.</li>
+          
+            <li>Recommendation thresholds are heuristic. LOW / MEDIUM / HIGH cutoffs at 30 and 60 are reasonable defaults; a real lender would calibrate to its own loss data.</li>
+          
+            <li>AI proposes, does not opine. Every credit decision still needs a human credit officer&#39;s sign-off.</li>
+          
+        </ul>
+      </section>
+      
 
       
       <section class="detail-section">
@@ -57,6 +116,25 @@
             <li>The decision and the write-up, in one pass.</li>
           
         </ul>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>Walk-through</h3>
+        <ol class="brief-tour">
+          
+            <li><b>Home page (cold start)</b> - Institutional credit-research aesthetic: white page, deep navy masthead with gold accent rule, Georgia serif body,...</li>
+          
+            <li><b>First data run: stable services firm</b> - Pemberton Services Ltd. Mature consultancy, healthy ratios across the board, clean payment record.</li>
+          
+            <li><b>Second data run: stressed manufacturer</b> - Britannia Heavy Engineering Ltd.</li>
+          
+            <li><b>Figures tab (what the Excel export embeds)</b> - Three charts on a white research-note page: risk-score gauge with LOW/MEDIUM/HIGH bands, per-feature contribution...</li>
+          
+            <li><b>AI credit memo (the integration)</b> - DeepSeek V4 reads a digest of the scorecard and drafts the one-page memo.</li>
+          
+        </ol>
       </section>
       
 
@@ -80,6 +158,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/day-18-credit-scorecard" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">

@@ -42,10 +42,46 @@
         <p>Local-only Flask web app and CLI for a five-year discounted cash flow valuation, with an AI assistant that pre-fills assumptions for a given company.</p>
       </section>
 
+      
+      <section class="detail-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Model</dt><dd>DeepSeek V4 (deepseek-chat), one call per AI pre-fill</dd>
+          
+            <dt>Cost</dt><dd>around $0.0005 per pre-fill.</dd>
+          
+        </dl>
+      </section>
+      
+
+      
+      <section class="detail-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Two-stage DCF maths.</b> dcf_maths.py is pure functional.</li>
+          
+            <li><b>WACC build.</b> Standard CAPM build. cost_of_equity_capm returns Re = Rf + Beta * ERP.</li>
+          
+            <li><b>Schema validation with bounds.</b> assumption_schema.parse takes any loose dict (from JSON, the form, or the AI) and returns a typed Assumptions instance or raises AssumptionError with a remediation message.</li>
+          
+            <li><b>AI pre-fill.</b> Single DeepSeek V4 call per pre-fill. About 250 input tokens and 500 output tokens, JSON mode, max_tokens 800.</li>
+          
+            <li><b>Live recompute.</b> static/app.js is a literal port of dcf_maths.run_dcf and the sensitivity functions to JavaScript.</li>
+          
+            <li><b>Sensitivity and football field.</b> sensitivity.build_sensitivity_table runs implied_per_share_for across a 7 by 7 grid of (WACC, g) pairs (defaults: 50bps and 25bps steps).</li>
+          
+        </ul>
+      </section>
+      
+
       <section class="detail-section">
         <h3>AI integration</h3>
         <p>DeepSeek writes the valuation commentary</p>
       </section>
+
+      
 
       
       <section class="detail-section">
@@ -58,6 +94,8 @@
           
         </ul>
       </section>
+      
+
       
 
       
@@ -80,6 +118,12 @@
 
     <aside>
       <div class="aside-card">
+        
+        <div class="row">
+          <h4>Source</h4>
+          <a class="repo-link" href="https://github.com/x7-u/DCF-Model-Day-9-of-30" target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+        
         <div class="row">
           <h4>Tags</h4>
           <div style="display:flex;flex-wrap:wrap;gap:6px;">
