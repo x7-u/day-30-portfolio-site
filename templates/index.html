@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Safwan - 30 Days of Finance + AI</title>
+<title>Safwan - Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/static/style.css">
@@ -13,9 +13,9 @@
   <div class="masthead-inner">
     <div class="logo-block">
       <div class="name">Portfolio<span class="dot">.</span></div>
-      <div class="sub">30 days of finance + AI by Safwan</div>
+      <div class="sub">Projects by Safwan</div>
     </div>
-    <span class="pill">30 builds / 30 days</span>
+    <span class="pill">{{ portfolio.total_projects }} projects</span>
   </div>
 </header>
 
@@ -23,13 +23,13 @@
 
   <section class="intro">
     <div>
-      <h1>30 daily builds. <em>Finance.</em><br>One AI integration each.</h1>
-      <p>From a financial-ratio dashboard to a three-stage dividend discount model. Every project is a working Flask app, every project ships with tests, and every project uses AI (Claude on Days 1 to 3, DeepSeek V4 from Day 4 onwards) as a meaningful part of the workflow.</p>
+      <h1>Things I <em>build</em>.</h1>
+      <p>A portfolio of projects: web apps and tools, plus a 30-day sprint of daily finance and AI builds. Pick a category below, or browse everything.</p>
     </div>
     <div class="stats">
       <div class="cell">
-        <div class="lab">Projects shipped</div>
-        <div class="v">{{ portfolio.built_projects }}<span style="color:var(--ink-mute);font-size:18px;"> / {{ portfolio.total_projects }}</span></div>
+        <div class="lab">Projects</div>
+        <div class="v">{{ portfolio.total_projects }}</div>
       </div>
       <div class="cell">
         <div class="lab">Tests written</div>
@@ -42,15 +42,21 @@
     </div>
   </section>
 
+  <div class="cat-bar" id="catbar">
+    <button class="cat-btn active" data-cat="all">All <span>{{ portfolio.total_projects }}</span></button>
+    <button class="cat-btn" data-cat="personal">Personal Projects <span>{{ portfolio.personal_count }}</span></button>
+    <button class="cat-btn" data-cat="finance">30 Day Finance <span>{{ portfolio.finance_count }}</span></button>
+  </div>
+
   <section class="grid" id="grid">
     {% set colors = ['var(--ink)', 'var(--c-red)', 'var(--c-blue)',
                        'var(--c-green)', 'var(--c-amber)', 'var(--c-purple)',
                        'var(--c-teal)', 'var(--c-rose)'] %}
     {% for s in portfolio.summaries %}
-      <a href="/project/{{ s.folder }}" class="card">
+      <a href="/project/{{ s.folder }}" class="card" data-category="{{ s.category }}">
         <div class="swatch" style="background:{{ colors[loop.index0 % colors|length] }}"></div>
         <div class="body">
-          <div class="day-num">DAY {{ '%02d' % s.day }}</div>
+          <div class="day-num">{% if s.category == 'personal' %}PERSONAL PROJECT{% else %}DAY {{ '%02d' % s.day }}{% endif %}</div>
           <h2>{{ s.name }}</h2>
           <p class="tagline">{{ s.tagline }}</p>
           <div class="description">{{ s.description }}</div>
@@ -58,9 +64,14 @@
             <b>Stack.</b> {{ s.stack|join(' / ') }}
           </div>
           <div class="footer-row">
-            <span class="ports">:{{ s.port }}</span>
-            <span class="built {% if not s.built %}no{% endif %}">{% if s.built %}SHIPPED{% else %}WIP{% endif %}</span>
-            {% if s.test_count %}<span class="tests">{{ s.test_count }} tests</span>{% endif %}
+            {% if s.category == 'personal' %}
+              <span class="ports">{{ s.stack[0] if s.stack else 'Project' }}</span>
+              <span class="built">PERSONAL</span>
+            {% else %}
+              <span class="ports">:{{ s.port }}</span>
+              <span class="built {% if not s.built %}no{% endif %}">{% if s.built %}SHIPPED{% else %}WIP{% endif %}</span>
+              {% if s.test_count %}<span class="tests">{{ s.test_count }} tests</span>{% endif %}
+            {% endif %}
           </div>
         </div>
       </a>
@@ -68,10 +79,29 @@
   </section>
 
   <div class="foot">
-    <span>PORTFOLIO. /  30 DAYS OF FINANCE + AI</span>
+    <span>PORTFOLIO. /  SELECTED WORK</span>
     <span>SAFWAN  /  ACA / ACCA CANDIDATE</span>
   </div>
 </div>
 
+<script>
+(function () {
+  var bar = document.getElementById('catbar');
+  if (!bar) return;
+  var cards = [].slice.call(document.querySelectorAll('#grid .card'));
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('.cat-btn');
+    if (!btn) return;
+    var cat = btn.getAttribute('data-cat');
+    bar.querySelectorAll('.cat-btn').forEach(function (b) {
+      b.classList.toggle('active', b === btn);
+    });
+    cards.forEach(function (c) {
+      var show = cat === 'all' || c.getAttribute('data-category') === cat;
+      c.style.display = show ? '' : 'none';
+    });
+  });
+})();
+</script>
 </body>
 </html>

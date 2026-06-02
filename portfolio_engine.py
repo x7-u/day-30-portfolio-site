@@ -12,7 +12,7 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from portfolio_schema import CATALOG, Project
+from portfolio_schema import CATALOG, PERSONAL, Project
 
 
 @dataclass
@@ -159,3 +159,28 @@ def build_portfolio(project_root: Path) -> PortfolioResult:
         tag_counts=tag_counts,
         stack_counts=stack_counts,
     )
+
+
+def personal_summaries() -> list[ProjectSummary]:
+    """Summaries for the personal projects. They live on GitHub, so there is
+    no folder to scan: each is just wrapped as a shipped, test-free entry."""
+    return [ProjectSummary(project=p, built=True) for p in PERSONAL]
+
+
+def all_summaries(project_root: Path) -> list[ProjectSummary]:
+    """Personal projects first, then the scanned 30-day finance run."""
+    return personal_summaries() + scan(project_root)
+
+
+def home_context(summaries: list[ProjectSummary]) -> dict:
+    """Render context for the home page from a combined summary list."""
+    return {
+        "summaries": [s.to_dict() for s in summaries],
+        "total_projects": len(summaries),
+        "finance_count": sum(1 for s in summaries
+                             if s.project.category == "finance"),
+        "personal_count": sum(1 for s in summaries
+                              if s.project.category == "personal"),
+        "total_tests": sum(s.test_count for s in summaries),
+        "total_screenshots": sum(s.screenshot_count for s in summaries),
+    }

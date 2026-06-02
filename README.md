@@ -1,8 +1,9 @@
-# Portfolio. 30 days of finance + AI
+# Portfolio. Projects by Safwan
 
-A static portfolio site for a 30-day run of daily finance and AI builds. It
-shows a filterable gallery of all 29 prior projects, and a page per project
-with a couple of plain-English fun facts and a few screenshots.
+A static portfolio site. It shows a gallery of every project with a category
+toggle a visitor can switch between: a 30-day run of daily finance and AI
+builds (29 projects), and a set of personal projects. Each project has its own
+page; the finance builds add a condensed brief, fun facts and screenshots.
 
 It is a plain, fast website: no server and no AI when someone visits. It is
 hosted on GitHub Pages.
@@ -11,8 +12,8 @@ Live site: https://x7-u.github.io/day-30-portfolio-site/
 
 ## What it shows
 
-- A gallery: one card per project with the day number, name, tagline,
-  stack, build status and test count.
+- A gallery of all projects with a category toggle (All / Personal Projects /
+  30 Day Finance). Each card shows the name, tagline, stack and status.
 - A page per project: a condensed brief pulled from the project's overview
   doc (use case, inputs and outputs, how it works, a screenshot walk-through
   and honest limitations), a couple of fun facts, the accounting focus, the
@@ -38,7 +39,7 @@ straight from the main branch, so what you push is what goes live.
 build_site.py        static site generator (writes docs/)
 fun_facts.py         curated per-project fun facts
 project_brief.py     condensed brief pulled from each PROJECT_OVERVIEW.docx
-portfolio_schema.py  the project catalogue (day, name, tagline, stack, tags)
+portfolio_schema.py  the catalogue: 29 finance builds (CATALOG) + PERSONAL
 portfolio_engine.py  scans each folder for build status, tests, screenshots
 pipeline.py          ties the scan together
 server.py            optional local preview (Flask, port 1030)

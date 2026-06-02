@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 from flask import Flask, abort, jsonify, render_template, send_file
 from fun_facts import fun_facts_for
 from pipeline import analyse
+from portfolio_engine import all_summaries, home_context
 from project_brief import brief_for
 from werkzeug.utils import safe_join
 
@@ -41,7 +42,8 @@ _cache = {}
 
 
 def _safe_folder(name: str) -> bool:
-    return bool(re.fullmatch(r"day-\d{2}-[a-z0-9-]+", name))
+    # day-NN-* finance folders and lowercase personal-project slugs.
+    return bool(re.fullmatch(r"[a-z0-9][a-z0-9-]{1,59}", name))
 
 
 def _safe_file(name: str) -> bool:
@@ -56,25 +58,25 @@ def _get_portfolio():
 
 @app.route("/")
 def index():
-    portfolio = _get_portfolio()
-    return render_template("index.html", portfolio=portfolio.to_dict())
+    return render_template(
+        "index.html", portfolio=home_context(all_summaries(PROJECT_ROOT)))
 
 
 @app.route("/project/<folder>")
 def project_detail(folder: str):
     if not _safe_folder(folder):
         abort(400)
-    portfolio = _get_portfolio()
-    summary = None
-    for s in portfolio.result.summaries:
-        if s.project.folder == folder:
-            summary = s
-            break
+    summary = next((s for s in all_summaries(PROJECT_ROOT)
+                    if s.project.folder == folder), None)
     if summary is None:
         abort(404)
     proj_d = summary.to_dict()
-    proj_d["fun_facts"] = fun_facts_for(summary)
-    proj_d["brief"] = brief_for(PROJECT_ROOT / folder)
+    if summary.project.category == "personal":
+        proj_d["fun_facts"] = []
+        proj_d["brief"] = None
+    else:
+        proj_d["fun_facts"] = fun_facts_for(summary)
+        proj_d["brief"] = brief_for(PROJECT_ROOT / folder)
     return render_template("project.html", project=proj_d)
 
 

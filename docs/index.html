@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Safwan - 30 Days of Finance + AI</title>
+<title>Safwan - Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/style.css">
@@ -13,9 +13,9 @@
   <div class="masthead-inner">
     <div class="logo-block">
       <div class="name">Portfolio<span class="dot">.</span></div>
-      <div class="sub">30 days of finance + AI by Safwan</div>
+      <div class="sub">Projects by Safwan</div>
     </div>
-    <span class="pill">30 builds / 30 days</span>
+    <span class="pill">34 projects</span>
   </div>
 </header>
 
@@ -23,13 +23,13 @@
 
   <section class="intro">
     <div>
-      <h1>30 daily builds. <em>Finance.</em><br>One AI integration each.</h1>
-      <p>From a financial-ratio dashboard to a three-stage dividend discount model. Every project is a working Flask app, every project ships with tests, and every project uses AI (Claude on Days 1 to 3, DeepSeek V4 from Day 4 onwards) as a meaningful part of the workflow.</p>
+      <h1>Things I <em>build</em>.</h1>
+      <p>A portfolio of projects: web apps and tools, plus a 30-day sprint of daily finance and AI builds. Pick a category below, or browse everything.</p>
     </div>
     <div class="stats">
       <div class="cell">
-        <div class="lab">Projects shipped</div>
-        <div class="v">29<span style="color:var(--ink-mute);font-size:18px;"> / 29</span></div>
+        <div class="lab">Projects</div>
+        <div class="v">34</div>
       </div>
       <div class="cell">
         <div class="lab">Tests written</div>
@@ -42,11 +42,112 @@
     </div>
   </section>
 
+  <div class="cat-bar" id="catbar">
+    <button class="cat-btn active" data-cat="all">All <span>34</span></button>
+    <button class="cat-btn" data-cat="personal">Personal Projects <span>5</span></button>
+    <button class="cat-btn" data-cat="finance">30 Day Finance <span>29</span></button>
+  </div>
+
   <section class="grid" id="grid">
     
     
-      <a href="day-01-ratio-dashboard.html" class="card">
+      <a href="part-vault.html" class="card" data-category="personal">
         <div class="swatch" style="background:var(--ink)"></div>
+        <div class="body">
+          <div class="day-num">PERSONAL PROJECT</div>
+          <h2>Part Vault</h2>
+          <p class="tagline">Retro terminal-style inventory tracker for PC parts</p>
+          <div class="description">A browser-based inventory tracker for PC parts and hardware components, styled as a retro terminal. Runs entirely client-side in the browser.</div>
+          <div class="stack">
+            <b>Stack.</b> HTML / CSS / JavaScript
+          </div>
+          <div class="footer-row">
+            
+              <span class="ports">HTML</span>
+              <span class="built">PERSONAL</span>
+            
+          </div>
+        </div>
+      </a>
+    
+      <a href="baktest.html" class="card" data-category="personal">
+        <div class="swatch" style="background:var(--c-red)"></div>
+        <div class="body">
+          <div class="day-num">PERSONAL PROJECT</div>
+          <h2>Baktest</h2>
+          <p class="tagline">Backtest Pine Script and MQL5 strategies on your own data</p>
+          <div class="description">A backtesting engine for Pine Script v5 and MQL5 trading strategies, run against your own data. A dual Cython engine handles multi-timeframe runs, walk-forward optimisation, spread and slippage simulation, 45+ metrics, and portfolio mode.</div>
+          <div class="stack">
+            <b>Stack.</b> Python / Cython / HTML
+          </div>
+          <div class="footer-row">
+            
+              <span class="ports">Python</span>
+              <span class="built">PERSONAL</span>
+            
+          </div>
+        </div>
+      </a>
+    
+      <a href="easykpi.html" class="card" data-category="personal">
+        <div class="swatch" style="background:var(--c-blue)"></div>
+        <div class="body">
+          <div class="day-num">PERSONAL PROJECT</div>
+          <h2>EasyKPI</h2>
+          <p class="tagline">Maps the data you have to the KPIs it can report</p>
+          <div class="description">Shows which KPIs can be represented from the data you already have: tag the available data fields, and the tool lists the KPIs those tags can support.</div>
+          <div class="stack">
+            <b>Stack.</b> TypeScript / Python / HTML
+          </div>
+          <div class="footer-row">
+            
+              <span class="ports">TypeScript</span>
+              <span class="built">PERSONAL</span>
+            
+          </div>
+        </div>
+      </a>
+    
+      <a href="quickfiremaths.html" class="card" data-category="personal">
+        <div class="swatch" style="background:var(--c-green)"></div>
+        <div class="body">
+          <div class="day-num">PERSONAL PROJECT</div>
+          <h2>QuickFire Maths</h2>
+          <p class="tagline">Fast-paced browser multiplication quiz with result tracking</p>
+          <div class="description">A fast-paced browser multiplication quiz with selectable difficulty levels, a live answer history, and Excel export of your results.</div>
+          <div class="stack">
+            <b>Stack.</b> HTML / JavaScript
+          </div>
+          <div class="footer-row">
+            
+              <span class="ports">HTML</span>
+              <span class="built">PERSONAL</span>
+            
+          </div>
+        </div>
+      </a>
+    
+      <a href="fileeasy.html" class="card" data-category="personal">
+        <div class="swatch" style="background:var(--c-amber)"></div>
+        <div class="body">
+          <div class="day-num">PERSONAL PROJECT</div>
+          <h2>FileEasy</h2>
+          <p class="tagline">Drag-and-drop video compressor for Windows</p>
+          <div class="description">A drag-and-drop video compressor for Windows: drop videos in and get smaller files out.</div>
+          <div class="stack">
+            <b>Stack.</b> JavaScript / HTML / CSS
+          </div>
+          <div class="footer-row">
+            
+              <span class="ports">JavaScript</span>
+              <span class="built">PERSONAL</span>
+            
+          </div>
+        </div>
+      </a>
+    
+      <a href="day-01-ratio-dashboard.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-purple)"></div>
         <div class="body">
           <div class="day-num">DAY 01</div>
           <h2>Ratio Dashboard</h2>
@@ -56,15 +157,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / Anthropic
           </div>
           <div class="footer-row">
-            <span class="ports">:1001</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">36 tests</span>
+            
+              <span class="ports">:1001</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">36 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-02-invoice-extractor.html" class="card">
-        <div class="swatch" style="background:var(--c-red)"></div>
+      <a href="day-02-invoice-extractor.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-teal)"></div>
         <div class="body">
           <div class="day-num">DAY 02</div>
           <h2>Invoice Workbench</h2>
@@ -74,15 +177,17 @@
             <b>Stack.</b> Python / Flask / pdf parsing / Anthropic
           </div>
           <div class="footer-row">
-            <span class="ports">:1002</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">33 tests</span>
+            
+              <span class="ports">:1002</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">33 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-03-budget-tracker.html" class="card">
-        <div class="swatch" style="background:var(--c-blue)"></div>
+      <a href="day-03-budget-tracker.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-rose)"></div>
         <div class="body">
           <div class="day-num">DAY 03</div>
           <h2>Budget vs Actual</h2>
@@ -92,15 +197,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / Anthropic
           </div>
           <div class="footer-row">
-            <span class="ports">:1003</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">15 tests</span>
+            
+              <span class="ports">:1003</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">15 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-04-cashflow-model.html" class="card">
-        <div class="swatch" style="background:var(--c-green)"></div>
+      <a href="day-04-cashflow-model.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--ink)"></div>
         <div class="body">
           <div class="day-num">DAY 04</div>
           <h2>Cashflow Model</h2>
@@ -110,15 +217,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1004</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">42 tests</span>
+            
+              <span class="ports">:1004</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">42 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-05-sentiment-analyser.html" class="card">
-        <div class="swatch" style="background:var(--c-amber)"></div>
+      <a href="day-05-sentiment-analyser.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-red)"></div>
         <div class="body">
           <div class="day-num">DAY 05</div>
           <h2>Sentiment Pulse</h2>
@@ -128,15 +237,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1005</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">65 tests</span>
+            
+              <span class="ports">:1005</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">65 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-06-breakeven-tool.html" class="card">
-        <div class="swatch" style="background:var(--c-purple)"></div>
+      <a href="day-06-breakeven-tool.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-blue)"></div>
         <div class="body">
           <div class="day-num">DAY 06</div>
           <h2>Breakeven Tool</h2>
@@ -146,15 +257,17 @@
             <b>Stack.</b> Python / Flask / numpy / matplotlib
           </div>
           <div class="footer-row">
-            <span class="ports">:1006</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">71 tests</span>
+            
+              <span class="ports">:1006</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">71 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-07-earnings-summariser.html" class="card">
-        <div class="swatch" style="background:var(--c-teal)"></div>
+      <a href="day-07-earnings-summariser.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-green)"></div>
         <div class="body">
           <div class="day-num">DAY 07</div>
           <h2>Earnings Brief</h2>
@@ -164,15 +277,17 @@
             <b>Stack.</b> Python / Flask / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1007</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">46 tests</span>
+            
+              <span class="ports">:1007</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">46 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-08-finance-categoriser.html" class="card">
-        <div class="swatch" style="background:var(--c-rose)"></div>
+      <a href="day-08-finance-categoriser.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-amber)"></div>
         <div class="body">
           <div class="day-num">DAY 08</div>
           <h2>Finance Categoriser</h2>
@@ -182,15 +297,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1008</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">81 tests</span>
+            
+              <span class="ports">:1008</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">81 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-09-dcf-model.html" class="card">
-        <div class="swatch" style="background:var(--ink)"></div>
+      <a href="day-09-dcf-model.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-purple)"></div>
         <div class="body">
           <div class="day-num">DAY 09</div>
           <h2>DCF Model</h2>
@@ -200,15 +317,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1009</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">60 tests</span>
+            
+              <span class="ports">:1009</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">60 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-10-ap-ageing-report.html" class="card">
-        <div class="swatch" style="background:var(--c-red)"></div>
+      <a href="day-10-ap-ageing-report.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-teal)"></div>
         <div class="body">
           <div class="day-num">DAY 10</div>
           <h2>AP Ageing</h2>
@@ -218,15 +337,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1010</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">49 tests</span>
+            
+              <span class="ports">:1010</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">49 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-11-sec-filing-parser.html" class="card">
-        <div class="swatch" style="background:var(--c-blue)"></div>
+      <a href="day-11-sec-filing-parser.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-rose)"></div>
         <div class="body">
           <div class="day-num">DAY 11</div>
           <h2>Filing Parser</h2>
@@ -236,15 +357,17 @@
             <b>Stack.</b> Python / Flask / BeautifulSoup / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1011</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">51 tests</span>
+            
+              <span class="ports">:1011</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">51 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-12-monte-carlo-sim.html" class="card">
-        <div class="swatch" style="background:var(--c-green)"></div>
+      <a href="day-12-monte-carlo-sim.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--ink)"></div>
         <div class="body">
           <div class="day-num">DAY 12</div>
           <h2>Monte Carlo</h2>
@@ -254,15 +377,17 @@
             <b>Stack.</b> Python / Flask / numpy / matplotlib
           </div>
           <div class="footer-row">
-            <span class="ports">:1012</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">56 tests</span>
+            
+              <span class="ports">:1012</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">56 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-13-mgmt-accounts.html" class="card">
-        <div class="swatch" style="background:var(--c-amber)"></div>
+      <a href="day-13-mgmt-accounts.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-red)"></div>
         <div class="body">
           <div class="day-num">DAY 13</div>
           <h2>Mgmt Accounts</h2>
@@ -272,15 +397,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1013</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">67 tests</span>
+            
+              <span class="ports">:1013</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">67 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-14-jargon-explainer.html" class="card">
-        <div class="swatch" style="background:var(--c-purple)"></div>
+      <a href="day-14-jargon-explainer.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-blue)"></div>
         <div class="body">
           <div class="day-num">DAY 14</div>
           <h2>Jargon Explainer</h2>
@@ -290,15 +417,17 @@
             <b>Stack.</b> Python / Flask / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1014</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">41 tests</span>
+            
+              <span class="ports">:1014</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">41 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-15-inventory-optimiser.html" class="card">
-        <div class="swatch" style="background:var(--c-teal)"></div>
+      <a href="day-15-inventory-optimiser.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-green)"></div>
         <div class="body">
           <div class="day-num">DAY 15</div>
           <h2>Inventory Optimiser</h2>
@@ -308,15 +437,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1015</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">38 tests</span>
+            
+              <span class="ports">:1015</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">38 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-16-ifrs16-calculator.html" class="card">
-        <div class="swatch" style="background:var(--c-rose)"></div>
+      <a href="day-16-ifrs16-calculator.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-amber)"></div>
         <div class="body">
           <div class="day-num">DAY 16</div>
           <h2>IFRS 16 Calculator</h2>
@@ -326,15 +457,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1016</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">38 tests</span>
+            
+              <span class="ports">:1016</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">38 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-17-tax-provision.html" class="card">
-        <div class="swatch" style="background:var(--ink)"></div>
+      <a href="day-17-tax-provision.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-purple)"></div>
         <div class="body">
           <div class="day-num">DAY 17</div>
           <h2>Tax Provision</h2>
@@ -344,15 +477,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1017</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">77 tests</span>
+            
+              <span class="ports">:1017</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">77 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-18-credit-scorecard.html" class="card">
-        <div class="swatch" style="background:var(--c-red)"></div>
+      <a href="day-18-credit-scorecard.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-teal)"></div>
         <div class="body">
           <div class="day-num">DAY 18</div>
           <h2>Credit Scorecard</h2>
@@ -362,15 +497,17 @@
             <b>Stack.</b> Python / Flask / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1018</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">36 tests</span>
+            
+              <span class="ports">:1018</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">36 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-19-fx-exposure.html" class="card">
-        <div class="swatch" style="background:var(--c-blue)"></div>
+      <a href="day-19-fx-exposure.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-rose)"></div>
         <div class="body">
           <div class="day-num">DAY 19</div>
           <h2>FX Exposure</h2>
@@ -380,15 +517,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1019</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">32 tests</span>
+            
+              <span class="ports">:1019</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">32 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-20-report-builder.html" class="card">
-        <div class="swatch" style="background:var(--c-green)"></div>
+      <a href="day-20-report-builder.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--ink)"></div>
         <div class="body">
           <div class="day-num">DAY 20</div>
           <h2>Report Builder</h2>
@@ -398,15 +537,17 @@
             <b>Stack.</b> Python / Flask / python-docx / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1020</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">21 tests</span>
+            
+              <span class="ports">:1020</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">21 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-21-working-capital.html" class="card">
-        <div class="swatch" style="background:var(--c-amber)"></div>
+      <a href="day-21-working-capital.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-red)"></div>
         <div class="body">
           <div class="day-num">DAY 21</div>
           <h2>Cycle.</h2>
@@ -416,15 +557,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1021</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">41 tests</span>
+            
+              <span class="ports">:1021</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">41 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-22-wacc-calculator.html" class="card">
-        <div class="swatch" style="background:var(--c-purple)"></div>
+      <a href="day-22-wacc-calculator.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-blue)"></div>
         <div class="body">
           <div class="day-num">DAY 22</div>
           <h2>WACC.</h2>
@@ -434,15 +577,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1022</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">35 tests</span>
+            
+              <span class="ports">:1022</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">35 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-23-fraud-detection.html" class="card">
-        <div class="swatch" style="background:var(--c-teal)"></div>
+      <a href="day-23-fraud-detection.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-green)"></div>
         <div class="body">
           <div class="day-num">DAY 23</div>
           <h2>Audit.</h2>
@@ -452,15 +597,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1023</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">38 tests</span>
+            
+              <span class="ports">:1023</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">38 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-24-ddm-valuation.html" class="card">
-        <div class="swatch" style="background:var(--c-rose)"></div>
+      <a href="day-24-ddm-valuation.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-amber)"></div>
         <div class="body">
           <div class="day-num">DAY 24</div>
           <h2>DDM.</h2>
@@ -470,15 +617,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1024</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">47 tests</span>
+            
+              <span class="ports">:1024</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">47 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-25-coa-generator.html" class="card">
-        <div class="swatch" style="background:var(--ink)"></div>
+      <a href="day-25-coa-generator.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-purple)"></div>
         <div class="body">
           <div class="day-num">DAY 25</div>
           <h2>Ledger.</h2>
@@ -488,15 +637,17 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1025</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">32 tests</span>
+            
+              <span class="ports">:1025</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">32 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-26-equity-research.html" class="card">
-        <div class="swatch" style="background:var(--c-red)"></div>
+      <a href="day-26-equity-research.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-teal)"></div>
         <div class="body">
           <div class="day-num">DAY 26</div>
           <h2>Equity.</h2>
@@ -506,15 +657,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1026</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">38 tests</span>
+            
+              <span class="ports">:1026</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">38 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-27-payroll-variance.html" class="card">
-        <div class="swatch" style="background:var(--c-blue)"></div>
+      <a href="day-27-payroll-variance.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-rose)"></div>
         <div class="body">
           <div class="day-num">DAY 27</div>
           <h2>Roll.</h2>
@@ -524,15 +677,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1027</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">33 tests</span>
+            
+              <span class="ports">:1027</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">33 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-28-valuation-aggregator.html" class="card">
-        <div class="swatch" style="background:var(--c-green)"></div>
+      <a href="day-28-valuation-aggregator.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--ink)"></div>
         <div class="body">
           <div class="day-num">DAY 28</div>
           <h2>Field.</h2>
@@ -542,15 +697,17 @@
             <b>Stack.</b> Python / Flask / matplotlib / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1028</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">34 tests</span>
+            
+              <span class="ports">:1028</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">34 tests</span>
+            
           </div>
         </div>
       </a>
     
-      <a href="day-29-accounting-chatbot.html" class="card">
-        <div class="swatch" style="background:var(--c-amber)"></div>
+      <a href="day-29-accounting-chatbot.html" class="card" data-category="finance">
+        <div class="swatch" style="background:var(--c-red)"></div>
         <div class="body">
           <div class="day-num">DAY 29</div>
           <h2>Ledger.AI</h2>
@@ -560,9 +717,11 @@
             <b>Stack.</b> Python / Flask / openpyxl / DeepSeek
           </div>
           <div class="footer-row">
-            <span class="ports">:1029</span>
-            <span class="built ">SHIPPED</span>
-            <span class="tests">33 tests</span>
+            
+              <span class="ports">:1029</span>
+              <span class="built ">SHIPPED</span>
+              <span class="tests">33 tests</span>
+            
           </div>
         </div>
       </a>
@@ -570,10 +729,29 @@
   </section>
 
   <div class="foot">
-    <span>PORTFOLIO. /  30 DAYS OF FINANCE + AI</span>
+    <span>PORTFOLIO. /  SELECTED WORK</span>
     <span>SAFWAN  /  ACA / ACCA CANDIDATE</span>
   </div>
 </div>
 
+<script>
+(function () {
+  var bar = document.getElementById('catbar');
+  if (!bar) return;
+  var cards = [].slice.call(document.querySelectorAll('#grid .card'));
+  bar.addEventListener('click', function (e) {
+    var btn = e.target.closest('.cat-btn');
+    if (!btn) return;
+    var cat = btn.getAttribute('data-cat');
+    bar.querySelectorAll('.cat-btn').forEach(function (b) {
+      b.classList.toggle('active', b === btn);
+    });
+    cards.forEach(function (c) {
+      var show = cat === 'all' || c.getAttribute('data-category') === cat;
+      c.style.display = show ? '' : 'none';
+    });
+  });
+})();
+</script>
 </body>
 </html>

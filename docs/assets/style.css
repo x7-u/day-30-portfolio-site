@@ -111,6 +111,30 @@ a { color: var(--ink); text-decoration: none; }
   letter-spacing: -0.02em;
 }
 
+/* Category chooser (Personal / 30 Day Finance) */
+.cat-bar {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  padding: 26px 0 6px;
+}
+.cat-btn {
+  flex: 1 1 220px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  background: var(--paper); border: 2px solid var(--ink);
+  color: var(--ink); cursor: pointer;
+  font-family: var(--sans); font-weight: 800;
+  font-size: 19px; letter-spacing: -0.01em;
+  padding: 20px 22px; text-align: left;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.cat-btn span {
+  font-family: var(--mono); font-size: 13px; font-weight: 700;
+  color: var(--ink-mute);
+}
+.cat-btn:hover { transform: translateY(-2px); box-shadow: 4px 4px 0 var(--ink); }
+.cat-btn.active { background: var(--ink); color: var(--paper); }
+.cat-btn.active span { color: var(--paper); }
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -13,10 +13,12 @@ class Project:
     description: str     # 2-3 sentence description
     stack: list[str] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)   # filter chips
+    category: str = "finance"   # "finance" (the 30-day run) or "personal"
     port: int = 0
     accounting_focus: str = ""
     ai_integration: str = ""
     repo: str = ""       # public GitHub repo URL
+    homepage: str = ""   # optional live-demo URL
     shots: list[str] = field(default_factory=list)            # screenshot rel paths
 
     def to_dict(self) -> dict:
@@ -25,10 +27,12 @@ class Project:
             "name": self.name, "tagline": self.tagline,
             "description": self.description,
             "stack": list(self.stack), "tags": list(self.tags),
+            "category": self.category,
             "port": self.port,
             "accounting_focus": self.accounting_focus,
             "ai_integration": self.ai_integration,
             "repo": self.repo,
+            "homepage": self.homepage,
             "shots": list(self.shots),
         }
 
@@ -445,3 +449,70 @@ _REPOS: dict[str, str] = {
 
 for _p in CATALOG:
     _p.repo = _REPOS.get(_p.folder, "")
+
+
+# ============================================================
+# Personal projects (not part of the 30-day finance run). These
+# live as their own public repos; the folder doubles as the URL
+# slug and must be lowercase/url-safe. No day, port or docx.
+# ============================================================
+
+PERSONAL: list[Project] = [
+    Project(
+        day=0, folder="part-vault", category="personal",
+        name="Part Vault",
+        tagline="Retro terminal-style inventory tracker for PC parts",
+        description="A browser-based inventory tracker for PC parts and "
+                    "hardware components, styled as a retro terminal. Runs "
+                    "entirely client-side in the browser.",
+        stack=["HTML", "CSS", "JavaScript"],
+        tags=["inventory", "browser", "vanilla-js"],
+        repo="https://github.com/x7-u/part-vault",
+    ),
+    Project(
+        day=0, folder="baktest", category="personal",
+        name="Baktest",
+        tagline="Backtest Pine Script and MQL5 strategies on your own data",
+        description="A backtesting engine for Pine Script v5 and MQL5 trading "
+                    "strategies, run against your own data. A dual Cython engine "
+                    "handles multi-timeframe runs, walk-forward optimisation, "
+                    "spread and slippage simulation, 45+ metrics, and portfolio "
+                    "mode.",
+        stack=["Python", "Cython", "HTML"],
+        tags=["backtesting", "trading", "cython"],
+        repo="https://github.com/x7-u/baktest",
+    ),
+    Project(
+        day=0, folder="easykpi", category="personal",
+        name="EasyKPI",
+        tagline="Maps the data you have to the KPIs it can report",
+        description="Shows which KPIs can be represented from the data you "
+                    "already have: tag the available data fields, and the tool "
+                    "lists the KPIs those tags can support.",
+        stack=["TypeScript", "Python", "HTML"],
+        tags=["kpi", "data", "typescript"],
+        repo="https://github.com/x7-u/EasyKPI",
+        homepage="https://x7-u.github.io/EasyKPI/",
+    ),
+    Project(
+        day=0, folder="quickfiremaths", category="personal",
+        name="QuickFire Maths",
+        tagline="Fast-paced browser multiplication quiz with result tracking",
+        description="A fast-paced browser multiplication quiz with selectable "
+                    "difficulty levels, a live answer history, and Excel export "
+                    "of your results.",
+        stack=["HTML", "JavaScript"],
+        tags=["browser", "quiz", "education"],
+        repo="https://github.com/x7-u/QuickFireMaths",
+    ),
+    Project(
+        day=0, folder="fileeasy", category="personal",
+        name="FileEasy",
+        tagline="Drag-and-drop video compressor for Windows",
+        description="A drag-and-drop video compressor for Windows: drop videos "
+                    "in and get smaller files out.",
+        stack=["JavaScript", "HTML", "CSS"],
+        tags=["desktop", "windows", "video"],
+        repo="https://github.com/x7-u/FileEasy",
+    ),
+]

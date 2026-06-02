@@ -31,7 +31,7 @@ if str(HERE) not in sys.path:
 
 from fun_facts import fun_facts_for
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from portfolio_engine import build_portfolio
+from portfolio_engine import all_summaries, home_context
 from project_brief import brief_for
 
 OUT = HERE / "docs"
@@ -77,7 +77,7 @@ def _copy_assets(summaries) -> int:
 
 
 def build() -> dict:
-    portfolio = build_portfolio(PROJECT_ROOT)
+    summaries = all_summaries(PROJECT_ROOT)
     env = Environment(
         loader=FileSystemLoader(str(TEMPLATES)),
         autoescape=select_autoescape(["html"]),
@@ -89,27 +89,31 @@ def build() -> dict:
     OUT.mkdir(parents=True)
 
     # Home page.
-    index_html = env.get_template("index.html").render(portfolio=portfolio.to_dict())
+    index_html = env.get_template("index.html").render(portfolio=home_context(summaries))
     (OUT / "index.html").write_text(to_relative(index_html), encoding="utf-8")
 
     # One page per project.
     project_tmpl = env.get_template("project.html")
     pages = 0
-    for s in portfolio.summaries:
+    for s in summaries:
         proj = s.to_dict()
         proj["shots"] = (proj.get("shots") or [])[:MAX_SHOTS]
-        proj["fun_facts"] = fun_facts_for(s)
-        proj["brief"] = brief_for(PROJECT_ROOT / s.project.folder)
+        if s.project.category == "personal":
+            proj["fun_facts"] = []
+            proj["brief"] = None
+        else:
+            proj["fun_facts"] = fun_facts_for(s)
+            proj["brief"] = brief_for(PROJECT_ROOT / s.project.folder)
         html = project_tmpl.render(project=proj)
         (OUT / f"{s.project.folder}.html").write_text(to_relative(html), encoding="utf-8")
         pages += 1
 
-    shot_count = _copy_assets(portfolio.summaries)
+    shot_count = _copy_assets(summaries)
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
 
     return {
         "pages": pages + 1,
-        "projects": portfolio.total_projects,
+        "projects": len(summaries),
         "screenshots": shot_count,
         "out": str(OUT),
     }
