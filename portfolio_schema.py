@@ -461,57 +461,81 @@ PERSONAL: list[Project] = [
     Project(
         day=0, folder="part-vault", category="personal",
         name="Part Vault",
-        tagline="Retro terminal-style inventory tracker for PC parts",
-        description="A browser-based inventory tracker for PC parts and "
-                    "hardware components, styled as a retro terminal. Runs "
-                    "entirely client-side in the browser.",
-        stack=["HTML", "CSS", "JavaScript"],
-        tags=["inventory", "browser", "vanilla-js"],
+        tagline="Retro-terminal inventory tracker and PC build planner",
+        description="A retro-terminal-styled inventory tracker for PC parts and "
+                    "hardware, built in vanilla HTML, CSS and JavaScript with no "
+                    "framework and no backend, so everything persists in the "
+                    "browser. Beyond a catalogue it doubles as a build planner "
+                    "with budgets, allocation of parts you already own, and "
+                    "profit and loss on flips. It can pull real eBay market "
+                    "prices and ask DeepSeek to suggest parts that finish a "
+                    "build within budget.",
+        stack=["HTML", "CSS", "JavaScript", "DeepSeek"],
+        tags=["inventory", "pc-hardware", "build-planner"],
         repo="https://github.com/x7-u/part-vault",
     ),
     Project(
         day=0, folder="baktest", category="personal",
         name="Baktest",
         tagline="Backtest Pine Script and MQL5 strategies on your own data",
-        description="A backtesting engine for Pine Script v5 and MQL5 trading "
-                    "strategies, run against your own data. A dual Cython engine "
-                    "handles multi-timeframe runs, walk-forward optimisation, "
-                    "spread and slippage simulation, 45+ metrics, and portfolio "
-                    "mode.",
-        stack=["Python", "Cython", "HTML"],
-        tags=["backtesting", "trading", "cython"],
+        description="A web-based backtesting engine that runs Pine Script v5 and "
+                    "MQL5 Expert Advisor strategies against your own OHLCV data, "
+                    "or data fetched straight from MetaTrader 5. A dual "
+                    "interpreter with Cython acceleration handles multi-timeframe "
+                    "aggregation, walk-forward optimisation and risk-based "
+                    "position sizing, and reports 45+ performance metrics. It "
+                    "also simulates funded-account evaluation phases and includes "
+                    "a deep data-analysis suite.",
+        stack=["Python", "Cython", "HTML", "JavaScript"],
+        tags=["backtesting", "trading", "pine-script", "mql5"],
         repo="https://github.com/x7-u/baktest",
     ),
     Project(
         day=0, folder="easykpi", category="personal",
         name="EasyKPI",
-        tagline="Maps the data you have to the KPIs it can report",
-        description="Shows which KPIs can be represented from the data you "
-                    "already have: tag the available data fields, and the tool "
-                    "lists the KPIs those tags can support.",
-        stack=["TypeScript", "Python", "HTML"],
-        tags=["kpi", "data", "typescript"],
+        tagline="Local KPI analytics workbench over a 95-KPI catalogue",
+        description="A fully local, browser-based KPI analytics workbench that "
+                    "runs on your own machine as a Windows executable or via npm, "
+                    "with nothing leaving it unless you configure a cloud "
+                    "connector. It ships a curated catalogue of 95 KPIs, each "
+                    "with a definition, formula, recommended chart and tags, "
+                    "browsable by department, focus area and plain-English "
+                    "semantic search. On your own data it adds live charts, "
+                    "benchmarks, traffic-light targets, forecasting, anomaly "
+                    "detection, a three-mode calculator and Excel export.",
+        stack=["TypeScript", "Electron", "ECharts", "Python"],
+        tags=["kpi", "analytics", "dashboards"],
         repo="https://github.com/x7-u/EasyKPI",
         homepage="https://x7-u.github.io/EasyKPI/",
     ),
     Project(
         day=0, folder="quickfiremaths", category="personal",
         name="QuickFire Maths",
-        tagline="Fast-paced browser multiplication quiz with result tracking",
-        description="A fast-paced browser multiplication quiz with selectable "
-                    "difficulty levels, a live answer history, and Excel export "
-                    "of your results.",
-        stack=["HTML", "JavaScript"],
+        tagline="Fast-paced browser multiplication quiz with Excel scoring",
+        description="A fast-paced browser multiplication quiz for sharpening "
+                    "mental arithmetic, playable instantly online or run locally "
+                    "with a small Node server for Excel result saving. It offers "
+                    "two game modes and four difficulty levels, from times tables "
+                    "up to 12 all the way to a custom mode up to 64, with a live "
+                    "answer-history panel and a results screen showing accuracy "
+                    "and questions per minute.",
+        stack=["Node.js", "Express", "JavaScript"],
         tags=["browser", "quiz", "education"],
         repo="https://github.com/x7-u/QuickFireMaths",
+        homepage="https://x7-u.github.io/QuickFireMaths/",
     ),
     Project(
         day=0, folder="fileeasy", category="personal",
         name="FileEasy",
         tagline="Drag-and-drop video compressor for Windows",
-        description="A drag-and-drop video compressor for Windows: drop videos "
-                    "in and get smaller files out.",
-        stack=["JavaScript", "HTML", "CSS"],
+        description="A simple drag-and-drop video compressor for Windows, built "
+                    "as an Electron desktop app around FFmpeg so anyone can "
+                    "shrink videos with no technical knowledge. Drop in one or "
+                    "more files, pick a quality preset, and compressed copies are "
+                    "written next to the originals. It supports most common "
+                    "formats and can optionally use NVIDIA GPU (NVENC) "
+                    "acceleration when a full FFmpeg build is detected.",
+        stack=["Electron", "FFmpeg", "Node.js"],
         tags=["desktop", "windows", "video"],
         repo="https://github.com/x7-u/FileEasy",
     ),

@@ -71,12 +71,11 @@ def project_detail(folder: str):
     if summary is None:
         abort(404)
     proj_d = summary.to_dict()
+    proj_d["brief"] = brief_for(PROJECT_ROOT / folder)
     if summary.project.category == "personal":
         proj_d["fun_facts"] = []
-        proj_d["brief"] = None
     else:
         proj_d["fun_facts"] = fun_facts_for(summary)
-        proj_d["brief"] = brief_for(PROJECT_ROOT / folder)
     return render_template("project.html", project=proj_d)
 
 

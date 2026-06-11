@@ -1,49 +1,87 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<title>Field. - Portfolio. Day 28</title>
+<title>Field. - Safwan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Football-field valuation aggregator">
+<script>
+(function () {
+  var t;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") {
+    t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-theme", t);
+  document.documentElement.classList.add("js");
+})();
+</script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<div class="bg-fx" aria-hidden="true"></div>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <div class="logo-block">
-      <div class="name">Portfolio<span class="dot">.</span></div>
-      <div class="sub">Projects by Safwan</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Safwan<span class="dot">.</span> <span class="star">&#10038;</span></a>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/x7-u" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <button class="icon-btn square" id="themeBtn" type="button" aria-label="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zm0-19a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1zm11 11a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1zM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1zm14.95 6.36a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zM7.17 7.17a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zm11.78-2.12a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0zM7.17 16.83a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0z"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.64 13.65A9 9 0 1 1 10.35 2.36a1 1 0 0 1 1.27 1.27A7 7 0 0 0 20.37 12.38a1 1 0 0 1 1.27 1.27z"/></svg>
+      </button>
     </div>
-    <span class="pill">Day 28 / 30</span>
   </div>
-</header>
+</nav>
 
 <div class="shell">
 
-  <section class="detail-cover">
-    <a href="index.html" class="back">&lt; ALL PROJECTS</a>
-    <div class="day-num">DAY 28 OF 30</div>
+  <section class="d-hero">
+    <div class="ghost-num" aria-hidden="true">28</div>
+    <a href="index.html" class="back">&#8592; All projects</a>
+    <div>
+      
+        <span class="stamp">Day 28 of 30</span>
+      
+    </div>
     <h1>Field.</h1>
-    <div class="tagline">Football-field valuation aggregator</div>
-    <div class="meta">
+    <p class="tagline">Football-field valuation aggregator</p>
+    <div class="d-meta">
       <span><span class="key">STACK</span>Python / Flask / matplotlib / DeepSeek</span>
       <span><span class="key">FOCUS</span>Investment banking valuation</span>
       <span><span class="key">PORT</span>:1028</span>
       <span><span class="key">TESTS</span>34</span>
     </div>
+    
+    <div class="cta-row">
+      
+      <a class="btn btn-primary" href="https://github.com/x7-u/day-28-valuation-aggregator" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+      
+      
+    </div>
+    
   </section>
 
-  <section class="detail-grid">
-    <div>
-      <section class="detail-section">
+  <div class="d-grid">
+    <main>
+      <section class="d-section">
         <h3>About the project</h3>
         <p>Four valuation methods side by side (DCF, EV/EBITDA, P/E, NAV) with AI weighting by sector and stage.</p>
         <p>A local Flask app and CLI that runs four valuation methods side by side (DCF, EV/EBITDA, P/E, NAV), draws the football-field chart, and lets DeepSeek V4 weight the methods based on sector and stage and write the valuation conclusion.</p>
       </section>
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>At a glance</h3>
         <dl class="brief-facts">
           
@@ -60,7 +98,7 @@
       
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>How it works</h3>
         <ul class="brief-list">
           
@@ -79,14 +117,14 @@
       
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>AI integration</h3>
         <p>DeepSeek weights methods + writes conclusion</p>
       </section>
       
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>Limitations</h3>
         <ul class="brief-limits">
           
@@ -105,7 +143,7 @@
       
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>Fun facts</h3>
         <ul class="talking-points">
           
@@ -118,7 +156,7 @@
       
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>Walk-through</h3>
         <ol class="brief-tour">
           
@@ -137,49 +175,44 @@
       
 
       
-      <section class="detail-section">
+      <section class="d-section">
         <h3>Screenshots</h3>
         <div class="shot-grid">
           
-            <img src="assets/shots/day-28-valuation-aggregator/01_home.png" alt="01_home.png">
+            <a class="shot" href="assets/shots/day-28-valuation-aggregator/01_home.png" target="_blank" rel="noopener">
+              <img src="assets/shots/day-28-valuation-aggregator/01_home.png" alt="Screenshot of Field." loading="lazy">
+            </a>
           
-            <img src="assets/shots/day-28-valuation-aggregator/02_run_tech_saas.png" alt="02_run_tech_saas.png">
+            <a class="shot" href="assets/shots/day-28-valuation-aggregator/02_run_tech_saas.png" target="_blank" rel="noopener">
+              <img src="assets/shots/day-28-valuation-aggregator/02_run_tech_saas.png" alt="Screenshot of Field." loading="lazy">
+            </a>
           
-            <img src="assets/shots/day-28-valuation-aggregator/03_run_asset_heavy.png" alt="03_run_asset_heavy.png">
+            <a class="shot" href="assets/shots/day-28-valuation-aggregator/03_run_asset_heavy.png" target="_blank" rel="noopener">
+              <img src="assets/shots/day-28-valuation-aggregator/03_run_asset_heavy.png" alt="Screenshot of Field." loading="lazy">
+            </a>
           
-            <img src="assets/shots/day-28-valuation-aggregator/04_charts_for_excel.png" alt="04_charts_for_excel.png">
+            <a class="shot" href="assets/shots/day-28-valuation-aggregator/04_charts_for_excel.png" target="_blank" rel="noopener">
+              <img src="assets/shots/day-28-valuation-aggregator/04_charts_for_excel.png" alt="Screenshot of Field." loading="lazy">
+            </a>
           
         </div>
       </section>
       
-    </div>
+    </main>
 
-    <aside>
+    <aside class="d-aside">
       <div class="aside-card">
         
         <div class="row">
-          <h4>Source</h4>
-          <a class="repo-link" href="https://github.com/x7-u/day-28-valuation-aggregator" target="_blank" rel="noopener">View on GitHub</a>
+          <h4>Build status</h4>
+          <div class="status-stamp">Shipped</div>
         </div>
-        
         
         
         <div class="row">
           <h4>Tags</h4>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            
-              <span class="tag" style="font-family:var(--mono);font-size:11px;
-                  background:var(--paper);border:1px solid var(--rule);
-                  padding:3px 9px;border-radius:10px;">valuation</span>
-            
-              <span class="tag" style="font-family:var(--mono);font-size:11px;
-                  background:var(--paper);border:1px solid var(--rule);
-                  padding:3px 9px;border-radius:10px;">football-field</span>
-            
-              <span class="tag" style="font-family:var(--mono);font-size:11px;
-                  background:var(--paper);border:1px solid var(--rule);
-                  padding:3px 9px;border-radius:10px;">aggregator</span>
-            
+          <div class="tag-chips">
+            <span>valuation</span><span>football-field</span><span>aggregator</span>
           </div>
         </div>
         
@@ -187,14 +220,6 @@
           <h4>Stack</h4>
           <div class="stack-list">Python / Flask / matplotlib / DeepSeek</div>
         </div>
-        
-        <div class="row">
-          <h4>Build status</h4>
-          <div class="num" style="color:var(--c-green);font-size:22px;">
-            Shipped
-          </div>
-        </div>
-        
         
         <div class="row">
           <h4>Tests</h4>
@@ -216,13 +241,29 @@
         
       </div>
     </aside>
-  </section>
-
-  <div class="foot">
-    <span>PORTFOLIO. /  DAY 28</span>
-    <span>SAFWAN  /  SELECTED WORK</span>
   </div>
+
+  <footer class="foot">
+    <p class="big">Safwan.</p>
+    <div class="row">
+      <span>ACA / ACCA candidate</span>
+      <a href="https://github.com/x7-u" target="_blank" rel="noopener">github.com/x7-u</a>
+    </div>
+  </footer>
 </div>
 
+<script>
+(function () {
+  var themeBtn = document.getElementById("themeBtn");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var h = document.documentElement;
+      var t = h.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      h.setAttribute("data-theme", t);
+      try { localStorage.setItem("theme", t); } catch (e) {}
+    });
+  }
+})();
+</script>
 </body>
 </html>

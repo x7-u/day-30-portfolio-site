@@ -1,49 +1,130 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
-<title>QuickFire Maths - Portfolio.</title>
+<title>QuickFire Maths - Safwan</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Fast-paced browser multiplication quiz with Excel scoring">
+<script>
+(function () {
+  var t;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") {
+    t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-theme", t);
+  document.documentElement.classList.add("js");
+})();
+</script>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<div class="bg-fx" aria-hidden="true"></div>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <div class="logo-block">
-      <div class="name">Portfolio<span class="dot">.</span></div>
-      <div class="sub">Projects by Safwan</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">Safwan<span class="dot">.</span> <span class="star">&#10038;</span></a>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/x7-u" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <button class="icon-btn square" id="themeBtn" type="button" aria-label="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zm0-19a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1zm11 11a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1zM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1zm14.95 6.36a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zM7.17 7.17a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zm11.78-2.12a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0zM7.17 16.83a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0z"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.64 13.65A9 9 0 1 1 10.35 2.36a1 1 0 0 1 1.27 1.27A7 7 0 0 0 20.37 12.38a1 1 0 0 1 1.27 1.27z"/></svg>
+      </button>
     </div>
-    <span class="pill">Personal project</span>
   </div>
-</header>
+</nav>
 
 <div class="shell">
 
-  <section class="detail-cover">
-    <a href="index.html" class="back">&lt; ALL PROJECTS</a>
-    <div class="day-num">PERSONAL PROJECT</div>
+  <section class="d-hero">
+    <div class="ghost-num" aria-hidden="true">Q</div>
+    <a href="index.html" class="back">&#8592; All projects</a>
+    <div>
+      
+        <span class="stamp personal">Personal project</span>
+      
+    </div>
     <h1>QuickFire Maths</h1>
-    <div class="tagline">Fast-paced browser multiplication quiz with result tracking</div>
-    <div class="meta">
-      <span><span class="key">STACK</span>HTML / JavaScript</span>
+    <p class="tagline">Fast-paced browser multiplication quiz with Excel scoring</p>
+    <div class="d-meta">
+      <span><span class="key">STACK</span>Node.js / Express / JavaScript</span>
       
       
       
     </div>
+    
+    <div class="cta-row">
+      
+      <a class="btn btn-primary" href="https://github.com/x7-u/QuickFireMaths" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        View on GitHub
+      </a>
+      
+      
+      <a class="btn btn-ghost" href="https://x7-u.github.io/QuickFireMaths/" target="_blank" rel="noopener">Live demo</a>
+      
+    </div>
+    
   </section>
 
-  <section class="detail-grid">
-    <div>
-      <section class="detail-section">
+  <div class="d-grid">
+    <main>
+      <section class="d-section">
         <h3>About the project</h3>
-        <p>A fast-paced browser multiplication quiz with selectable difficulty levels, a live answer history, and Excel export of your results.</p>
+        <p>A fast-paced browser multiplication quiz for sharpening mental arithmetic, playable instantly online or run locally with a small Node server for Excel result saving. It offers two game modes and four difficulty levels, from times tables up to 12 all the way to a custom mode up to 64, with a live answer-history panel and a results screen showing accuracy and questions per minute.</p>
         
       </section>
 
       
+      <section class="d-section">
+        <h3>At a glance</h3>
+        <dl class="brief-facts">
+          
+            <dt>Modes</dt><dd>Race the clock, or answer a set number of questions</dd>
+          
+            <dt>Difficulty</dt><dd>Easy (to 12), Normal (15), Hard (18), Custom (to 64)</dd>
+          
+            <dt>Output</dt><dd>Results appended to a local results.xlsx</dd>
+          
+        </dl>
+      </section>
+      
 
+      
+      <section class="d-section">
+        <h3>How it works</h3>
+        <ul class="brief-list">
+          
+            <li><b>Game modes.</b> Time-limit or question-count, with a 3-second countdown and a 1-second pause after a wrong answer.</li>
+          
+            <li><b>Live history.</b> A panel ticks each correct answer green and crosses wrong ones red, showing the correct answer on a miss.</li>
+          
+            <li><b>Results.</b> End screen shows correct, wrong, percentage and questions per minute, with per-difficulty themes.</li>
+          
+            <li><b>Excel saving.</b> Enter a name and results are appended to results.xlsx, openable directly from the app via the local Node server.</li>
+          
+        </ul>
+      </section>
+      
+
+      
+
+      
+      <section class="d-section">
+        <h3>Limitations</h3>
+        <ul class="brief-limits">
+          
+            <li>Excel result saving needs the local Node server; the hosted version is play-only.</li>
+          
+        </ul>
+      </section>
       
 
       
@@ -51,58 +132,51 @@
       
 
       
+    </main>
 
-      
-
-      
-    </div>
-
-    <aside>
+    <aside class="d-aside">
       <div class="aside-card">
-        
-        <div class="row">
-          <h4>Source</h4>
-          <a class="repo-link" href="https://github.com/x7-u/QuickFireMaths" target="_blank" rel="noopener">View on GitHub</a>
-        </div>
-        
         
         
         <div class="row">
           <h4>Tags</h4>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;">
-            
-              <span class="tag" style="font-family:var(--mono);font-size:11px;
-                  background:var(--paper);border:1px solid var(--rule);
-                  padding:3px 9px;border-radius:10px;">browser</span>
-            
-              <span class="tag" style="font-family:var(--mono);font-size:11px;
-                  background:var(--paper);border:1px solid var(--rule);
-                  padding:3px 9px;border-radius:10px;">quiz</span>
-            
-              <span class="tag" style="font-family:var(--mono);font-size:11px;
-                  background:var(--paper);border:1px solid var(--rule);
-                  padding:3px 9px;border-radius:10px;">education</span>
-            
+          <div class="tag-chips">
+            <span>browser</span><span>quiz</span><span>education</span>
           </div>
         </div>
         
         <div class="row">
           <h4>Stack</h4>
-          <div class="stack-list">HTML / JavaScript</div>
+          <div class="stack-list">Node.js / Express / JavaScript</div>
         </div>
-        
         
         
         
       </div>
     </aside>
-  </section>
-
-  <div class="foot">
-    <span>PORTFOLIO. /  PERSONAL PROJECT</span>
-    <span>SAFWAN  /  SELECTED WORK</span>
   </div>
+
+  <footer class="foot">
+    <p class="big">Safwan.</p>
+    <div class="row">
+      <span>ACA / ACCA candidate</span>
+      <a href="https://github.com/x7-u" target="_blank" rel="noopener">github.com/x7-u</a>
+    </div>
+  </footer>
 </div>
 
+<script>
+(function () {
+  var themeBtn = document.getElementById("themeBtn");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var h = document.documentElement;
+      var t = h.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      h.setAttribute("data-theme", t);
+      try { localStorage.setItem("theme", t); } catch (e) {}
+    });
+  }
+})();
+</script>
 </body>
 </html>

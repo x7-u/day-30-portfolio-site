@@ -1,31 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <title>Safwan - Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio of Safwan: {{ portfolio.total_projects }} projects spanning a 30-day finance and AI sprint plus personal builds.">
+<script>
+(function () {
+  var t;
+  try { t = localStorage.getItem("theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") {
+    t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-theme", t);
+  document.documentElement.classList.add("js");
+})();
+</script>
 <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+<div class="bg-fx" aria-hidden="true"></div>
 
-<header class="masthead">
-  <div class="masthead-inner">
-    <div class="logo-block">
-      <div class="name">Portfolio<span class="dot">.</span></div>
-      <div class="sub">Projects by Safwan</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand">Safwan<span class="dot">.</span> <span class="star">&#10038;</span></a>
+    <div class="nav-actions">
+      <a class="icon-btn" href="https://github.com/x7-u" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <button class="icon-btn square" id="themeBtn" type="button" aria-label="Switch theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1zm0-19a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1zm11 11a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1zM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1zm14.95 6.36a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zM7.17 7.17a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41zm11.78-2.12a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0zM7.17 16.83a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0z"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.64 13.65A9 9 0 1 1 10.35 2.36a1 1 0 0 1 1.27 1.27A7 7 0 0 0 20.37 12.38a1 1 0 0 1 1.27 1.27z"/></svg>
+      </button>
     </div>
-    <span class="pill">{{ portfolio.total_projects }} projects</span>
   </div>
-</header>
+</nav>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>30 daily builds &#10038; finance + AI &#10038; {{ '{:,}'.format(portfolio.total_tests) }} tests written &#10038; Python / Flask &#10038; personal projects &#10038; ACA / ACCA candidate &#10038; built and shipped &#10038;&nbsp;</span>
+    <span>30 daily builds &#10038; finance + AI &#10038; {{ '{:,}'.format(portfolio.total_tests) }} tests written &#10038; Python / Flask &#10038; personal projects &#10038; ACA / ACCA candidate &#10038; built and shipped &#10038;&nbsp;</span>
+  </div>
+</div>
 
 <div class="shell">
 
-  <section class="intro">
-    <div>
-      <h1>Things I <em>build</em>.</h1>
-      <p>A portfolio of projects: web apps and tools, plus a 30-day sprint of daily finance and AI builds. Pick a category below, or browse everything.</p>
-    </div>
+  <header class="hero">
+    <p class="kicker">Portfolio / Selected work</p>
+    <h1 class="mega">
+      <span class="solid">Things I</span>
+      <span class="hollow">build<span class="dot">.</span></span>
+    </h1>
+    <div class="sticker">{{ portfolio.total_projects }} projects &#10038; shipped</div>
+    <p class="lede">Web apps, desktop tools, and a 30-day sprint of daily finance + AI builds. Every finance build is a working Flask app that ships with its own tests.</p>
     <div class="stats">
       <div class="cell">
         <div class="lab">Projects</div>
@@ -33,74 +65,101 @@
       </div>
       <div class="cell">
         <div class="lab">Tests written</div>
-        <div class="v">{{ portfolio.total_tests }}</div>
+        <div class="v">{{ '{:,}'.format(portfolio.total_tests) }}</div>
       </div>
       <div class="cell">
         <div class="lab">Screenshots</div>
         <div class="v">{{ portfolio.total_screenshots }}</div>
       </div>
     </div>
-  </section>
+  </header>
 
-  <div class="cat-bar" id="catbar">
-    <button class="cat-btn active" data-cat="all">All <span>{{ portfolio.total_projects }}</span></button>
-    <button class="cat-btn" data-cat="personal">Personal Projects <span>{{ portfolio.personal_count }}</span></button>
-    <button class="cat-btn" data-cat="finance">30 Day Finance <span>{{ portfolio.finance_count }}</span></button>
+  <div class="cat-bar" id="catbar" role="group" aria-label="Filter projects by category">
+    <button class="cat-btn active" data-cat="all" type="button" aria-pressed="true">All <span class="count">{{ portfolio.total_projects }}</span></button>
+    <button class="cat-btn" data-cat="personal" type="button" aria-pressed="false">Personal Projects <span class="count">{{ portfolio.personal_count }}</span></button>
+    <button class="cat-btn" data-cat="finance" type="button" aria-pressed="false">30 Day Finance <span class="count">{{ portfolio.finance_count }}</span></button>
   </div>
 
-  <section class="grid" id="grid">
-    {% set colors = ['var(--ink)', 'var(--c-red)', 'var(--c-blue)',
-                       'var(--c-green)', 'var(--c-amber)', 'var(--c-purple)',
-                       'var(--c-teal)', 'var(--c-rose)'] %}
+  <main class="grid" id="grid">
     {% for s in portfolio.summaries %}
-      <a href="/project/{{ s.folder }}" class="card" data-category="{{ s.category }}">
-        <div class="swatch" style="background:{{ colors[loop.index0 % colors|length] }}"></div>
-        <div class="body">
-          <div class="day-num">{% if s.category == 'personal' %}PERSONAL PROJECT{% else %}DAY {{ '%02d' % s.day }}{% endif %}</div>
+      <a href="/project/{{ s.folder }}" class="card reveal" data-category="{{ s.category }}" style="--i:{{ loop.index0 % 12 }}">
+        <div class="card-media">
+          {% if s.shots %}
+            <img src="/shots/{{ s.folder }}/{{ s.shots[0] }}" alt="Screenshot of {{ s.name }}" loading="lazy">
+          {% else %}
+            <div class="card-ph"><span>{{ s.name[:1] }}</span></div>
+          {% endif %}
+          {% if s.category == 'personal' %}
+            <span class="card-tag personal">Personal</span>
+          {% else %}
+            <span class="card-tag">Day {{ '%02d' % s.day }}</span>
+          {% endif %}
+        </div>
+        <div class="card-body">
           <h2>{{ s.name }}</h2>
           <p class="tagline">{{ s.tagline }}</p>
-          <div class="description">{{ s.description }}</div>
-          <div class="stack">
-            <b>Stack.</b> {{ s.stack|join(' / ') }}
+          <p class="desc">{{ s.description }}</p>
+          <div class="stack-chips">
+            {% for t in s.stack[:4] %}<span>{{ t }}</span>{% endfor %}
           </div>
-          <div class="footer-row">
-            {% if s.category == 'personal' %}
-              <span class="ports">{{ s.stack[0] if s.stack else 'Project' }}</span>
-              <span class="built">PERSONAL</span>
-            {% else %}
-              <span class="ports">:{{ s.port }}</span>
-              <span class="built {% if not s.built %}no{% endif %}">{% if s.built %}SHIPPED{% else %}WIP{% endif %}</span>
-              {% if s.test_count %}<span class="tests">{{ s.test_count }} tests</span>{% endif %}
-            {% endif %}
+          <div class="card-foot">
+            <span class="tests">{% if s.test_count %}{{ s.test_count }} tests{% else %}Open source{% endif %}</span>
+            <span class="go">View &#8594;</span>
           </div>
         </div>
       </a>
     {% endfor %}
-  </section>
+  </main>
 
-  <div class="foot">
-    <span>PORTFOLIO. /  SELECTED WORK</span>
-    <span>SAFWAN  /  ACA / ACCA CANDIDATE</span>
-  </div>
+  <footer class="foot">
+    <p class="big">Safwan.</p>
+    <div class="row">
+      <span>ACA / ACCA candidate</span>
+      <a href="https://github.com/x7-u" target="_blank" rel="noopener">github.com/x7-u</a>
+    </div>
+  </footer>
 </div>
 
 <script>
 (function () {
-  var bar = document.getElementById('catbar');
-  if (!bar) return;
-  var cards = [].slice.call(document.querySelectorAll('#grid .card'));
-  bar.addEventListener('click', function (e) {
-    var btn = e.target.closest('.cat-btn');
-    if (!btn) return;
-    var cat = btn.getAttribute('data-cat');
-    bar.querySelectorAll('.cat-btn').forEach(function (b) {
-      b.classList.toggle('active', b === btn);
+  var themeBtn = document.getElementById("themeBtn");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", function () {
+      var h = document.documentElement;
+      var t = h.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      h.setAttribute("data-theme", t);
+      try { localStorage.setItem("theme", t); } catch (e) {}
     });
-    cards.forEach(function (c) {
-      var show = cat === 'all' || c.getAttribute('data-category') === cat;
-      c.style.display = show ? '' : 'none';
+  }
+
+  var bar = document.getElementById("catbar");
+  var cards = [].slice.call(document.querySelectorAll("#grid .card"));
+  if (bar) {
+    bar.addEventListener("click", function (e) {
+      var btn = e.target.closest(".cat-btn");
+      if (!btn) return;
+      var cat = btn.getAttribute("data-cat");
+      bar.querySelectorAll(".cat-btn").forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      cards.forEach(function (c) {
+        c.style.display = (cat === "all" || c.getAttribute("data-category") === cat) ? "" : "none";
+      });
     });
-  });
+  }
+
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.08 });
+    cards.forEach(function (c) { io.observe(c); });
+  } else {
+    cards.forEach(function (c) { c.classList.add("in"); });
+  }
 })();
 </script>
 </body>

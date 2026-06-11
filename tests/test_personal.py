@@ -6,6 +6,7 @@ from pathlib import Path
 
 from portfolio_engine import all_summaries, home_context, personal_summaries
 from portfolio_schema import CATALOG, PERSONAL
+from project_brief import brief_for
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -30,6 +31,16 @@ def test_personal_summaries():
     assert len(ps) == 5
     assert all(s.project.category == "personal" for s in ps)
     assert all(s.test_count == 0 and s.screenshot_count == 0 for s in ps)
+
+
+def test_personal_projects_have_briefs():
+    # Each personal project now carries a curated brief (from its README).
+    for p in PERSONAL:
+        b = brief_for(PROJECT_ROOT / p.folder)
+        assert b is not None, p.folder
+        assert b["how_it_works"], p.folder
+        blob = repr(b)
+        assert chr(0x2014) not in blob and chr(0x2013) not in blob
 
 
 def test_home_context_counts():

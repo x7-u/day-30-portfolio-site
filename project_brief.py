@@ -290,4 +290,185 @@ _MANUAL_BRIEFS: dict[str, dict] = {
             "hosting is a later step.",
         ],
     },
+    "part-vault": {
+        "facts": [
+            {"label": "Type",
+             "value": "Browser app, no backend or account required"},
+            {"label": "Storage",
+             "value": "localStorage; your inventory persists across sessions"},
+            {"label": "Data",
+             "value": "Excel (.xlsx) import and export with flexible column "
+                      "mapping"},
+            {"label": "Optional",
+             "value": "DeepSeek part suggestions and live eBay prices (bring "
+                      "your own key)"},
+        ],
+        "how_it_works": [
+            {"title": "Inventory",
+             "summary": "Add parts with price paid, market value, quantity and "
+                        "tags; names auto-sort into 15 categories with "
+                        "per-category and global totals."},
+            {"title": "Build planner",
+             "summary": "Plan builds with In Progress / Holding / Sold tabs, a "
+                        "per-build budget meter, and flip analysis (cost, "
+                        "listed, sold, profit and loss)."},
+            {"title": "Allocation",
+             "summary": "Drag inventory parts into a build; quantity is the "
+                        "limit, and selling a build moves the used units to a "
+                        "reversible graveyard."},
+            {"title": "AI suggestions",
+             "summary": "DeepSeek recommends parts to complete a build within "
+                        "the remaining budget, preferring parts you already own, "
+                        "with basic compatibility awareness."},
+            {"title": "Real prices",
+             "summary": "An eBay button fills market value with the median of "
+                        "current listings, through a small proxy you control."},
+        ],
+        "walkthrough": [],
+        "limitations": [
+            "AI suggestions need your own DeepSeek API key, stored only in your "
+            "browser.",
+            "Live eBay prices run through a small proxy you host, since eBay "
+            "blocks direct browser calls.",
+        ],
+    },
+    "baktest": {
+        "facts": [
+            {"label": "Engines",
+             "value": "Pine Script v5 and MQL5 Expert Advisor interpreters"},
+            {"label": "Data",
+             "value": "Your own OHLCV CSV, or fetched from MetaTrader 5"},
+            {"label": "Acceleration",
+             "value": "Cython, with parallel walk-forward optimisation"},
+            {"label": "Metrics",
+             "value": "45+ including R-multiples, Sharpe, drawdown and monthly "
+                      "returns"},
+        ],
+        "how_it_works": [
+            {"title": "Dual engine",
+             "summary": "One app runs both Pine Script v5 and MQL5 EA "
+                        "strategies, with a Cython-accelerated core for speed."},
+            {"title": "Multi-timeframe",
+             "summary": "Higher timeframes are auto-aggregated from the base "
+                        "data, with spread, slippage, commission and intra-bar "
+                        "stop/target priority modelled."},
+            {"title": "Walk-forward",
+             "summary": "Parameter optimisation runs in parallel across "
+                        "walk-forward windows."},
+            {"title": "Funded simulation",
+             "summary": "Simulates prop-firm phase 1 and phase 2 evaluations, "
+                        "with daily drawdown enforcement and a pass timeline."},
+            {"title": "Data analysis",
+             "summary": "Equity-curve overlays, a 7x24 hour-by-day trade "
+                        "heatmap, a consecutive-loss simulator and "
+                        "drawdown-recovery charts."},
+            {"title": "Position sizing",
+             "summary": "Risk-based lot sizing from stop distance and equity, "
+                        "with currency-aware profit conversion across pairs."},
+        ],
+        "walkthrough": [],
+        "limitations": [
+            "A backtesting and analysis tool, not a live trading bot.",
+            "MetaTrader 5 data fetching needs a local MT5 install.",
+        ],
+    },
+    "easykpi": {
+        "facts": [
+            {"label": "Runs",
+             "value": "Locally as a Windows .exe, or via npm on any OS"},
+            {"label": "Catalogue",
+             "value": "95 KPIs with hand-written formulas, definitions and tags"},
+            {"label": "Data in",
+             "value": "CSV, XLSX and SQL, parsed in the browser into IndexedDB"},
+            {"label": "Charts",
+             "value": "ECharts with benchmark bands, targets, forecasts and "
+                      "anomaly dots"},
+        ],
+        "how_it_works": [
+            {"title": "KPI catalogue",
+             "summary": "95 KPIs across 8 departments and 19 focus areas, with "
+                        "full-text and plain-English semantic search."},
+            {"title": "Live charts",
+             "summary": "Every KPI renders a real chart on your data with "
+                        "optional benchmark bands, a target line, a forecast "
+                        "with confidence band, and anomaly dots."},
+            {"title": "Targets",
+             "summary": "Set a target and direction and every instance of the "
+                        "KPI turns green, amber or red against a configurable "
+                        "warn threshold."},
+            {"title": "Calculator",
+             "summary": "Each KPI has Single, Series (paste a CSV) and Goal-seek "
+                        "modes; goal-seek inverts any formula numerically."},
+            {"title": "Data ingest",
+             "summary": "Drag in CSV or XLSX, parsed locally with a "
+                        "column-mapping step, or connect a SQL source."},
+        ],
+        "walkthrough": [],
+        "limitations": [
+            "The hosted link is a read-only catalogue preview; the full "
+            "workbench runs locally.",
+        ],
+    },
+    "quickfiremaths": {
+        "facts": [
+            {"label": "Modes",
+             "value": "Race the clock, or answer a set number of questions"},
+            {"label": "Difficulty",
+             "value": "Easy (to 12), Normal (15), Hard (18), Custom (to 64)"},
+            {"label": "Output",
+             "value": "Results appended to a local results.xlsx"},
+        ],
+        "how_it_works": [
+            {"title": "Game modes",
+             "summary": "Time-limit or question-count, with a 3-second countdown "
+                        "and a 1-second pause after a wrong answer."},
+            {"title": "Live history",
+             "summary": "A panel ticks each correct answer green and crosses "
+                        "wrong ones red, showing the correct answer on a miss."},
+            {"title": "Results",
+             "summary": "End screen shows correct, wrong, percentage and "
+                        "questions per minute, with per-difficulty themes."},
+            {"title": "Excel saving",
+             "summary": "Enter a name and results are appended to results.xlsx, "
+                        "openable directly from the app via the local Node "
+                        "server."},
+        ],
+        "walkthrough": [],
+        "limitations": [
+            "Excel result saving needs the local Node server; the hosted "
+            "version is play-only.",
+        ],
+    },
+    "fileeasy": {
+        "facts": [
+            {"label": "Platform",
+             "value": "Windows desktop app (FileEasy-Setup.exe)"},
+            {"label": "Engine",
+             "value": "FFmpeg via Electron, using bundled ffmpeg-static"},
+            {"label": "Presets",
+             "value": "High, Balanced and Max quality"},
+            {"label": "Formats",
+             "value": "MP4, AVI, MOV, MKV, WMV, FLV, WEBM, M4V and more"},
+        ],
+        "how_it_works": [
+            {"title": "Drag and drop",
+             "summary": "Drop multiple videos at once; compressed copies are "
+                        "saved to the same folder with a _cpd suffix."},
+            {"title": "Quality presets",
+             "summary": "Choose High, Balanced or Max, and the app handles the "
+                        "FFmpeg settings."},
+            {"title": "GPU acceleration",
+             "summary": "Optional NVIDIA NVENC encoding is auto-detected when a "
+                        "full FFmpeg build is installed."},
+            {"title": "Packaging",
+             "summary": "Shipped as a Windows installer built with "
+                        "electron-builder; CPU encoding works out of the box."},
+        ],
+        "walkthrough": [],
+        "limitations": [
+            "Not commercially code-signed yet, so Windows SmartScreen shows a "
+            "warning (choose More info, then Run anyway).",
+            "GPU acceleration needs a full FFmpeg install.",
+        ],
+    },
 }

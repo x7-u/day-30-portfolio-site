@@ -52,6 +52,7 @@ def to_relative(html: str) -> str:
     html = html.replace('src="/static/', 'src="assets/')
     html = re.sub(r'href="/project/([a-z0-9\-]+)"', r'href="\1.html"', html)
     html = re.sub(r'src="/shots/([a-z0-9\-]+)/([^"]+)"', r'src="assets/shots/\1/\2"', html)
+    html = re.sub(r'href="/shots/([a-z0-9\-]+)/([^"]+)"', r'href="assets/shots/\1/\2"', html)
     html = html.replace('href="/"', 'href="index.html"')
     return html.translate(_DASH)
 
@@ -98,12 +99,11 @@ def build() -> dict:
     for s in summaries:
         proj = s.to_dict()
         proj["shots"] = (proj.get("shots") or [])[:MAX_SHOTS]
+        proj["brief"] = brief_for(PROJECT_ROOT / s.project.folder)
         if s.project.category == "personal":
             proj["fun_facts"] = []
-            proj["brief"] = None
         else:
             proj["fun_facts"] = fun_facts_for(s)
-            proj["brief"] = brief_for(PROJECT_ROOT / s.project.folder)
         html = project_tmpl.render(project=proj)
         (OUT / f"{s.project.folder}.html").write_text(to_relative(html), encoding="utf-8")
         pages += 1
